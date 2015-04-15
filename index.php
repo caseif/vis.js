@@ -6,22 +6,32 @@
 			'gramophone' => array(
 				'file' => 'gramophone.mp3',
 				'artist' => 'FAUX',
-				'title' => 'GRAMOPHONE'
+				'title' => 'GRAMOPHONE',
+				'genre' => 'EDM'
 			),
 			'gravity' => array(
 				'file' => 'gravity.mp3',
 				'artist' => 'UMPIRE',
-				'title' => 'GRAVITY'
+				'title' => 'GRAVITY',
+				'genre' => 'Dubstep'
 			),
 			'pressure' => array(
 				'file' => 'pressure.mp3',
 				'artist' => 'DRAPER',
-				'title' => 'THE PRESSURE (FEAT. LAURA BREHM)'
+				'title' => 'THE PRESSURE (FEAT. LAURA BREHM)',
+				'genre' => 'EDM'
 			),
 			'equinox' => array(
 				'file' => 'equinox.mp3',
 				'artist' => 'SKRILLEX',
-				'title' => 'FIRST OF THE YEAR (EQUINOX)'
+				'title' => 'FIRST OF THE YEAR (EQUINOX)',
+				'genre' => 'Dubstep'
+			),
+			'triumph' => array(
+				'file' => 'triumph.mp3',
+				'artist' => 'WRLD',
+				'title' => 'TRIUMPH',
+				'genre' => 'Future Bass'
 			)
 		);
 		$song = $songs[$_GET['song']];
@@ -33,6 +43,7 @@
 			var file = '<?php echo $song['file']; ?>';
 			var artist = '<?php echo $song['artist']; ?>';
 			var title = '<?php echo $song['title']; ?>';
+			var genre = '<?php echo isset($song['genre']) ? $song['genre'] : 'EDM'; ?>';
 		</script>
 	</head>
 	<body>

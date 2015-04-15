@@ -5,6 +5,20 @@ if (! window.AudioContext) {
 	window.AudioContext = window.webkitAudioContext;
 }
 
+var colors = {
+	'EDM': '#C2C1C3',
+	'House': '#EB8C00',
+	'Drumstep': '#F22189',
+	'Drum and Bass': '#F61A03',
+	'Trance': '#007FE8',
+	'Electro': '#E7CD00',
+	'Glitch Hop': '#0C9758',
+	'Nu Disco': '#1DAAB4',
+	'Dubstep': '#961EEA',
+	'Trap': '#8C0F29',
+	'Future Bass': '#989FFF'
+};
+
 var context = new AudioContext();
 var audioBuffer;
 var sourceNode;
@@ -24,7 +38,7 @@ function setupAudioNodes() {
 
 	analyser = context.createAnalyser();
 	analyser.smoothingTimeConstant = 0.8;
-	analyser.fftSize = 1024; //don't change!
+	analyser.fftSize = 1024;
 
 	sourceNode = context.createBufferSource();
 	sourceNode.connect(analyser);
@@ -62,14 +76,13 @@ javascriptNode.onaudioprocess = function() {
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, 1000, height);
-	ctx.fillStyle="#BBB"; //bar color
+	ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
 	drawSpectrum(array);
 }
 
 
 function drawSpectrum(array) {
-	//var newArray = new Uint8Array(array.length);
-	for (var i = 0; i < (array.length); i++){
+	for (var i = 0; i < array.length; i++){
 		if (i == 0) {
 			var value = array[i];
 		}
@@ -79,7 +92,7 @@ function drawSpectrum(array) {
 		else {
 			var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
 		}
-		//newArray[i] = value;
+		value = Math.min(value + 1, height);
 		ctx.fillRect(i * 17, height - value, 10, height); //1st value = bar side margins
 	}
 };
