@@ -1,6 +1,6 @@
 if (! window.AudioContext) {
 	if (! window.webkitAudioContext) {
-		alert('no audiocontext found, update your browser yo');
+		alert('Could not get audio context! (Are you using IE?)');
 	}
 	window.AudioContext = window.webkitAudioContext;
 }
@@ -16,7 +16,7 @@ var colors = {
 	'Nu Disco': '#1DAAB4',
 	'Dubstep': '#961EEA',
 	'Trap': '#8C0F29',
-	'Future Bass': '#989FFF'
+	'Future Bass': '#B8B8FF'
 };
 
 var context = new AudioContext();
@@ -38,7 +38,7 @@ function setupAudioNodes() {
 
 	analyser = context.createAnalyser();
 	analyser.smoothingTimeConstant = 0.8;
-	analyser.fftSize = 1024;
+	analyser.fftSize = 2048;
 
 	sourceNode = context.createBufferSource();
 	sourceNode.connect(analyser);
