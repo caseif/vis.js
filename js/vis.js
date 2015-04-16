@@ -35,7 +35,7 @@ var velMult = 1;
 
 var amplitudeScalar = 5; // the multiplier for the particle system velocity
 var ampAnalysisStart = 0; // the start of the spectrum section used to determine the speed of the particles
-var ampAnalysisLength = 0.25; // the length of the spectrum section used to determine the speed of the particles
+var ampAnalysisLength = 0.5; // the length of the spectrum section used to determine the speed of the particles
 var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
 
 //$(".content").hide();
