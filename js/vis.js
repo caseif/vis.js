@@ -47,12 +47,12 @@ setupAudioNodes();
 loadSound('music/' + file); //music file
 
 function setupAudioNodes() {
-	javascriptNode = context.createScriptProcessor(4096, 1, 1);
+	javascriptNode = context.createScriptProcessor(1024, 1, 1);
 	javascriptNode.connect(context.destination);
 
 	analyser = context.createAnalyser();
 	analyser.smoothingTimeConstant = 0.8;
-	analyser.fftSize = 2048;
+	analyser.fftSize = 512;
 
 	sourceNode = context.createBufferSource();
 	sourceNode.connect(analyser);
