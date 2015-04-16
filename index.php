@@ -32,12 +32,24 @@
 				'artist' => 'WRLD',
 				'title' => 'TRIUMPH',
 				'genre' => 'Future Bass'
+			),
+			'friends' => array(
+				'file' => 'friends.mp3',
+				'artist' => 'GRABBITZ',
+				'title' => 'FRIENDS (WITH FAUSTIX)',
+				'genre' => 'Trap'
+			),
+			'thegirl' => array(
+				'file' => 'thegirl.mp3',
+				'artist' => 'HELLBERG',
+				'title' => 'THE GIRL (FEAT. COZI ZUEHLSDORFF)',
+				'genre' => 'House'
 			)
 		);
-		$song = $songs[$_GET['song']];
+		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];
 		?>
 		<title>vis</title>
-		<script type="text/javascript" src="http://amigocraft.net/js/jquery.min.js"></script>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="vis.css">
 		<script>
 			var file = '<?php echo $song['file']; ?>';
@@ -47,14 +59,28 @@
 		</script>
 	</head>
 	<body>
-		<div id="hue">Loading moosic (Sit back and get yourself a coffee)...</div>
+		<div id="hue">Loading moosic, please wait...</div>
 		<div class="content">
-			<canvas id="canvas" width="1000" height="325" style="display: block;"></canvas>
+			<canvas id="canvas" style="display: block;"></canvas>
 			<div class="names"><?php echo $song['artist']; ?></div>
 			<div class="title"><?php echo $song['title']; ?></div>
 		</div>
+		
+		<script>
+			$(document).ready(function() {
+				function centerText() {
+					$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2 - 80);
+					$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2 - 52);
+				};
 
-		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+				centerText();	
+
+				$(window).resize(function() {
+					centerText();
+				});
+			});
+		</script>
+
 		<script type="text/javascript" src="vis.js"></script>
 	</body>
 </html>

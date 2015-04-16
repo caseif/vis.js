@@ -24,9 +24,15 @@ var audioBuffer;
 var sourceNode;
 var analyser;
 var javascriptNode;
+var barWidth = 10;
+var barMargin = 4;
+var width = $(document).width() * 0.9;
+width -= width % (barWidth + barMargin * 2)
 var height = 325;
 
-$(".content").hide();
+//$(".content").hide();
+$('#canvas').attr('width', width);
+$('#canvas').attr('height', height);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 setupAudioNodes();
@@ -64,7 +70,7 @@ function loadSound(url) {
 function playSound(buffer) {
 	sourceNode.buffer = buffer;
 	sourceNode.start(0);
-	$(".content").show();
+	//$(".content").show();
 	$("#hue").hide();
 }
 
@@ -75,7 +81,7 @@ function onError(e) {
 javascriptNode.onaudioprocess = function() {
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
-	ctx.clearRect(0, 0, 1000, height);
+	ctx.clearRect(0, 0, width, height);
 	ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
 	drawSpectrum(array);
 }
@@ -93,6 +99,6 @@ function drawSpectrum(array) {
 			var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
 		}
 		value = Math.min(value + 1, height);
-		ctx.fillRect(i * 17, height - value, 10, height); //1st value = bar side margins
+		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, height); //1st value = bar side margins
 	}
 };
