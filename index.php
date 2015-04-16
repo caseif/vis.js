@@ -56,6 +56,30 @@
 				'artist' => 'Tristam',
 				'title' => 'My Friend',
 				'genre' => 'Drumstep'
+			),
+			'dreams' => array(
+				'file' => 'dreams.mp3',
+				'artist' => 'Rogue',
+				'title' => 'Dreams (feat. Laura Brehm)',
+				'genre' => 'Drumstep'
+			),
+			'onceagain' => array(
+				'file' => 'onceagain.mp3',
+				'artist' => 'Tristam',
+				'title' => 'Once Again',
+				'genre' => 'Glitch Hop'
+			),
+			'puresunlight' => array(
+				'file' => 'puresunlight.mp3',
+				'artist' => 'Mr Fijiwiji, Laura Brehm, & AgNO3',
+				'title' => 'Pure Sunlight',
+				'genre' => 'EDM'
+			),
+			'rainbowroad' => array(
+				'file' => 'rainbowroad.mp3',
+				'artist' => 'nanobii',
+				'title' => 'Rainbow Road',
+				'genre' => 'Hardcore'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];

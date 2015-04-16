@@ -13,6 +13,7 @@ var colors = {
 	'Trance': '#007FE8',
 	'Electro': '#E7CD00',
 	'Glitch Hop': '#0C9758',
+	'Hardcore': '#009800',
 	'Nu Disco': '#1DAAB4',
 	'Dubstep': '#961EEA',
 	'Trap': '#8C0F29',
@@ -24,17 +25,18 @@ var audioBuffer;
 var sourceNode;
 var analyser;
 var javascriptNode;
-var barWidth = 10;
-var barMargin = 4;
+var barWidth = 16;
+var barMargin = 6;
 var width = $(document).width() * 0.9;
 width -= width % (barWidth + barMargin * 2)
 var height = 325;
 
-var velMult = 0.3;
+var velMult = 1;
 
 var amplitudeScalar = 5; // the multiplier for the particle system velocity
-var ampAnalysisStart = 0.02; // the start of the spectrum section used to determine the speed of the particles
-var ampAnalysisLength = 0.15; // the length of the spectrum section used to determine the speed of the particles
+var ampAnalysisStart = 0; // the start of the spectrum section used to determine the speed of the particles
+var ampAnalysisLength = 0.25; // the length of the spectrum section used to determine the speed of the particles
+var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
 
 //$(".content").hide();
 $('#canvas').attr('width', width);
@@ -94,6 +96,7 @@ javascriptNode.onaudioprocess = function() {
 
 function drawSpectrum(array) {
 	var sum = 0;
+	var arraySectionLength = array.length * (ampAnalysisLength - ampAnalysisStart);
 	for (var i = 0; i < array.length; i++){
 		if (i == 0) {
 			var value = array[i];
@@ -106,9 +109,10 @@ function drawSpectrum(array) {
 		}
 		value = Math.min(value + 1, height);
 		if (i >= array.length * ampAnalysisStart && i < array.length * ampAnalysisLength) {
-			sum += value / height;
+			var bias = ((arraySectionLength / minAmpBias - i) / (arraySectionLength / minAmpBias));
+			sum += (value / height) * bias;
 		}
-		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, height); //1st value = bar side margins
+		ctx.fillRect(i * (barWidth + barMargin), height - value, barWidth, height);
 	}
-	velMult = sum / (array.length * (ampAnalysisLength - ampAnalysisStart)) * amplitudeScalar;
+	velMult = sum / arraySectionLength * (amplitudeScalar * (1 + minAmpBias));
 };
