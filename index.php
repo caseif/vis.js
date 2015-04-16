@@ -5,8 +5,8 @@
 		$songs = array(
 			'gramophone' => array(
 				'file' => 'gramophone.mp3',
-				'artist' => 'FAUX',
-				'title' => 'GRAMOPHONE',
+				'artist' => 'Faux',
+				'title' => 'Gramophone',
 				'genre' => 'EDM'
 			),
 			'gravity' => array(
@@ -44,11 +44,24 @@
 				'artist' => 'Hellberg',
 				'title' => 'The Girl (feat. Cozi Zuehlsdorff)',
 				'genre' => 'House'
+			),
+			'therunner' => array(
+				'file' => 'therunner.mp3',
+				'artist' => 'Faux',
+				'title' => 'The Runner',
+				'genre' => 'Drum & Bass'
+			),
+			'myfriend' => array(
+				'file' => 'myfriend.mp3',
+				'artist' => 'Tristam',
+				'title' => 'My Friend',
+				'genre' => 'Drumstep'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];
 		?>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
 		<link rel="stylesheet" href="vis.css">
 		<script>
 			var file = '<?php echo $song['file']; ?>';
@@ -59,12 +72,13 @@
 		<title><?php echo $song['artist'].' &mdash; '.$song['title']; ?></title>
 	</head>
 	<body>
-		<div id="hue">Loading moosic, please wait...</div>
+		<div id="loading">Loading music, please wait...</div>
 		<div class="content">
 			<canvas id="canvas" style="display: block;"></canvas>
 			<div class="names"><?php echo strtoupper($song['artist']); ?></div>
 			<div class="title"><?php echo strtoupper($song['title']); ?></div>
 		</div>
+		<div id="github"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
 		
 		<script>
 			$(document).ready(function() {
@@ -81,6 +95,12 @@
 			});
 		</script>
 
-		<script type="text/javascript" src="vis.js"></script>
+		<script type="text/javascript" src="./js/vis.js"></script>
+		
+		<script type="text/javascript" src="./js/util.js"></script>
+		<script type="text/javascript" src="./js/scene.js"></script>
+		<script type="text/javascript" src="./js/geometry.js"></script>
+		<script type="text/javascript" src="./js/light.js"></script>
+		<script type="text/javascript" src="./js/render.js"></script>
 	</body>
 </html>

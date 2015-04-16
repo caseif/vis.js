@@ -5,8 +5,19 @@ body {
   background-color: #111;
 }
 
-#hue {
-  color: #fff;
+#loading {
+  color: #FFF;
+}
+
+#github {
+	position: absolute;
+	bottom: 8px;
+	right: 12px;
+}
+
+#github a {
+	color: #FFF;
+	text-decoration: none;
 }
 
 .content {
@@ -16,7 +27,7 @@ body {
 }
 
 .content .names {
-  color: #fff;
+  color: #FFF;
   display: block;
   font-size: 3em;
   font-family: Lato, sans-serif;
@@ -24,9 +35,16 @@ body {
 }
 
 .content .title {
-  color: #fff;
+  color: #FFF;
   display: block;
   font-size: 2em;
   font-family: Lato, sans-serif;
   font-weight: 700;
+}
+
+#particles {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: -99;
 }
