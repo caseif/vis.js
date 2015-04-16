@@ -26,7 +26,7 @@ var sourceNode;
 var analyser;
 var javascriptNode;
 var barWidth = 16;
-var barMargin = 6;
+var barMargin = 3;
 var width = $(document).width() * 0.9;
 width -= width % (barWidth + barMargin * 2)
 var height = 325;
@@ -112,7 +112,7 @@ function drawSpectrum(array) {
 			var bias = ((arraySectionLength / minAmpBias - i) / (arraySectionLength / minAmpBias));
 			sum += (value / height) * bias;
 		}
-		ctx.fillRect(i * (barWidth + barMargin), height - value, barWidth, height);
+		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, height);
 	}
 	velMult = sum / arraySectionLength * (amplitudeScalar * (1 + minAmpBias));
 };
