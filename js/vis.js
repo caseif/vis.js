@@ -45,11 +45,17 @@ var blue = 0;
 var stage = 0;
 var cycleSpeed = 4;
 
+var begun = false;
+var ended = false;
+var isPlaying = false;
+var bufferInterval = 1024;
+var started = 0;
+var currentTime = 0;
+
 if (genre == 'ayy lmao') {
 	$('.ayylmao').show();
-	$('.kitty').css('margin-top', -$('#songinfo').height() + 16);
-	//$('.kitty').css('margin-left', $('#songinfo').width());
-	$('.kitty').attr('height', $('#songinfo').height() - 16);
+	$('.kitty').css('margin-top', -$('#songinfo').height() + 17);
+	$('.kitty').attr('height', $('#songinfo').height() - 20);
 	$('#songinfo').css('margin-left', $('.kitty').width() + 16);
 }
 
@@ -62,7 +68,7 @@ setupAudioNodes();
 loadSound('music/' + file); //music file
 
 function setupAudioNodes() {
-	javascriptNode = context.createScriptProcessor(1024, 1, 1);
+	javascriptNode = context.createScriptProcessor(bufferInterval, 1, 1);
 	javascriptNode.connect(context.destination);
 
 	analyser = context.createAnalyser();
@@ -75,6 +81,25 @@ function setupAudioNodes() {
 
 	sourceNode.connect(context.destination);
 }
+
+$(document).keypress(function(event) {
+	if (event.which == 80 || event.which == 112) {
+		if (isPlaying) {
+			sourceNode.stop();
+			currentTime += Date.now() - started;
+			velMult = 0;
+		} else {
+			var newSource = context.createBufferSource();
+			newSource.buffer = sourceNode.buffer;
+			sourceNode = newSource
+			sourceNode.connect(analyser);
+			sourceNode.connect(context.destination);
+			sourceNode.start(0, currentTime / 1000);
+			started = Date.now();
+		}
+		isPlaying = !isPlaying;
+	}
+});
 
 function loadSound(url) {
 	var request = new XMLHttpRequest();
@@ -95,6 +120,9 @@ function playSound(buffer) {
 	sourceNode.start(0);
 	//$(".content").show();
 	$("#loading").hide();
+	isPlaying = true;
+	begun = true;
+	started = Date.now();
 }
 
 function onError(e) {
@@ -140,25 +168,38 @@ javascriptNode.onaudioprocess = function() {
 	drawSpectrum(array);
 }
 
+var lastSpectrum = null;
+
 function drawSpectrum(array) {
 	var sum = 0;
 	var arraySectionLength = array.length * (ampAnalysisLength - ampAnalysisStart);
 	for (var i = 0; i < array.length; i++){
-		if (i == 0) {
-			var value = array[i];
+		if (isPlaying) {
+			lastSpectrum = array;
+		} else if (lastSpectrum != null) {
+			array = lastSpectrum;
 		}
-		else if (i == array.length - 1) {
-			var value = (array[i - 1] + array[i]) / 2;
+		if (begun) {
+			if (i == 0) {
+				var value = array[i];
+			}
+			else if (i == array.length - 1) {
+				var value = (array[i - 1] + array[i]) / 2;
+			}
+			else {
+				var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
+			}
+			value = Math.min(value + 1, height);
+			if (i >= array.length * ampAnalysisStart && i < array.length * ampAnalysisLength) {
+				var bias = ((arraySectionLength / minAmpBias - i) / (arraySectionLength / minAmpBias));
+				sum += (value / height) * bias;
+			}
+		} else {
+			value = 1;
 		}
-		else {
-			var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
-		}
-		value = Math.min(value + 1, height);
-		if (i >= array.length * ampAnalysisStart && i < array.length * ampAnalysisLength) {
-			var bias = ((arraySectionLength / minAmpBias - i) / (arraySectionLength / minAmpBias));
-			sum += (value / height) * bias;
-		}
-		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, height);
+		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
 	}
-	velMult = sum / arraySectionLength * (amplitudeScalar * (1 + minAmpBias));
+	if (isPlaying) {
+		velMult = sum / arraySectionLength * (amplitudeScalar * (1 + minAmpBias));
+	}
 };
