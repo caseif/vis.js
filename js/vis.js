@@ -38,6 +38,21 @@ var ampAnalysisStart = 0; // the start of the spectrum section used to determine
 var ampAnalysisLength = 0.5; // the length of the spectrum section used to determine the speed of the particles
 var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
 
+// dudududududu
+var red = 255;
+var green = 0;
+var blue = 0;
+var stage = 0;
+var cycleSpeed = 4;
+
+if (genre == 'ayy lmao') {
+	$('.ayylmao').show();
+	$('.kitty').css('margin-top', -$('#songinfo').height() + 16);
+	//$('.kitty').css('margin-left', $('#songinfo').width());
+	$('.kitty').attr('height', $('#songinfo').height() - 16);
+	$('#songinfo').css('margin-left', $('.kitty').width() + 16);
+}
+
 //$(".content").hide();
 $('#canvas').attr('width', width);
 $('#canvas').attr('height', height);
@@ -90,7 +105,38 @@ javascriptNode.onaudioprocess = function() {
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, width, height);
-	ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
+	if (genre == 'ayy lmao') {
+		switch (stage) {
+			case 0:
+				if (green < 255) green = Math.min(green + cycleSpeed, 255);
+				else ++stage;
+				break;
+			case 1:
+				if (red > 0) red = Math.max(red - cycleSpeed, 0);
+				else ++stage;
+				break;
+			case 2:
+				if (blue < 255) blue = Math.min(blue + cycleSpeed, 255);
+				else ++stage;
+				break;
+			case 3:
+				if (green > 0) green = Math.max(green - cycleSpeed, 0);
+				else ++stage;
+				break;
+			case 4:
+				if (red < 255) red = Math.min(red + cycleSpeed, 255);
+				else ++stage;
+				break;
+			case 5:
+				if (blue > 0) blue = Math.max(blue - cycleSpeed, 0);
+				else ++stage;
+				break;
+		}
+		if (stage > 5) stage = 0;
+		ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
+	} else {
+		ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
+	}
 	drawSpectrum(array);
 }
 

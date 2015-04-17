@@ -80,6 +80,24 @@
 				'artist' => 'nanobii',
 				'title' => 'Rainbow Road',
 				'genre' => 'Hardcore'
+			),
+			'btmaerochord' => array(
+				'file' => 'btmaerochord.mp3',
+				'artist' => 'Excision & Pegboard Nerds',
+				'title' => 'Bring The Madness (Aero Chord Remix)',
+				'genre' => 'Trap'
+			),
+			'sandstorm' => array(
+				'file' => 'sandstorm.mp3',
+				'artist' => 'Darude',
+				'title' => 'Sandstorm',
+				'genre' => 'ayy lmao'
+			),
+			'sworchestral' => array(
+				'file' => 'sworchestral.mp3',
+				'artist' => 'Stephen Walking',
+				'title' => 'Monstercat Orchestral Suite',
+				'genre' => 'ayy lmao'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];
@@ -99,8 +117,11 @@
 		<div id="loading">Loading music, please wait...</div>
 		<div class="content">
 			<canvas id="canvas" style="display: block;"></canvas>
-			<div class="names"><?php echo strtoupper($song['artist']); ?></div>
-			<div class="title"><?php echo strtoupper($song['title']); ?></div>
+			<div id="songinfo">
+				<div class="names"><?php echo strtoupper($song['artist']); ?></div>
+				<div class="title"><?php echo strtoupper($song['title']); ?></div>
+			</div>
+			<div class="ayylmao"><img class='kitty' src="./img/cat.gif" alt="ayy lmao"></div>
 		</div>
 		<div id="github"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
 		
