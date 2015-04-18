@@ -129,6 +129,8 @@ function onError(e) {
 	console.log(e);
 }
 
+var lastLowest = -1;
+
 javascriptNode.onaudioprocess = function() {
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
@@ -165,15 +167,48 @@ javascriptNode.onaudioprocess = function() {
 	} else {
 		ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
 	}
+	
+	if (isPlaying) {
+		var sum = 0;
+		var sectionLength = array.length * ampAnalysisLength;
+		for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
+			if (i >= array.length * ampAnalysisStart && i < array.length * (ampAnalysisStart + ampAnalysisLength)) {
+				var bias = (sectionLength / minAmpBias - (i - (array.length * ampAnalysisStart))) / (sectionLength / minAmpBias);
+				sum += (array[i] / height) * bias;
+			}
+		}
+		velMult = sum / sectionLength * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
+	}
+	
 	drawSpectrum(array);
 }
 
 var lastSpectrum = null;
 
 function drawSpectrum(array) {
-	var sum = 0;
-	var sectionLength = array.length * ampAnalysisLength;
-	for (var i = 0; i < array.length; i++){
+	var lowest = height;
+	for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
+		if (array[i] < lowest) {
+			lowest = array[i];
+		}
+	}
+	lowest /= 2;
+	if (lastLowest == -1) {
+		lastLowest = lowest;
+	} else if (lowest < lastLowest) {
+		lastLowest -= Math.min(lastLowest - lowest, 1);
+	} else {
+		lastLowest += Math.min(lowest - lastLowest, 1);
+	}
+	for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
+		if (array[i] >= lastLowest) {
+			array[i] = height * ((array[i] - lastLowest) / (height - lastLowest));
+		} else {
+			array[i] = 0;
+		}
+	}
+
+	for (var i = 0; i < width / (barWidth + barMargin * 2); i++){
 		if (isPlaying) {
 			lastSpectrum = array;
 		} else if (lastSpectrum != null) {
@@ -190,16 +225,9 @@ function drawSpectrum(array) {
 				var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
 			}
 			value = Math.min(value + 1, height);
-			if (i >= array.length * ampAnalysisStart && i < array.length * (ampAnalysisStart + ampAnalysisLength)) {
-				var bias = (sectionLength / minAmpBias - (i - (array.length * ampAnalysisStart))) / (sectionLength / minAmpBias);
-				sum += (value / height) * bias;
-			}
 		} else {
 			value = 1;
 		}
 		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
-	}
-	if (isPlaying) {
-		velMult = sum / sectionLength * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
 	}
 };
