@@ -29,14 +29,15 @@ var barWidth = 16;
 var barMargin = 3;
 var width = $(document).width() * 0.9;
 width -= width % (barWidth + barMargin * 2);
+var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
 var height = 325;
 
 var velMult = 1;
 
 var amplitudeScalar = 5; // the multiplier for the particle system velocity
-var ampAnalysisStart = 0.05; // the start of the spectrum section used to determine the speed of the particles
-var ampAnalysisLength = 0.4; // the length of the spectrum section used to determine the speed of the particles
-var minAmpBias = 0.4; // the minimum weight applied to any given amplitude point
+var ampAnalysisStart = 0.03; // the start of the spectrum section used to determine the speed of the particles
+var ampAnalysisLength = 0.5; // the length of the spectrum section used to determine the speed of the particles
+var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
 
 // dudududududu
 var red = 255;
@@ -170,10 +171,10 @@ javascriptNode.onaudioprocess = function() {
 	
 	if (isPlaying) {
 		var sum = 0;
-		var sectionLength = array.length * ampAnalysisLength;
-		for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
-			if (i >= array.length * ampAnalysisStart && i < array.length * (ampAnalysisStart + ampAnalysisLength)) {
-				var bias = (sectionLength / minAmpBias - (i - (array.length * ampAnalysisStart))) / (sectionLength / minAmpBias);
+		var sectionLength = spectrumSize * ampAnalysisLength;
+		for (var i = 0; i < spectrumSize; i++) {
+			if (i >= spectrumSize * ampAnalysisStart && i < spectrumSize * (ampAnalysisStart + ampAnalysisLength)) {
+				var bias = (sectionLength / minAmpBias - (i - (spectrumSize * ampAnalysisStart))) / (sectionLength / minAmpBias);
 				sum += (array[i] / height) * bias;
 			}
 		}
@@ -187,7 +188,7 @@ var lastSpectrum = null;
 
 function drawSpectrum(array) {
 	var lowest = height;
-	for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
+	for (var i = 0; i < spectrumSize; i++) {
 		if (array[i] < lowest) {
 			lowest = array[i];
 		}
@@ -218,7 +219,7 @@ function drawSpectrum(array) {
 			if (i == 0) {
 				var value = array[i];
 			}
-			else if (i == array.length - 1) {
+			else if (i == spectrumSize - 1) {
 				var value = (array[i - 1] + array[i]) / 2;
 			}
 			else {
