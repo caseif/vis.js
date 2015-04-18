@@ -7,15 +7,15 @@ if (! window.AudioContext) {
 
 var colors = {
 	'EDM': '#C2C1C3',
-	'House': '#EB8C00',
-	'Drumstep': '#F22189',
-	'Drum & Bass': '#F61A03',
-	'Trance': '#007FE8',
-	'Electro': '#E7CD00',
-	'Glitch Hop': '#0C9758',
+	'House': '#EA8C00',
+	'Drumstep': '#F12188',
+	'Drum & Bass': '#F71A00',
+	'Trance': '#0785E4',
+	'Electro': '#E6CE00',
+	'Glitch Hop': '#0B9753',
 	'Hardcore': '#009800',
-	'Nu Disco': '#1DAAB4',
-	'Dubstep': '#961EEA',
+	'Nu Disco': '#1CABB1',
+	'Dubstep': '#951EF5',
 	'Trap': '#8C0F29',
 	'Future Bass': '#B8B8FF'
 };
@@ -28,15 +28,15 @@ var javascriptNode;
 var barWidth = 16;
 var barMargin = 3;
 var width = $(document).width() * 0.9;
-width -= width % (barWidth + barMargin * 2)
+width -= width % (barWidth + barMargin * 2);
 var height = 325;
 
 var velMult = 1;
 
 var amplitudeScalar = 5; // the multiplier for the particle system velocity
-var ampAnalysisStart = 0; // the start of the spectrum section used to determine the speed of the particles
-var ampAnalysisLength = 0.5; // the length of the spectrum section used to determine the speed of the particles
-var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
+var ampAnalysisStart = 0.05; // the start of the spectrum section used to determine the speed of the particles
+var ampAnalysisLength = 0.4; // the length of the spectrum section used to determine the speed of the particles
+var minAmpBias = 0.4; // the minimum weight applied to any given amplitude point
 
 // dudududududu
 var red = 255;
@@ -172,7 +172,7 @@ var lastSpectrum = null;
 
 function drawSpectrum(array) {
 	var sum = 0;
-	var arraySectionLength = array.length * (ampAnalysisLength - ampAnalysisStart);
+	var sectionLength = array.length * ampAnalysisLength;
 	for (var i = 0; i < array.length; i++){
 		if (isPlaying) {
 			lastSpectrum = array;
@@ -190,8 +190,8 @@ function drawSpectrum(array) {
 				var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
 			}
 			value = Math.min(value + 1, height);
-			if (i >= array.length * ampAnalysisStart && i < array.length * ampAnalysisLength) {
-				var bias = ((arraySectionLength / minAmpBias - i) / (arraySectionLength / minAmpBias));
+			if (i >= array.length * ampAnalysisStart && i < array.length * (ampAnalysisStart + ampAnalysisLength)) {
+				var bias = (sectionLength / minAmpBias - (i - (array.length * ampAnalysisStart))) / (sectionLength / minAmpBias);
 				sum += (value / height) * bias;
 			}
 		} else {
@@ -200,6 +200,6 @@ function drawSpectrum(array) {
 		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
 	}
 	if (isPlaying) {
-		velMult = sum / arraySectionLength * (amplitudeScalar * (1 + minAmpBias));
+		velMult = sum / sectionLength * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
 	}
 };

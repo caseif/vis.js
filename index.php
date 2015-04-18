@@ -98,6 +98,48 @@
 				'artist' => 'Stephen Walking',
 				'title' => 'Monstercat Orchestral Suite',
 				'genre' => 'ayy lmao'
+			),
+			'beyondthesurface' => array(
+				'file' => 'beyondthesurface.mp3',
+				'artist' => 'Varien',
+				'title' => 'Beyond The Surface (feat. Aloma Steele)',
+				'genre' => 'EDM'
+			),
+			'loveandfear' => array(
+				'file' => 'loveandfear.m4a',
+				'artist' => 'FutureFreqs',
+				'title' => 'Love & Fear',
+				'genre' => 'EDM'
+			),
+			'changetheworld' => array(
+				'file' => 'changetheworld.mp3',
+				'artist' => 'Jetta',
+				'title' => 'I&#39;d Love To Change The World (Matstubs Remix)',
+				'genre' => 'Trap'
+			),
+			'leavingyou' => array(
+				'file' => 'leavingyou.mp3',
+				'artist' => 'Savoy & Sound Remedy',
+				'title' => 'Leaving You (feat. Jojee)',
+				'genre' => 'Future Bass'
+			),
+			'inertia' => array(
+				'file' => 'inertia.mp3',
+				'artist' => 'Draper',
+				'title' => 'Inertia',
+				'genre' => 'Glitch Hop'
+			),
+			'menandmachines' => array(
+				'file' => 'menchines.mp3',
+				'artist' => 'Draper',
+				'title' => 'Men And Machines',
+				'genre' => 'Dubstep'
+			),
+			'seeingstars' => array(
+				'file' => 'seeingstars.mp3',
+				'artist' => 'FutureFreqs',
+				'title' => 'Seeing Stars',
+				'genre' => 'Drumstep'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];

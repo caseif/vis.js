@@ -15,7 +15,7 @@ function resetParticle(particle) {
 	particle.velocity = new THREE.Vector3(
 		0.1,
 		Math.random() * yVelRange - yVelRange / 2 - yVelBias,
-		Math.random() * zVelRange - zVelRange / 2 - zVelBias
+		0
 	);
 }
 
