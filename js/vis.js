@@ -35,8 +35,8 @@ var height = 325;
 var velMult = 1;
 
 var amplitudeScalar = 5; // the multiplier for the particle system velocity
-var ampAnalysisStart = 0.03; // the start of the spectrum section used to determine the speed of the particles
-var ampAnalysisLength = 0.5; // the length of the spectrum section used to determine the speed of the particles
+var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
+var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
 var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
 
 // dudududududu
@@ -171,14 +171,11 @@ javascriptNode.onaudioprocess = function() {
 	
 	if (isPlaying) {
 		var sum = 0;
-		var sectionLength = spectrumSize * ampAnalysisLength;
-		for (var i = 0; i < spectrumSize; i++) {
-			if (i >= spectrumSize * ampAnalysisStart && i < spectrumSize * (ampAnalysisStart + ampAnalysisLength)) {
-				var bias = (sectionLength / minAmpBias - (i - (spectrumSize * ampAnalysisStart))) / (sectionLength / minAmpBias);
-				sum += (array[i] / height) * bias;
-			}
+		for (var i = ampLower; i < ampUpper; i++) {
+			var bias = ((ampUpper - ampLower) / minAmpBias - (i - ampLower)) / ((ampUpper - ampLower) / minAmpBias);
+			sum += (array[i] / height) * bias
 		}
-		velMult = sum / sectionLength * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
+		velMult = sum / (ampUpper - ampLower) * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
 	}
 	
 	drawSpectrum(array);
