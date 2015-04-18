@@ -9,6 +9,14 @@ body {
   color: #FFF;
 }
 
+#pause-info {
+	position: absolute;
+	bottom: 8px;
+	left: 8px;
+	color: #FFF;
+	display: none;
+}
+
 #github {
 	position: absolute;
 	bottom: 8px;

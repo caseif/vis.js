@@ -122,7 +122,8 @@ function playSound(buffer) {
 	sourceNode.buffer = buffer;
 	sourceNode.start(0);
 	//$(".content").show();
-	$("#loading").hide();
+	$('#loading').hide();
+	$('#pause-info').show();
 	isPlaying = true;
 	begun = true;
 	started = Date.now();

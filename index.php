@@ -140,6 +140,12 @@
 				'artist' => 'FutureFreqs',
 				'title' => 'Seeing Stars',
 				'genre' => 'Drumstep'
+			),
+			'swedenfaux' => array(
+				'file' => 'swedenfaux.mp3',
+				'artist' => 'C418',
+				'title' => 'Sweden (Faux Remix)',
+				'genre' => 'Drum & Bass'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];
@@ -165,6 +171,7 @@
 			</div>
 			<div class="ayylmao"><img class='kitty' src="./img/cat.gif" alt="ayy lmao"></div>
 		</div>
+		<div id="pause-info">Press P to pause</div>
 		<div id="github"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
 		
 		<script>
