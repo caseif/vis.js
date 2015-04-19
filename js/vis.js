@@ -76,7 +76,15 @@ function setupAudioNodes() {
 
 	analyser = context.createAnalyser();
 	analyser.smoothingTimeConstant = 0.8;
-	analyser.fftSize = 512;
+	try {
+		analyser.fftSize = 8192; // ideal bin count
+	} catch (ex) {
+		try {
+			analyser.fftSize = 4096; // fallback #1
+		} catch (ex) {
+			analyser.fftSize = 2048; // this will work for most if not all systems
+		}
+	}
 
 	sourceNode = context.createBufferSource();
 	sourceNode.connect(analyser);
@@ -201,7 +209,7 @@ function drawSpectrum(array) {
 	} else {
 		lastLowest += Math.min(lowest - lastLowest, 1);
 	}
-	for (var i = 0; i < width / (barWidth + barMargin * 2); i++) {
+	for (var i = 0; i < spectrumSize; i++) {
 		if (array[i] >= lastLowest) {
 			array[i] = height * ((array[i] - lastLowest) / (height - lastLowest));
 		} else {
@@ -217,13 +225,13 @@ function drawSpectrum(array) {
 		}
 		if (begun) {
 			if (i == 0) {
-				var value = array[i];
+				var value = array[i] / 255 * height;
 			}
 			else if (i == spectrumSize - 1) {
-				var value = (array[i - 1] + array[i]) / 2;
+				var value = (array[i - 1] + array[i]) / 2  / 255 * height;
 			}
 			else {
-				var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
+				var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * height;
 			}
 			value = Math.min(value + 1, height);
 		} else {
