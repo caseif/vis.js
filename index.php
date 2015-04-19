@@ -153,6 +153,7 @@
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
 		<link rel="stylesheet" href="vis.css">
+		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<script>
 			var file = '<?php echo $song['file']; ?>';
 			var artist = '<?php echo $song['artist']; ?>';

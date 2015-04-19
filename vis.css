@@ -38,16 +38,16 @@ body {
   color: #FFF;
   display: block;
   font-size: 3em;
-  font-family: Lato, sans-serif;
-  font-weight: 900;
+  font-family: 'Montserrat', Lato, sans-serif;
+  font-weight: 700;
 }
 
 .content .title {
   color: #FFF;
   display: block;
   font-size: 2em;
-  font-family: Lato, sans-serif;
-  font-weight: 700;
+  font-family: 'Montserrat', Lato, sans-serif;
+  font-weight: 400;
 }
 
 #particles {

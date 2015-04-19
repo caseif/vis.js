@@ -28,7 +28,7 @@ var javascriptNode;
 //var barWidth = 16;
 var width = $(document).width() * 0.9;
 var barCount = 80;
-var barMargin = 3;
+var barMargin = 4;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
