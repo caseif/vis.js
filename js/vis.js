@@ -32,7 +32,7 @@ var barMargin = 4;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
-var height = 325;
+var height = 255;
 
 var velMult = 1;
 
@@ -54,6 +54,7 @@ var isPlaying = false;
 var bufferInterval = 1024;
 var started = 0;
 var currentTime = 0;
+var minProcessPeriod = 18; // ms between calls to the process function
 
 if (genre == 'ayy lmao') {
 	$('.ayylmao').show();
@@ -146,7 +147,11 @@ function onError(e) {
 
 var lastLowest = -1;
 
+var lastProcess = Date.now();
 javascriptNode.onaudioprocess = function() {
+	var now = Date.now();
+	do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
+	lastProcess = Date.now();
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, width, height);
