@@ -9,7 +9,7 @@
 		}
 		foreach ($entries as $key => $song){
 			if (substr($song, 0, 1) != '#'){
-				list($index, $file, $artist, $title, $genre) = explode("|", preg_replace('/\r|\n/', '', $song));
+				list($index, $file, $artist, $title, $genre) = explode("|", str_replace("'", "&#39", preg_replace('/\r|\n/', '', $song)));
 				$songs[$index] = array(
 					'file' => $file,
 					'artist' => $artist,
