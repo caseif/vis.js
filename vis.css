@@ -50,6 +50,15 @@ body {
   font-weight: 400;
 }
 
+.content .title a {
+	color: white;
+	text-decoration: none;
+}
+
+.content .title a:hover {
+	text-decoration: underline;
+}
+
 #particles {
 	position: fixed;
 	left: 0;

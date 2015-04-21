@@ -9,13 +9,17 @@
 		}
 		foreach ($entries as $key => $song){
 			if (substr($song, 0, 1) != '#'){
-				list($index, $file, $artist, $title, $genre) = explode("|", str_replace("'", "&#39", preg_replace('/\r|\n/', '', $song)));
+				list($index, $file, $artist, $title, $genre, $url) = explode("|", str_replace("'", "&#39", preg_replace('/\r|\n/', '', $song)));
 				$songs[$index] = array(
 					'file' => $file,
 					'artist' => $artist,
 					'title' => $title,
-					'genre' => $genre
+					'genre' => $genre,
+					'url' => $url
 				);
+				if (substr($songs[$index]['url'], 0, 4) != 'http') {
+					$songs[$index]['url'] = 'http://youtu.be/'.$songs[$index]['url'];
+				}
 				unset($entries[$key]);
 			}
 		}
@@ -31,6 +35,7 @@
 			var artist = '<?php echo $song['artist']; ?>';
 			var title = '<?php echo $song['title']; ?>';
 			var genre = '<?php echo isset($song['genre']) ? $song['genre'] : 'EDM'; ?>';
+			var url = '<?php echo isset($song['url']) ? $song['url'] : ''; ?>';
 		</script>
 		<title><?php echo $song['artist'].' &mdash; '.$song['title']; ?></title>
 	</head>
@@ -40,7 +45,17 @@
 			<canvas id="canvas" style="display: block;"></canvas>
 			<div id="songinfo">
 				<div class="names"><?php echo strtoupper($song['artist']); ?></div>
-				<div class="title"><?php echo strtoupper($song['title']); ?></div>
+				<div class="title">
+					<?php
+					if (isset($song['url'])) {
+						echo '<a href="'.$song['url'].'" target="_blank">';
+					}
+					echo strtoupper($song['title']);
+					if (isset($song['url'])) {
+						echo '</a>';
+					}
+					?>
+				</div>
 			</div>
 			<div class="ayylmao"><img class='kitty' src="./img/cat.gif" alt="ayy lmao"></div>
 		</div>

@@ -1,33 +1,36 @@
-#key|fileName|artist|title|genre
-gramophone|gramophone.mp3|Faux|Gramophone|EDM
-gravity|gravity.mp3|Umpire|Gravity|Dubstep
-pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|EDM
-equinox|equinox.mp3|Skrillex|First Of The Year (Equinox)|Dubstep
-triumph|triumph.mp3|WRLD|Triumph|Future Bass
-friends|friends.mp3|Grabbitz|Friends (with Faustix)|Trap
-thegirl|thegirl.mp3|Hellberg|The Girl (feat. Cozi Zuehlsdorff)|House
-therunner|therunner.mp3|Faux|The Runner|Drum & Bass
-myfriend|myfriend.mp3|Tristam|My Friend|Drumstep
-dreams|dreams.mp3|Rogue|Dreams (feat. Laura Brehm)|Drumstep
-onceagain|onceagain.mp3|Tristam|Once Again|Glitch Hop
-puresunlight|puresunlight.mp3|Mr Fijiwiji, Laura Brehm, & AgNO3|Pure Sunlight|EDM
-rainbowroad|rainbowroad.mp3|nanobii|Rainbow Road|Hardcore
-btmaerochord|btmaerochord.mp3|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit) (Aero Chord Remix)|Trap
-sandstorm|sandstorm.mp3|Darude|Sandstorm|ayy lmao
-sworchestral|sworchestral.mp3|Stephen Walking|Monstercat Orchestral Suite|ayy lmao
-beyondthesurface|beyondthesurface.mp3|Varien|Beyond The Surface (feat. Aloma Steele)|EDM
-loveandfear|loveandfear.m4a|FutureFreqs|Love & Fear|EDM
-changetheworld|changetheworld.mp3|Jetta|I'd Love To Change The World (Matstubs Remix)|Trap
-leavingyou|leavingyou.mp3|Savoy & Sound Remedy|Leaving You (feat. Jojee)|Future Bass
-inertia|inertia.mp3|Draper|Inertia|Glitch Hop
-menandmachines|menchines.mp3|Draper|Men & Machines|Dubstep
-seeingstars|seeingstars.mp3|FutureFreqs|Seeing Stars|Drumstep
-swedenfaux|swedenfaux.mp3|C418|Sweden (Faux Remix)|Drum & Bass
-surface|surface.mp3|Aero Chord|Surface|Trap
-insight|insight.mp3|Haywyre|Insight|Dubstep
-more|more.mp3|Subformat|More (feat. Charli Brix)|Drum & Bass
-sunofagun|sunofagun.mp3|Oh Land|Sun Of A Gun (Jacob Plant Remix)|Dubstep
-freshprincerazihel|freshprincerazihel.mp3|Will Smith|The Fresh Prince Of Bel-Air (Razihel Remix)|Dubstep
-fuckgravity|fuckgravity.mp3|Virtual Riot|Fuck Gravity|Glitch Hop
-moments|moments.mp3|Mutrix|Moments (feat. Charity Vance)|Dubstep
-weareone|weareone.mp3|Pegboard Nerds|We Are One (feat. Splitbreed)|Glitch Hop
+# key|fileName|artist|title|genre|url/youtubeId
+# The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
+gramophone|gramophone.mp3|Faux|Gramophone|EDM|USlOx7pi6BE
+gravity|gravity.mp3|Umpire|Gravity|Dubstep|1iDTrK2EAfI
+pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|EDM|j8F1NwrHBIU
+equinox|equinox.mp3|Skrillex|First Of The Year (Equinox)|Dubstep|2cXDgFwE13g
+triumph|triumph.mp3|WRLD|Triumph|Future Bass|5YxVMyeIGvA
+friends|friends.mp3|Grabbitz|Friends (with Faustix)|Trap|6-VhfzNI4M
+thegirl|thegirl.mp3|Hellberg|The Girl (feat. Cozi Zuehlsdorff)|House|FtveSk1N7Uo
+therunner|therunner.mp3|Faux|The Runner|Drum & Bass|https://soundcloud.com/faux_official/the-runner
+myfriend|myfriend.mp3|Tristam|My Friend|Drumstep|M0CfCdQ2zPU
+dreams|dreams.mp3|Rogue|Dreams (feat. Laura Brehm)|Drumstep|yYPXVcgZo-U
+onceagain|onceagain.mp3|Tristam|Once Again|Glitch Hop|59M5z0c8YtE
+puresunlight|puresunlight.mp3|Mr Fijiwiji, Laura Brehm, & AgNO3|Pure Sunlight|EDM|F_QrKYAv1NE
+rainbowroad|rainbowroad.mp3|nanobii|Rainbow Road|Hardcore|a0Aauep0VWs
+btmaerochord|btmaerochord.mp3|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit) (Aero Chord Remix)|Trap|L10QuAncJx0
+sandstorm|sandstorm.mp3|Darude|Sandstorm|ayy lmao|2HQaBWziYvY
+sworchestral|sworchestral.mp3|Stephen Walking|Monstercat Orchestral Suite|ayy lmao|ZjJOJcNWFE0
+beyondthesurface|beyondthesurface.mp3|Varien|Beyond The Surface (feat. Aloma Steele)|EDM|https://soundcloud.com/varienofficial/varien-beyond-the-surface-feat-aloma-steele
+loveandfear|loveandfear.m4a|FutureFreqs|Love & Fear|EDM|cMCgQnD2Nyc
+changetheworld|changetheworld.mp3|Jetta|I'd Love To Change The World (Matstubs Remix)|Trap|5hEh9LiSzow
+leavingyou|leavingyou.mp3|Savoy & Sound Remedy|Leaving You (feat. Jojee)|Future Bass|Vf_WUSXiv00
+inertia|inertia.mp3|Draper|Inertia|Glitch Hop|kn4BH1Ga4ss
+menandmachines|menchines.mp3|Draper|Men & Machines|Dubstep|irkaE4ZLUng
+seeingstars|seeingstars.mp3|FutureFreqs|Seeing Stars|Drumstep|tZCaxrF8gJ0
+swedenfaux|swedenfaux.mp3|C418|Sweden (Faux Remix)|Drum & Bass|https://soundcloud.com/faux_official/c418-sweden-entropy-remix
+surface|surface.mp3|Aero Chord|Surface|Trap|BrCKvKXvN2c
+insight|insight.mp3|Haywyre|Insight|Dubstep|UGeNoml0OHc
+more|more.mp3|Subformat|More (feat. Charli Brix)|Drum & Bass|LKZWZtRUPVY
+sunofagun|sunofagun.mp3|Oh Land|Sun Of A Gun (Jacob Plant Remix)|Dubstep|vs__1a1gbPo
+freshprincerazihel|freshprincerazihel.mp3|Will Smith|The Fresh Prince Of Bel-Air (Razihel Remix)|Dubstep|-iBugy2xVPs
+fuckgravity|fuckgravity.mp3|Virtual Riot|Fuck Gravity|Glitch Hop|gxuB-aKFEzo
+moments|moments.mp3|Mutrix|Moments (feat. Charity Vance)|Dubstep|https://soundcloud.com/mutrix/mutrix-moments-ft-charity
+weareone|weareone.mp3|Pegboard Nerds|We Are One (feat. Splitbreed)|Glitch Hop|JJvdp0XpSj0
+whatsgoingon|whatsgoingon.mp3|Droptek|What's Going On|Trap|hwJGx2KeMhU
+minty|minty.mp3|Volant|Minty|Glitch Hop|7BhYmwFSOas
