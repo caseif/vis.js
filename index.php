@@ -2,188 +2,24 @@
 <html>
 	<head>
 		<?php
-		$songs = array(
-			'gramophone' => array(
-				'file' => 'gramophone.mp3',
-				'artist' => 'Faux',
-				'title' => 'Gramophone',
-				'genre' => 'EDM'
-			),
-			'gravity' => array(
-				'file' => 'gravity.mp3',
-				'artist' => 'Umpire',
-				'title' => 'Gravity',
-				'genre' => 'Dubstep'
-			),
-			'pressure' => array(
-				'file' => 'pressure.mp3',
-				'artist' => 'Draper',
-				'title' => 'Pressure (feat. Laura Brehm)',
-				'genre' => 'EDM'
-			),
-			'equinox' => array(
-				'file' => 'equinox.mp3',
-				'artist' => 'Skrillex',
-				'title' => 'First Of The Year (Equinox)',
-				'genre' => 'Dubstep'
-			),
-			'triumph' => array(
-				'file' => 'triumph.mp3',
-				'artist' => 'WRLD',
-				'title' => 'Triumph',
-				'genre' => 'Future Bass'
-			),
-			'friends' => array(
-				'file' => 'friends.mp3',
-				'artist' => 'Grabbitz',
-				'title' => 'Friends (with Faustix)',
-				'genre' => 'Trap'
-			),
-			'thegirl' => array(
-				'file' => 'thegirl.mp3',
-				'artist' => 'Hellberg',
-				'title' => 'The Girl (feat. Cozi Zuehlsdorff)',
-				'genre' => 'House'
-			),
-			'therunner' => array(
-				'file' => 'therunner.mp3',
-				'artist' => 'Faux',
-				'title' => 'The Runner',
-				'genre' => 'Drum & Bass'
-			),
-			'myfriend' => array(
-				'file' => 'myfriend.mp3',
-				'artist' => 'Tristam',
-				'title' => 'My Friend',
-				'genre' => 'Drumstep'
-			),
-			'dreams' => array(
-				'file' => 'dreams.mp3',
-				'artist' => 'Rogue',
-				'title' => 'Dreams (feat. Laura Brehm)',
-				'genre' => 'Drumstep'
-			),
-			'onceagain' => array(
-				'file' => 'onceagain.mp3',
-				'artist' => 'Tristam',
-				'title' => 'Once Again',
-				'genre' => 'Glitch Hop'
-			),
-			'puresunlight' => array(
-				'file' => 'puresunlight.mp3',
-				'artist' => 'Mr Fijiwiji, Laura Brehm, & AgNO3',
-				'title' => 'Pure Sunlight',
-				'genre' => 'EDM'
-			),
-			'rainbowroad' => array(
-				'file' => 'rainbowroad.mp3',
-				'artist' => 'nanobii',
-				'title' => 'Rainbow Road',
-				'genre' => 'Hardcore'
-			),
-			'btmaerochord' => array(
-				'file' => 'btmaerochord.mp3',
-				'artist' => 'Excision & Pegboard Nerds',
-				'title' => 'Bring The Madness (Aero Chord Remix)',
-				'genre' => 'Trap'
-			),
-			'sandstorm' => array(
-				'file' => 'sandstorm.mp3',
-				'artist' => 'Darude',
-				'title' => 'Sandstorm',
-				'genre' => 'ayy lmao'
-			),
-			'sworchestral' => array(
-				'file' => 'sworchestral.mp3',
-				'artist' => 'Stephen Walking',
-				'title' => 'Monstercat Orchestral Suite',
-				'genre' => 'ayy lmao'
-			),
-			'beyondthesurface' => array(
-				'file' => 'beyondthesurface.mp3',
-				'artist' => 'Varien',
-				'title' => 'Beyond The Surface (feat. Aloma Steele)',
-				'genre' => 'EDM'
-			),
-			'loveandfear' => array(
-				'file' => 'loveandfear.m4a',
-				'artist' => 'FutureFreqs',
-				'title' => 'Love & Fear',
-				'genre' => 'EDM'
-			),
-			'changetheworld' => array(
-				'file' => 'changetheworld.mp3',
-				'artist' => 'Jetta',
-				'title' => 'I&#39;d Love To Change The World (Matstubs Remix)',
-				'genre' => 'Trap'
-			),
-			'leavingyou' => array(
-				'file' => 'leavingyou.mp3',
-				'artist' => 'Savoy & Sound Remedy',
-				'title' => 'Leaving You (feat. Jojee)',
-				'genre' => 'Future Bass'
-			),
-			'inertia' => array(
-				'file' => 'inertia.mp3',
-				'artist' => 'Draper',
-				'title' => 'Inertia',
-				'genre' => 'Glitch Hop'
-			),
-			'menandmachines' => array(
-				'file' => 'menchines.mp3',
-				'artist' => 'Draper',
-				'title' => 'Men And Machines',
-				'genre' => 'Dubstep'
-			),
-			'seeingstars' => array(
-				'file' => 'seeingstars.mp3',
-				'artist' => 'FutureFreqs',
-				'title' => 'Seeing Stars',
-				'genre' => 'Drumstep'
-			),
-			'swedenfaux' => array(
-				'file' => 'swedenfaux.mp3',
-				'artist' => 'C418',
-				'title' => 'Sweden (Faux Remix)',
-				'genre' => 'Drum & Bass'
-			),
-			'surface' => array(
-				'file' => 'surface.mp3',
-				'artist' => 'Aero Chord',
-				'title' => 'Surface',
-				'genre' => 'Trap'
-			),
-			'insight' => array(
-				'file' => 'insight.mp3',
-				'artist' => 'Haywyre',
-				'title' => 'Insight',
-				'genre' => 'Dubstep'
-			),
-			'more' => array(
-				'file' => 'more.mp3',
-				'artist' => 'Subformat',
-				'title' => 'More (feat. Charlie Brix)',
-				'genre' => 'Drum & Bass'
-			),
-			'sunofagun' => array(
-				'file' => 'sunofagun.mp3',
-				'artist' => 'Oh Land',
-				'title' => 'Sun Of A Gun (Jacob Plant Remix)',
-				'genre' => 'Dubstep'
-			),
-			'freshprincerazihel' => array(
-				'file' => 'freshprincerazihel.mp3',
-				'artist' => 'Will Smith',
-				'title' => 'The Fresh Prince Of Bel-Air (Razihel Remix)',
-				'genre' => 'Glitch Hop'
-			),
-			'fuckgravity' => array(
-				'file' => 'fuckgravity.mp3',
-				'artist' => 'Virtual Riot',
-				'title' => 'Fuck Gravity',
-				'genre' => 'Glitch Hop'
-			)
-		);
+		$songs = array();
+		$file = fopen('songs.csv', 'r');
+		while (!feof($file)) {
+			$entries[] = fgets($file);
+		}
+		foreach ($entries as $key => $song){
+			if (substr($song, 0, 1) != '#'){
+				list($index, $file, $artist, $title, $genre) = explode("|", preg_replace('/\r|\n/', '', $song));
+				$songs[$index] = array(
+					'file' => $file,
+					'artist' => $artist,
+					'title' => $title,
+					'genre' => $genre
+				);
+				unset($entries[$key]);
+			}
+		}
+		fclose($file);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];
 		?>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
