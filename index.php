@@ -146,6 +146,42 @@
 				'artist' => 'C418',
 				'title' => 'Sweden (Faux Remix)',
 				'genre' => 'Drum & Bass'
+			),
+			'surface' => array(
+				'file' => 'surface.mp3',
+				'artist' => 'Aero Chord',
+				'title' => 'Surface',
+				'genre' => 'Trap'
+			),
+			'insight' => array(
+				'file' => 'insight.mp3',
+				'artist' => 'Haywyre',
+				'title' => 'Insight',
+				'genre' => 'Dubstep'
+			),
+			'more' => array(
+				'file' => 'more.mp3',
+				'artist' => 'Subformat',
+				'title' => 'More (feat. Charlie Brix)',
+				'genre' => 'Drum & Bass'
+			),
+			'sunofagun' => array(
+				'file' => 'sunofagun.mp3',
+				'artist' => 'Oh Land',
+				'title' => 'Sun Of A Gun (Jacob Plant Remix)',
+				'genre' => 'Dubstep'
+			),
+			'freshprincerazihel' => array(
+				'file' => 'freshprincerazihel.mp3',
+				'artist' => 'Will Smith',
+				'title' => 'The Fresh Prince Of Bel-Air (Razihel Remix)',
+				'genre' => 'Glitch Hop'
+			),
+			'fuckgravity' => array(
+				'file' => 'fuckgravity.mp3',
+				'artist' => 'Virtual Riot',
+				'title' => 'Fuck Gravity',
+				'genre' => 'Glitch Hop'
 			)
 		);
 		$song = $songs[isset($_GET['song']) ? $_GET['song'] : array_rand($songs)];

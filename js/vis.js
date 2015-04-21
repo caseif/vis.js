@@ -78,11 +78,14 @@ function setupAudioNodes() {
 	analyser.smoothingTimeConstant = 0.8;
 	try {
 		analyser.fftSize = 8192; // ideal bin count
+		console.log('Using fftSize of 8192 (woot woot!)');
 	} catch (ex) {
 		try {
 			analyser.fftSize = 4096; // fallback #1
+			console.log('Using fftSize of 4096');
 		} catch (ex) {
 			analyser.fftSize = 2048; // this will work for most if not all systems
+			console.log('Using fftSize of 2048');
 		}
 	}
 
