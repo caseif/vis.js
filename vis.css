@@ -34,7 +34,7 @@ body {
   left: 50px;
 }
 
-.content .names {
+.content #artist {
   color: #FFF;
   display: block;
   font-size: 3em;
@@ -42,7 +42,7 @@ body {
   font-weight: 700;
 }
 
-.content .title {
+.content #title {
   color: #FFF;
   display: block;
   font-size: 2em;
@@ -50,12 +50,12 @@ body {
   font-weight: 400;
 }
 
-.content .title a {
+.content #title a {
 	color: white;
 	text-decoration: none;
 }
 
-.content .title a:hover {
+.content #title a:hover {
 	text-decoration: underline;
 }
 

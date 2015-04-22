@@ -1,8 +1,8 @@
 # key|fileName|artist|title|genre|url/youtubeId
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
 gramophone|gramophone.mp3|Faux|Gramophone|EDM|USlOx7pi6BE
-gravity|gravity.mp3|Umpire|Gravity|Dubstep|1iDTrK2EAfI
-pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|EDM|j8F1NwrHBIU
+gravity|gravity.mp3|Umpire|Gravity (feat. Liz Kretschmer)|Dubstep|1iDTrK2EAfI
+pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|Post-Rock|j8F1NwrHBIU
 equinox|equinox.mp3|Skrillex|First Of The Year (Equinox)|Dubstep|2cXDgFwE13g
 triumph|triumph.mp3|WRLD|Triumph|Future Bass|5YxVMyeIGvA
 friends|friends.mp3|Grabbitz|Friends (with Faustix)|Trap|6-VhfzNI4M
@@ -11,13 +11,14 @@ therunner|therunner.mp3|Faux|The Runner|Drum & Bass|https://soundcloud.com/faux_
 myfriend|myfriend.mp3|Tristam|My Friend|Drumstep|M0CfCdQ2zPU
 dreams|dreams.mp3|Rogue|Dreams (feat. Laura Brehm)|Drumstep|yYPXVcgZo-U
 onceagain|onceagain.mp3|Tristam|Once Again|Glitch Hop|59M5z0c8YtE
-puresunlight|puresunlight.mp3|Mr Fijiwiji, Laura Brehm, & AgNO3|Pure Sunlight|EDM|F_QrKYAv1NE
+puresunlight|puresunlight.mp3|Mr Fijiwiji, Laura Brehm, & AgNO3|Pure Sunlight|Industrial EDM|F_QrKYAv1NE
 rainbowroad|rainbowroad.mp3|nanobii|Rainbow Road|Hardcore|a0Aauep0VWs
 btmaerochord|btmaerochord.mp3|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit) (Aero Chord Remix)|Trap|L10QuAncJx0
+btmnoisestorm|btmnoisestorm.mp3|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit) (Noisestorm Remix)|Breaks|zOMFGuM5xww
 sandstorm|sandstorm.mp3|Darude|Sandstorm|ayy lmao|2HQaBWziYvY
 sworchestral|sworchestral.mp3|Stephen Walking|Monstercat Orchestral Suite|ayy lmao|ZjJOJcNWFE0
-beyondthesurface|beyondthesurface.mp3|Varien|Beyond The Surface (feat. Aloma Steele)|EDM|https://soundcloud.com/varienofficial/varien-beyond-the-surface-feat-aloma-steele
-loveandfear|loveandfear.m4a|FutureFreqs|Love & Fear|EDM|cMCgQnD2Nyc
+beyondthesurface|beyondthesurface.mp3|Varien|Beyond The Surface (feat. Aloma Steele)|Future|https://soundcloud.com/varienofficial/varien-beyond-the-surface-feat-aloma-steele
+loveandfear|loveandfear.m4a|FutureFreqs|Love & Fear|Acoustic EDM|cMCgQnD2Nyc
 changetheworld|changetheworld.mp3|Jetta|I'd Love To Change The World (Matstubs Remix)|Trap|5hEh9LiSzow
 leavingyou|leavingyou.mp3|Savoy & Sound Remedy|Leaving You (feat. Jojee)|Future Bass|Vf_WUSXiv00
 inertia|inertia.mp3|Draper|Inertia|Glitch Hop|kn4BH1Ga4ss
@@ -34,3 +35,18 @@ moments|moments.mp3|Mutrix|Moments (feat. Charity Vance)|Dubstep|https://soundcl
 weareone|weareone.mp3|Pegboard Nerds|We Are One (feat. Splitbreed)|Glitch Hop|JJvdp0XpSj0
 whatsgoingon|whatsgoingon.mp3|Droptek|What's Going On|Trap|hwJGx2KeMhU
 minty|minty.mp3|Volant|Minty|Glitch Hop|7BhYmwFSOas
+ideekay|ideekay.mp3|Ephixa|Ideekay|Glitch Hop|5v7T7L3g1yw
+somewobbles|somewobbles.mp3|Ephixa|Some Wobbles|Dubstep|WT7CBNJjwc0
+fullgrizzly|fullgrizzly.mp3|Going Quantum & Stephen Walking|Full Grizzly|Dubstep|obVlQinLQnQ
+findthatsomeone|findthatsomeone.mp3|Televisor|Find That Someone|Nu Disco|h7aunPoTU64
+animebae|animebae.mp3|Sushi Killer & Kevin Villecco|Anime Bae|Future Bass|YHHjfYxLyuA
+kaleidoscope|kaleidoscope.mp3|Kasbo|Kaleidoscope|Future Bass|rI-t2M0t63s
+dadsinspace|dadsinspace.mp3|Stephen Walking|Dads In Space|Future Funk|ra2E_mjQMvg
+bullseye|bullseye.mp3|Kevin Drew|Bullseye|Not Dubstep, That's All I Know|kqjKOL0N8ks
+manslaughter|manslaughter.mp3|Let's Be Friends|Manslaughter (VIP Mix)|Glitch Hop|SQRIaztIf3E
+nofire|nofire.mp3|Protostar & MakO|No Fire (feat. Rachel Hirons)|Dubstep|4G10QL3VBrw
+seekingofthetruth|seekingofthetruth.mp3|Razihel|Seeking Of The Truth (feat. Taryn Manning)|Dubstep|7qDGTVbOyO8
+thementalist|thementalist.mp3|Mr FijiWiji|The Mentalist|Dubstep|HSsvWUeAFM8
+nightsinbangalore|nightsinbangalore.mp3|Varien|Nights In Bangalore Part 2|Trap|Jv1E1jYVt2s
+bringthemadness|bringthemadness.mp3|Excision & Pegboard Nerds|Bring The Madness (feat.  Mayor Apeshit)|Drumstep|8dZDdW7v4Q8
+breakdownvip|breakdownvip.mp3|Noisestorm|Breakdown VIP|Drumstep|wqZ5iLOUOGA

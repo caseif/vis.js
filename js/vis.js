@@ -20,6 +20,7 @@ var colors = {
 	'Future Bass': '#B8B8FF'
 };
 
+var song;
 var context = new AudioContext();
 var audioBuffer;
 var sourceNode;
@@ -56,20 +57,66 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
-if (genre == 'ayy lmao') {
+//$(".content").hide();
+$('#canvas').attr('width', width);
+$('#canvas').attr('height', height);
+var ctx = $("#canvas").get()[0].getContext("2d");
+
+function centerText() {
+	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2 - 80);
+	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2 - 52);
+};
+
+centerText();	
+
+$(window).resize(function() {
+	centerText();
+});
+
+loadSong();
+setupAudioNodes();
+loadSound('music/' + song.getFileName()); // music file
+
+if (song.getGenre() == 'ayy lmao') {
 	$('.ayylmao').show();
 	$('.kitty').css('margin-top', -$('#songinfo').height() + 17);
 	$('.kitty').attr('height', $('#songinfo').height() - 20);
 	$('#songinfo').css('margin-left', $('.kitty').width() + 16);
 }
 
-//$(".content").hide();
-$('#canvas').attr('width', width);
-$('#canvas').attr('height', height);
-var ctx = $("#canvas").get()[0].getContext("2d");
-
-setupAudioNodes();
-loadSound('music/' + file); //music file
+function loadSong() {
+	var songs = [];
+	var count = 0;
+	var loc = window.location.pathname;
+	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+	var path = prefix + '/songs.csv';
+	$.ajax({
+		url:		path,
+		success:	function(csv) {
+						var lines = csv.split('\n');
+						for (var i = 0; i < lines.length; i++) {
+							try {
+								var s = new Song(lines[i]);
+								songs[s.getId()] = s;
+								count = count + 1;
+							} catch (ex) {} // not a song
+						}
+						songs.splice('undefined', 1);
+					},
+		async:		false
+	});
+	if (songName !== undefined) {
+		song = songs[songName];
+	} else {
+		var keys = Object.keys(songs);
+		var key = keys[Math.floor(Math.random() * count)];
+		console.log(key);
+		song = songs[key];
+	}
+	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
+	document.getElementById('title').innerHTML = song.getTitle().toUpperCase();
+	document.title = song.getArtist() + ' — ' + song.getTitle();
+}
 
 function setupAudioNodes() {
 	javascriptNode = context.createScriptProcessor(bufferInterval, 1, 1);
@@ -155,7 +202,7 @@ javascriptNode.onaudioprocess = function() {
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, width, height);
-	if (genre == 'ayy lmao') {
+	if (song.getGenre() == 'ayy lmao') {
 		switch (stage) {
 			case 0:
 				if (green < 255) green = Math.min(green + cycleSpeed, 255);
@@ -185,7 +232,7 @@ javascriptNode.onaudioprocess = function() {
 		if (stage > 5) stage = 0;
 		ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
 	} else {
-		ctx.fillStyle = colors[genre] != undefined ? colors[genre] : colors['EDM']; //bar color
+		ctx.fillStyle = colors[song.getGenre()] != undefined ? colors[song.getGenre()] : colors['EDM']; //bar color
 	}
 	
 	if (isPlaying) {
