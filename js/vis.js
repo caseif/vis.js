@@ -115,7 +115,7 @@ function loadSong() {
 	}
 	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
 	document.getElementById('title').innerHTML = song.getTitle().toUpperCase();
-	document.title = song.getArtist() + ' — ' + song.getTitle();
+	document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
 }
 
 function setupAudioNodes() {
