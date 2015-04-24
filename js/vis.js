@@ -19,6 +19,7 @@ var colors = {
 	'Trap': '#8C0F29',
 	'Future Bass': '#B8B8FF'
 };
+var color;
 
 var song;
 var context = new AudioContext();
@@ -116,6 +117,10 @@ function loadSong() {
 	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
 	document.getElementById('title').innerHTML = song.getTitle().toUpperCase();
 	document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
+	color = colors[song.getGenre()];
+	if (color == undefined) {
+		color = colors['EDM']
+	}
 }
 
 function setupAudioNodes() {
@@ -232,7 +237,7 @@ javascriptNode.onaudioprocess = function() {
 		if (stage > 5) stage = 0;
 		ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
 	} else {
-		ctx.fillStyle = colors[song.getGenre()] != undefined ? colors[song.getGenre()] : colors['EDM']; //bar color
+		ctx.fillStyle = color; //bar color
 	}
 	
 	if (isPlaying) {
