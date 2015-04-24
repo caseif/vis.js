@@ -298,13 +298,3 @@ function drawSpectrum(array) {
 		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
 	}
 };
-
-// from http://stackoverflow.com/questions/5623838/
-function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-}
-
-function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
