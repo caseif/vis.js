@@ -111,7 +111,6 @@ function loadSong() {
 	} else {
 		var keys = Object.keys(songs);
 		var key = keys[Math.floor(Math.random() * count)];
-		console.log(key);
 		song = songs[key];
 	}
 	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
@@ -235,10 +234,9 @@ javascriptNode.onaudioprocess = function() {
 				break;
 		}
 		if (stage > 5) stage = 0;
-		ctx.fillStyle = 'rgb(' + red + ',' + green + ',' + blue + ')';
-	} else {
-		ctx.fillStyle = color; //bar color
+		color = 'rgb(' + red + ',' + green + ',' + blue + ')';
 	}
+	ctx.fillStyle = color; // bar color
 	
 	if (isPlaying) {
 		var sum = 0;
@@ -300,3 +298,13 @@ function drawSpectrum(array) {
 		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
 	}
 };
+
+// from http://stackoverflow.com/questions/5623838/
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}

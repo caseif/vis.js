@@ -21,8 +21,7 @@ function resetParticle(particle) {
 }
 
 function getValidSpawnPosition(fleck) {
-	var zRange = fleck ? fleckZPosRange : zPosRange;
-	var z = Math.random() * zRange - zRange / 2; // random z-value
+	var z = fleck ? fleckZ : Math.random() * zPosRange - zPosRange / 2; // random z-value
 	var x = -Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)); // x-value intersecting the frustum at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var y = Math.random() * yRange - yRange / 2; // random y-value within calculated range

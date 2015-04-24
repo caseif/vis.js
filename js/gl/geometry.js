@@ -1,5 +1,5 @@
 var particleCount = 500; // total particle count including flecks
-var fleckCount = particleCount * 0.075;
+var fleckCount = particleCount * 0.05;
 var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 
@@ -7,22 +7,23 @@ var uniforms = {
 	color: {type: "c", value: new THREE.Color(0xFFFFFF)},
 };
 
+var texture = THREE.ImageUtils.loadTexture(
+	'./img/particle_alpha.png'
+)
+texture.minFilter = THREE.LinearFilter;
+
 var pMaterial = new THREE.PointCloudMaterial({
 	color: 0xFFFFFF,
 	size: 5,
-	map: THREE.ImageUtils.loadTexture(
-		'./img/particle_alpha.png'
-	),
+	map: texture,
 	blending: THREE.AdditiveBlending,
 	transparent: true
 });
 
 var fleckMaterial = new THREE.PointCloudMaterial({
 	color: color,
-	size: 3,
-	map: THREE.ImageUtils.loadTexture(
-		'./img/particle_alpha.png'
-	),
+	size: 2,
+	map: texture,
 	blending: THREE.AdditiveBlending,
 	transparent: true
 });
@@ -55,12 +56,12 @@ for (var p = 0; p < particleCount; p++) {
 
 var fleckVelocity = 0.15;
 
-var fleckZPosRange = 0;
+var fleckYVelRange = 0.1;
 
-var fleckYVelRange = 0.05;
+var fleckZ = 150;
 
 for (var p = 0; p < fleckCount; p++) {
-	var z = 0;
+	var z = fleckZ;
 	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var pX = Math.random() * xRange - xRange / 2,
@@ -72,7 +73,7 @@ for (var p = 0; p < fleckCount; p++) {
 	  // create a velocity vector
 	fleck.velocity = new THREE.Vector3(
 		fleckVelocity,
-		Math.random() * yVelRange - fleckYVelRange / 2,
+		Math.random() * fleckYVelRange - fleckYVelRange / 2,
 		0
 	);
 
