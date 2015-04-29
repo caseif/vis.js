@@ -58,9 +58,14 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
+var blockSize = 140;
+var blockMargin = 15;
+
 //$(".content").hide();
 $('#canvas').attr('width', width);
-$('#canvas').attr('height', height);
+$('#canvas').attr('height', height + blockSize + 2 * blockMargin);
+$('#songinfo').css('margin-top', -blockSize - blockMargin - 10);
+$('#songinfo').css('margin-left', blockSize + blockMargin);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 function centerText() {
@@ -114,12 +119,33 @@ function loadSong() {
 		song = songs[key];
 	}
 	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
-	document.getElementById('title').innerHTML = song.getTitle().toUpperCase();
+	document.getElementById('title').innerHTML =
+			(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
+			+ song.getTitle().toUpperCase()
+			+ (song.getLink() != null ? '</a>' : '');
 	document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
 	color = colors[song.getGenre()];
 	if (color == undefined) {
 		color = colors['EDM']
 	}
+
+	drawBlock();
+}
+
+function drawBlock() {
+	ctx.fillStyle = color;
+	ctx.fillRect(0, height + blockMargin, blockSize, blockSize);
+	var img = new Image();
+	img.onload = function() {
+		ctx.fillStyle = 'white';
+		var widthRatio = 0.82;
+		var heightRatio = 0.93;
+		ctx.drawImage(img, blockSize * (1 - widthRatio) / 2, height + blockMargin + (blockSize * (1 - heightRatio) / 2), blockSize * widthRatio, blockSize * heightRatio);
+	}
+	var loc = window.location.pathname;
+	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+	img.src = prefix + '/img/mcat.svg';
+	console.log('drawn');
 }
 
 function setupAudioNodes() {

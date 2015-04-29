@@ -14,6 +14,8 @@ function Song(rawData) {
 			if (!data[5].match('^http')) {
 				this.link = 'http://youtu.be/' + this.link;
 			}
+		} else {
+			this.link = null;
 		}
 	} else {
 		throw 'non-song';
