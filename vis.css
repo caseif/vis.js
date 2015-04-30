@@ -38,7 +38,7 @@ body {
   color: #FFF;
   display: block;
   font-size: 5em;
-  font-family: 'Montserrat', Lato, sans-serif;
+  font-family: 'Raleway', Lato, sans-serif;
   font-weight: 700;
 }
 
@@ -46,8 +46,8 @@ body {
   color: #FFF;
   display: block;
   font-size: 2em;
-  font-family: 'Montserrat', Lato, sans-serif;
-  font-weight: 400;
+  font-family: 'Raleway', Lato, sans-serif;
+  font-weight: 300;
 }
 
 .content #title a {
