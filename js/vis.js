@@ -60,6 +60,8 @@ var minProcessPeriod = 18; // ms between calls to the process function
 
 var blockSize = 140;
 var blockMargin = 15;
+var blockWidthRatio = 0.82;
+var blockHeightRatio = 0.93;
 
 //$(".content").hide();
 $('#canvas').attr('width', width);
@@ -85,9 +87,8 @@ loadSound('music/' + song.getFileName()); // music file
 
 if (song.getGenre() == 'ayy lmao') {
 	$('.ayylmao').show();
-	$('.kitty').css('margin-top', -$('#songinfo').height() + 17);
-	$('.kitty').attr('height', $('#songinfo').height() - 20);
-	$('#songinfo').css('margin-left', $('.kitty').width() + 16);
+	$('.kitty').css('margin-top', -blockSize + blockMargin);
+	$('.kitty').attr('height', blockSize);
 }
 
 function loadSong() {
@@ -128,8 +129,10 @@ function loadSong() {
 	if (color == undefined) {
 		color = colors['EDM']
 	}
-
-	drawBlock();
+	
+	if (song.getGenre() != 'ayy lmao') {
+		drawBlock();
+	}
 }
 
 function drawBlock() {
@@ -138,9 +141,13 @@ function drawBlock() {
 	var img = new Image();
 	img.onload = function() {
 		ctx.fillStyle = 'white';
-		var widthRatio = 0.82;
-		var heightRatio = 0.93;
-		ctx.drawImage(img, blockSize * (1 - widthRatio) / 2, height + blockMargin + (blockSize * (1 - heightRatio) / 2), blockSize * widthRatio, blockSize * heightRatio);
+		ctx.drawImage(
+			img,
+			blockSize * (1 - blockWidthRatio) / 2,
+			height + blockMargin + (blockSize * (1 - blockHeightRatio) / 2),
+			blockSize * blockWidthRatio,
+			blockSize * blockHeightRatio
+		);
 	}
 	var loc = window.location.pathname;
 	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
