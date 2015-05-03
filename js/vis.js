@@ -34,14 +34,15 @@ var barMargin = 4;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
-var height = 255;
+var height = $(document).width() / 6;
 
-var velMult = 1;
+var velMult = 0.15;
 
-var amplitudeScalar = 5; // the multiplier for the particle system velocity
+var amplitudeScalar = 6; // the multiplier for the particle system velocity
 var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 50; // the upper bound for amplitude analysis (exclusive)
 var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
+var quadraticCurve = 1.5; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -152,7 +153,6 @@ function drawBlock() {
 	var loc = window.location.pathname;
 	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
 	img.src = prefix + '/img/mcat.svg';
-	console.log('drawn');
 }
 
 function setupAudioNodes() {
@@ -277,7 +277,9 @@ javascriptNode.onaudioprocess = function() {
 			var bias = ((ampUpper - ampLower) / minAmpBias - (i - ampLower)) / ((ampUpper - ampLower) / minAmpBias);
 			sum += (array[i] / height) * bias
 		}
-		velMult = sum / (ampUpper - ampLower) * (amplitudeScalar * (1 / (minAmpBias * 3 / 2)));
+		velMult = sum / (ampUpper - ampLower) * (1 / (minAmpBias * 3 / 2));
+		velMult = Math.pow(velMult, quadraticCurve);
+		velMult *= amplitudeScalar;
 	}
 	
 	drawSpectrum(array);
