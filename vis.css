@@ -1,12 +1,14 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:700,900');
 
-body {
-  font-family: sans-serif;
-  background-color: #111;
+html {
+	height: 100%;
+	font-family: sans-serif;
+	background-color: #111;
+	background: url('./img/bg.png');
 }
 
 #loading {
-  color: #FFF;
+	color: #FFF;
 }
 
 #pause-info {
@@ -29,25 +31,25 @@ body {
 }
 
 .content {
-  position: absolute;
-  top: 50px;
-  left: 50px;
+	position: absolute;
+	top: 50px;
+	left: 50px;
 }
 
 .content #artist {
-  color: #FFF;
-  display: block;
-  font-size: 6em;
-  font-family: 'Raleway', Lato, sans-serif;
-  font-weight: 700;
+	color: #FFF;
+	display: block;
+	font-size: 6em;
+	font-family: 'Raleway', Lato, sans-serif;
+	font-weight: 700;
 }
 
 .content #title {
-  color: #FFF;
-  display: block;
-  font-size: 2em;
-  font-family: 'Raleway', Lato, sans-serif;
-  font-weight: 300;
+	color: #FFF;
+	display: block;
+	font-size: 2em;
+	font-family: 'Raleway', Lato, sans-serif;
+	font-weight: 300;
 }
 
 .content #title a {

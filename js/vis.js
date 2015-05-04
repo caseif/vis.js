@@ -40,7 +40,7 @@ var velMult = 0;
 
 var amplitudeScalar = 8; // the multiplier for the particle system velocity
 var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
+var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
 var minAmpBias = 0.7; // the minimum weight applied to any given amplitude point
 var quadraticCurve = 1.8; // the power to raise velMult to after initial computation
 
