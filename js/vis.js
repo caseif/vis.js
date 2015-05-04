@@ -36,13 +36,13 @@ width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
 var height = $(document).width() / 6;
 
-var velMult = 0.15;
+var velMult = 0;
 
-var amplitudeScalar = 6; // the multiplier for the particle system velocity
+var amplitudeScalar = 8; // the multiplier for the particle system velocity
 var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 50; // the upper bound for amplitude analysis (exclusive)
-var minAmpBias = 0.5; // the minimum weight applied to any given amplitude point
-var quadraticCurve = 1.5; // the power to raise velMult to after initial computation
+var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
+var minAmpBias = 0.7; // the minimum weight applied to any given amplitude point
+var quadraticCurve = 1.8; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -67,8 +67,9 @@ var blockHeightRatio = 0.93;
 //$(".content").hide();
 $('#canvas').attr('width', width);
 $('#canvas').attr('height', height + blockSize + 2 * blockMargin);
-$('#songinfo').css('margin-top', -blockSize - blockMargin - 10);
+$('#songinfo').css('margin-top', -blockSize - blockMargin - 12);
 $('#songinfo').css('margin-left', blockSize + blockMargin);
+$('#songinfo').css('width', width - blockSize - blockMargin);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 function centerText() {
@@ -120,18 +121,27 @@ function loadSong() {
 		var key = keys[Math.floor(Math.random() * count)];
 		song = songs[key];
 	}
-	document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
-	document.getElementById('title').innerHTML =
-			(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
-			+ song.getTitle().toUpperCase()
-			+ (song.getLink() != null ? '</a>' : '');
-	document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
-	color = colors[song.getGenre()];
+	document.getElementById('artist').innerHTML = '???';
+	document.getElementById('title').innerHTML = '???';
+	document.title = '??? \u2014 ???';
+	if (song != undefined) {
+		var baseHeight = $('#artist').height();
+		document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
+		while ($('#artist').height() > baseHeight) {
+			$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
+		}
+		document.getElementById('title').innerHTML =
+				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
+				+ song.getTitle().toUpperCase()
+				+ (song.getLink() != null ? '</a>' : '');
+		document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
+		color = colors[song.getGenre()];
+	}
 	if (color == undefined) {
 		color = colors['EDM']
 	}
 	
-	if (song.getGenre() != 'ayy lmao') {
+	if (!song || song.getGenre() != 'ayy lmao') {
 		drawBlock();
 	}
 }
@@ -274,10 +284,14 @@ javascriptNode.onaudioprocess = function() {
 	if (isPlaying) {
 		var sum = 0;
 		for (var i = ampLower; i < ampUpper; i++) {
-			var bias = ((ampUpper - ampLower) / minAmpBias - (i - ampLower)) / ((ampUpper - ampLower) / minAmpBias);
-			sum += (array[i] / height) * bias
+			// this determines the bias of the current amplitude point, decreasing linearly from the start to the end of
+			// the observed range
+			bias = 1 - ((i - ampLower) / (ampUpper - ampLower) * minAmpBias);
+			sum += (array[i] / height) * bias;
 		}
-		velMult = sum / (ampUpper - ampLower) * (1 / (minAmpBias * 3 / 2));
+		// the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
+		// amplitude points in the observed range are at 100% of their potential value
+		velMult = (2 * sum) / ((ampUpper - ampLower) * (1 + minAmpBias));
 		velMult = Math.pow(velMult, quadraticCurve);
 		velMult *= amplitudeScalar;
 	}
