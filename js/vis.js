@@ -377,10 +377,10 @@ function drawSpectrum(array) {
 			}
 		}*/
 		
-		values[i] = value;
+		values[i] = Math.max(Math.pow(value / height, 4) * height, 1);
 	}
 
-	// calculate quadratic curve at head and tailp
+	// calculate quadratic curve at head and tail
 	// slope of head quadratic
 	var headCoeff = (values[headMargin - 1] - values[0]) / Math.pow(headMargin, 2);
 	var headIntercept = values[0];
