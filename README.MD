@@ -4,4 +4,6 @@ vis is a visualizer for music files written in Javascript. Technologies utilized
 [jQuery](https://jquery.com/). The visual spectrum is inspired by the [Monstercat](https://youtube.com/Monstercat)
 visualizer.
 
-Based on [Leafcat/vis](https://github.com/Leafcat/vis). Original project by [ix](https://github.com/ix).
+See the visualizer in action [here](http://caseif.net/vis/).
+
+Based on [Leafcat/vis](https://github.com/Leafcat/vis).
