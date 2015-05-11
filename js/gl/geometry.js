@@ -54,9 +54,9 @@ for (var p = 0; p < particleCount; p++) {
 	particles.vertices.push(particle);
 }
 
-var fleckVelocity = 0.15;
+var fleckVelocity = 0.2;
 
-var fleckYVelRange = 0.1;
+var fleckYVelRange = 0.15;
 
 var fleckZ = 150;
 

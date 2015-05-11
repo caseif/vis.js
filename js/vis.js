@@ -6,7 +6,7 @@ if (! window.AudioContext) {
 }
 
 var colors = {
-	'EDM': '#C2C1C3',
+	'EDM': '#C2C2C2',
 	'House': '#EA8C00',
 	'Drumstep': '#F12188',
 	'Drum & Bass': '#F71A00',
@@ -35,6 +35,8 @@ var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
 var height = $(document).width() / 6;
+var headMargin = 8;
+var tailMargin = 8;
 
 var velMult = 0;
 
@@ -42,7 +44,7 @@ var amplitudeScalar = 8; // the multiplier for the particle system velocity
 var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
 var minAmpBias = 0.7; // the minimum weight applied to any given amplitude point
-var quadraticCurve = 1.8; // the power to raise velMult to after initial computation
+var quadraticCurve = 2.2; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -89,7 +91,7 @@ loadSound('music/' + song.getFileName()); // music file
 
 if (song.getGenre() == 'ayy lmao') {
 	$('.ayylmao').show();
-	$('.kitty').css('margin-top', -blockSize + blockMargin);
+	$('.kitty').css('margin-top', -blockSize + 4);
 	$('.kitty').attr('height', blockSize);
 }
 
@@ -170,7 +172,7 @@ function setupAudioNodes() {
 	javascriptNode.connect(context.destination);
 
 	analyser = context.createAnalyser();
-	analyser.smoothingTimeConstant = 0.8;
+	analyser.smoothingTimeConstant = 0.7;
 	try {
 		analyser.fftSize = 8192; // ideal bin count
 		console.log('Using fftSize of 8192 (woot woot!)');
@@ -299,9 +301,13 @@ javascriptNode.onaudioprocess = function() {
 	drawSpectrum(array);
 }
 
-var lastSpectrum = null;
+var lastSpectrum = [];
+var prevPeak = -1;
 
 function drawSpectrum(array) {
+	if (isPlaying && lastSpectrum.length == 1) {
+		lastSpectrum = array;
+	}
 	var lowest = height;
 	for (var i = 0; i < spectrumSize; i++) {
 		if (array[i] < lowest) {
@@ -323,13 +329,13 @@ function drawSpectrum(array) {
 			array[i] = 0;
 		}
 	}
+	
+	values = [];
 
-	for (var i = 0; i < width / (barWidth + barMargin * 2); i++){
-		if (isPlaying) {
-			lastSpectrum = array;
-		} else if (lastSpectrum != null) {
-			array = lastSpectrum;
-		}
+	/*var highest = 0;
+	var firstPeak = -1;
+	var peakFound = false;*/
+	for (var i = 0; i < spectrumSize; i++) {
 		if (begun) {
 			if (i == 0) {
 				var value = array[i] / 255 * height;
@@ -344,6 +350,57 @@ function drawSpectrum(array) {
 		} else {
 			value = 1;
 		}
+		// create linear slope at head and tail of spectrum
+		if (i < headMargin) {
+			value *= (i + 1) / headMargin;
+		} else if (spectrumSize - i <= tailMargin) {
+			value *= (spectrumSize - i) / tailMargin;
+		}
+
+		// using a dynamic margin makes it too jittery
+		/*if (!peakFound) {
+			if (value > highest) {
+				highest = value;
+				firstPeak = i;
+			} else if (value < highest) {
+				peakFound = true;
+				if (firstPeak < prevPeak) {
+					firstPeak = prevPeak - 1;
+				} else {
+					if (firstPeak < headMargin) {
+						firstPeak = prevPeak + 1;
+					} else {
+						firstPeak = headMargin;
+					}
+				}
+				prevPeak = firstPeak;
+			}
+		}*/
+		
+		values[i] = value;
+	}
+
+	// calculate quadratic curve at head and tailp
+	// slope of head quadratic
+	var headCoeff = (values[headMargin - 1] - values[0]) / Math.pow(headMargin, 2);
+	var headIntercept = values[0];
+	// slope of tail quadratic
+	var tailCoeff = (values[spectrumSize - tailMargin] - values[spectrumSize - 1]) / Math.pow(tailMargin, 2);
+	var tailIntercept = values[spectrumSize - 1];
+	headCoeff = Math.max(headCoeff, 0);
+	tailCoeff = Math.max(tailCoeff, 0);
+	for (var i = 0; i < Math.max(headMargin, tailMargin); i++) {
+		if (i < headMargin) {
+			values[i] = Math.max(headCoeff * Math.pow(i + 1, 2) + headIntercept, 1);
+		}
+		if (i < tailMargin) {
+			values[spectrumSize - 1 - i] = Math.max(tailCoeff * Math.pow(i + 1, 2) + tailIntercept, 1);
+		}
+	}
+	
+	// drawing pass
+	for (var i = 0; i < spectrumSize; i++) {
+		var value = values[i];
 		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
 	}
 };

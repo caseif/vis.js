@@ -2,7 +2,7 @@
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
 gramophone|gramophone.mp3|Faux|Gramophone|EDM|USlOx7pi6BE
 gravity|gravity.mp3|Umpire|Gravity (feat. Liz Kretschmer)|Dubstep|1iDTrK2EAfI
-pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|Post-Rock|j8F1NwrHBIU
+pressure|pressure.mp3|Draper|Pressure (feat. Laura Brehm)|Dubstep|j8F1NwrHBIU
 equinox|equinox.mp3|Skrillex|First Of The Year (Equinox)|Dubstep|2cXDgFwE13g
 triumph|triumph.mp3|WRLD|Triumph|Future Bass|5YxVMyeIGvA
 friends|friends.mp3|Grabbitz|Friends (with Faustix)|Trap|6-VhfzNI4M
@@ -38,7 +38,7 @@ minty|minty.mp3|Volant|Minty|Glitch Hop|7BhYmwFSOas
 ideekay|ideekay.mp3|Ephixa|Ideekay|Glitch Hop|5v7T7L3g1yw
 somewobbles|somewobbles.mp3|Ephixa|Some Wobbles|Dubstep|WT7CBNJjwc0
 fullgrizzly|fullgrizzly.mp3|Going Quantum & Stephen Walking|Full Grizzly|Dubstep|obVlQinLQnQ
-findthatsomeone|findthatsomeone.mp3|Televisor|Find That Someone|Nu Disco|h7aunPoTU64
+findthatsomeone|findthatsomeone.mp3|Televisor|Find That Someone (feat. J.U.D.G.E.)|Nu Disco|h7aunPoTU64
 animebae|animebae.mp3|Sushi Killer & Kevin Villecco|Anime Bae|Future Bass|YHHjfYxLyuA
 kaleidoscope|kaleidoscope.mp3|Kasbo|Kaleidoscope|Future Bass|rI-t2M0t63s
 dadsinspace|dadsinspace.mp3|Stephen Walking|Dads In Space|Future Funk|ra2E_mjQMvg
@@ -63,3 +63,35 @@ genesis|genesis.mp3|Protostar|Genesis|Glitch Hop|exFVjpFRvq4
 seeyou|seeyou.mp3|WRLD & Richard Caddock|See You|Nu Disco|BGPGzDvAnDs
 orbit|orbit.mp3|WRLD|Orbit (feat. Richard Caddock)|Future Bass|dpciZ0D-Hhc
 onelook|onelook.mp3|LVTHER|One Look (feat. Mammals)|Nu Disco|RJOkI8k_VU0
+precipitate|precipitate.mp3|AZEDIA|Precipitate|Dubstep|C9o_ODo-380
+valkyrie|valkyrie.mp3|Varien|Valkyrie|Symphonic Rock|ddFAIkUb7A0
+valkyrie2|valkyrie2.mp3|Varien|Valkyrie II: Lacuna|Symphonic Rock|iiyUN5qyZlw
+smoothcriminal|smoothcriminal.mp3|Haywyre|Smooth Criminal|Glitch Hop|vLXS0EGwCZg
+thewayilikeit|thewayilikeit.mp3|Mandy Capristo|The Way I Like It (Mutrix Remix)|Dubstep|DBhcVV7T83g
+rescueme|rescueme.mp3|Insan3lik3|Rescue Me (feat. Jonny Rose)|Nu Disco|XLxSMT6CdKk
+boundless|boundless.mp3|Aero Chord|Boundless|Trap|mNn34ErU6kM
+rattlesnake|rattlesnake.mp3|Rogue|Rattlesnake|Trap|x0E39ug6t70
+snowblind|snowblind.mp3|Au5|Snowblind (feat. Tasha Baxter)|Dubstep|DECxluN8OZM
+championswrld|championswrld.mp3|Astronaut|Champions (WRLD Remix)|Future Bass|iSpOzYhhi7k
+pounce|pounce.mp3|Falcon Funk|Pounce|Glitch Hop|jwvXM1jnUUM
+runawayfromme|runawayfromme.mp3|DotEXE|Run Away From Me|Drumstep|PFH1aEjKfjE
+killitwithfire|killitwithfire.mp3|DotEXE|Kill It With Fire|Dubstep|vFXv4Rqr7hc
+killinit|killinit.mp3|Krewella|Killin' It|Dubstep|w96QLJ5Byq8
+fresh|fresh.mp3|23|Fresh|Dubstep|6d9h867DAMM
+discodancer|discodancer.mp3|Matduke|Disco Dancer|Electro|K-bSEwr-jX8
+internetrebellion|internetrebellion.mp3|Arion|Internet Rebellion|Dubstep|Hag2JWC8qZ0
+evolution|evolution.mp3|Mr FijiWiji|Evolution (feat. Laura Brehm)|Trip Hop|SuMTS9BNx-s
+growingup|growingup.mp3|Mr FijiWiji|Growing Up (feat. Openwater)|Dubstep|jfkXT1BGJnk
+cinemaskrillex|cinemaskrillex.mp3|Benny Benassi|Cinema (Skrillex Remix)|Dubstep|https://soundcloud.com/benny-benassi/benny-benassi-cinema-skrillex
+contact|contact.mp3|Fractal|Contact|Dubstep|LyhU7qwGuFA
+elements|elements.mp3|Fractal|Elements|Dubstep|_lBY-zZksGw
+mountains|mountains.mp3|Rameses B|Mountains (feat. Veela)|Drum & Bass|gtmqFmXPysI
+dreamcatcher|dreamcatcher.mp3|Rameses B|Dream Catcher (feat. Charlotte Haining)|Drum & Bass|6b4gbkmgTmU
+welove|welove.mp3|Rameses B|We Love|Drum & Bass|UZGyMuHRx58
+keeponrocking|keeponrocking.mp3|F.O.O.L|Keep On Rocking|Electro|XM7lb5wiQkE
+againstthesun|againstthesun.mp3|Rootkit|Against the Sun (feat. Anna Yvette)|Drumstep|NLukRvKWBeA
+doit|doit.mp3|Rootkit|Do It|Drumstep|QBXrhgg9s0c
+breakthem|breakthem.mp3|Aero Chord|Break Them (feat. Anna Yvette)|Trap|nnAy1906EHg
+believe|believe.mp3|Trivecta|Believe (feat. Connor Zwetcsh)|Dubstep|PJ6B3eIj8QE
+cloudnine|cloudnine.mp3|Grant Bowtie|Cloud Nine|Future Bass|TIx46qOjjAM
+dancetoit|dancetoit.mp3|Tut Tut Child|Dance To It|Glitch Hop|pGvdvT_XWWI
