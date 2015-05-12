@@ -78,20 +78,19 @@ $('#songinfo').css('margin-left', blockSize + blockMargin);
 $('#songinfo').css('width', width - blockSize - blockMargin);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
-function centerText() {
+function centerContent() {
 	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2 - 80);
 	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2 - 52);
-};
-
-centerText();	
+};	
 
 $(window).resize(function() {
-	centerText();
+	centerContent();
 });
 
 loadSong();
 setupAudioNodes();
 loadSound('music/' + song.getFileName()); // music file
+centerContent();
 
 if (song.getGenre() == 'ayy lmao') {
 	$('.ayylmao').show();
