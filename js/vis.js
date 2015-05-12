@@ -34,7 +34,7 @@ var barMargin = 4;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
-var height = $(document).width() / 6;
+var height = 350;
 var headMargin = 8;
 var tailMargin = 8;
 
@@ -66,6 +66,10 @@ var blockMargin = 15;
 var blockWidthRatio = 0.82;
 var blockHeightRatio = 0.93;
 
+var lastMouseMove = Date.now();
+var mouseSleepTime = 3000;
+var textHidden = false;
+
 //$(".content").hide();
 $('#canvas').attr('width', width);
 $('#canvas').attr('height', height + blockSize + 2 * blockMargin);
@@ -94,6 +98,14 @@ if (song.getGenre() == 'ayy lmao') {
 	$('.kitty').css('margin-top', -blockSize + 4);
 	$('.kitty').attr('height', blockSize);
 }
+
+$('html').mousemove(function(event) {
+	if (textHidden) {
+		$('.hide').show();
+		textHidden = false;
+	}
+	lastMouseMove = Date.now();
+});
 
 function loadSong() {
 	var songs = [];
@@ -248,6 +260,12 @@ javascriptNode.onaudioprocess = function() {
 	var now = Date.now();
 	do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
 	lastProcess = Date.now();
+	
+	if (started && !textHidden && Date.now() - lastMouseMove >= mouseSleepTime) {
+		$('.hide').fadeOut(500);
+		textHidden = true;
+	}
+	
 	var array =  new Uint8Array(analyser.frequencyBinCount);
 	analyser.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, width, height);
@@ -377,7 +395,7 @@ function drawSpectrum(array) {
 			}
 		}*/
 		
-		values[i] = Math.max(Math.pow(value / height, 4) * height, 1);
+		values[i] = Math.max(Math.pow(value / height, 3) * height, 1);
 	}
 
 	// calculate quadratic curve at head and tail
