@@ -40,11 +40,10 @@ var tailMargin = 8;
 
 var velMult = 0;
 
-var amplitudeScalar = 8; // the multiplier for the particle system velocity
-var ampLower = 2; // the lower bound for amplitude analysis (inclusive)
+var amplitudeScalar = 6; // the multiplier for the particle system velocity
+var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var minAmpBias = 0.7; // the minimum weight applied to any given amplitude point
-var quadraticCurve = 2.2; // the power to raise velMult to after initial computation
+var quadraticCurve = 3; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -70,7 +69,6 @@ var lastMouseMove = Date.now();
 var mouseSleepTime = 3000;
 var textHidden = false;
 
-//$(".content").hide();
 $('#canvas').attr('width', width);
 $('#canvas').attr('height', height + blockSize + 2 * blockMargin);
 $('#songinfo').css('margin-top', -blockSize - blockMargin - 12);
@@ -184,6 +182,8 @@ function setupAudioNodes() {
 
 	analyser = context.createAnalyser();
 	analyser.smoothingTimeConstant = 0.7;
+	analyser.minDecibels = -65;
+	//analyser.maxDecibels = -28;
 	try {
 		analyser.fftSize = 8192; // ideal bin count
 		console.log('Using fftSize of 8192 (woot woot!)');
@@ -240,7 +240,6 @@ function loadSound(url) {
 function playSound(buffer) {
 	sourceNode.buffer = buffer;
 	sourceNode.start(0);
-	//$(".content").show();
 	$('#loading').hide();
 	$('#pause-info').show();
 	isPlaying = true;
@@ -303,14 +302,11 @@ javascriptNode.onaudioprocess = function() {
 	if (isPlaying) {
 		var sum = 0;
 		for (var i = ampLower; i < ampUpper; i++) {
-			// this determines the bias of the current amplitude point, decreasing linearly from the start to the end of
-			// the observed range
-			bias = 1 - ((i - ampLower) / (ampUpper - ampLower) * minAmpBias);
-			sum += (array[i] / height) * bias;
+			sum += array[i] / height;
 		}
 		// the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
 		// amplitude points in the observed range are at 100% of their potential value
-		velMult = (2 * sum) / ((ampUpper - ampLower) * (1 + minAmpBias));
+		velMult = sum / (ampUpper - ampLower);
 		velMult = Math.pow(velMult, quadraticCurve);
 		velMult *= amplitudeScalar;
 	}
@@ -349,9 +345,6 @@ function drawSpectrum(array) {
 	
 	values = [];
 
-	/*var highest = 0;
-	var firstPeak = -1;
-	var peakFound = false;*/
 	for (var i = 0; i < spectrumSize; i++) {
 		if (begun) {
 			if (i == 0) {
@@ -373,46 +366,8 @@ function drawSpectrum(array) {
 		} else if (spectrumSize - i <= tailMargin) {
 			value *= (spectrumSize - i) / tailMargin;
 		}
-
-		// using a dynamic margin makes it too jittery
-		/*if (!peakFound) {
-			if (value > highest) {
-				highest = value;
-				firstPeak = i;
-			} else if (value < highest) {
-				peakFound = true;
-				if (firstPeak < prevPeak) {
-					firstPeak = prevPeak - 1;
-				} else {
-					if (firstPeak < headMargin) {
-						firstPeak = prevPeak + 1;
-					} else {
-						firstPeak = headMargin;
-					}
-				}
-				prevPeak = firstPeak;
-			}
-		}*/
 		
-		values[i] = Math.max(Math.pow(value / height, 3) * height, 1);
-	}
-
-	// calculate quadratic curve at head and tail
-	// slope of head quadratic
-	var headCoeff = (values[headMargin - 1] - values[0]) / Math.pow(headMargin, 2);
-	var headIntercept = values[0];
-	// slope of tail quadratic
-	var tailCoeff = (values[spectrumSize - tailMargin] - values[spectrumSize - 1]) / Math.pow(tailMargin, 2);
-	var tailIntercept = values[spectrumSize - 1];
-	headCoeff = Math.max(headCoeff, 0);
-	tailCoeff = Math.max(tailCoeff, 0);
-	for (var i = 0; i < Math.max(headMargin, tailMargin); i++) {
-		if (i < headMargin) {
-			values[i] = Math.max(headCoeff * Math.pow(i + 1, 2) + headIntercept, 1);
-		}
-		if (i < tailMargin) {
-			values[spectrumSize - 1 - i] = Math.max(tailCoeff * Math.pow(i + 1, 2) + tailIntercept, 1);
-		}
+		values[i] = Math.max(Math.pow(value / height, 2.5) * height, 1);
 	}
 	
 	// drawing pass
