@@ -83,7 +83,6 @@ $('#songinfo').css('width', width - blockSize - blockMargin);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 function centerContent() {
-	console.log($(document).width() + ', ' + $('.content').width() + ', ');
 	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2);
 	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2);
 };	
