@@ -38,7 +38,11 @@ var spectrumStart = 5; // the first bin rendered in the spectrum
 var height = width / 5;
 var headMargin = 8;
 var tailMargin = 8;
-var marginDecay = 1.3;
+var marginDecay = 2;
+var minMarginWeight = 0.3;
+// margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
+var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
+var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 
 var velMult = 0;
 
@@ -362,9 +366,11 @@ function drawSpectrum(array) {
 		}
 		// create linear slope at head and tail of spectrum
 		if (i < headMargin) {
-			value *= Math.pow(i + 1, marginDecay) / Math.pow(headMargin, marginDecay);
+			//value *= Math.pow(i + 1, marginDecay) / Math.pow(headMargin, marginDecay);
+			value *= headMarginSlope * Math.pow(i + 1, marginDecay) + minMarginWeight;
 		} else if (spectrumSize - i <= tailMargin) {
-			value *= Math.pow(spectrumSize - i, marginDecay) / Math.pow(tailMargin, marginDecay);
+			//value *= Math.pow(spectrumSize - i, marginDecay) / Math.pow(tailMargin, marginDecay);
+			value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
 		}
 		
 		values[i] = Math.max(Math.pow(value / height, 2.5) * height, 1);
