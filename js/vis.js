@@ -38,7 +38,7 @@ var spectrumStart = 5; // the first bin rendered in the spectrum
 var height = width / 5;
 var headMargin = 8;
 var tailMargin = 8;
-var marginDecay = 2;
+var marginDecay = 1.3;
 
 var velMult = 0;
 
