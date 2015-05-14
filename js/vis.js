@@ -24,9 +24,9 @@ var color;
 var song;
 var context = new AudioContext();
 var audioBuffer;
-var sourceNode;
-var analyser;
-var javascriptNode;
+var bufferSource;
+var analyzer;
+var scriptProcessor;
 //var barWidth = 16;
 var width = $(document).width() * 0.9;
 var barCount = 80;
@@ -34,16 +34,18 @@ var barMargin = 4;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
-var height = 350;
+var spectrumStart = 5; // the first bin rendered in the spectrum
+var height = width / 5;
 var headMargin = 8;
 var tailMargin = 8;
+var marginDecay = 2;
 
 var velMult = 0;
 
-var amplitudeScalar = 6; // the multiplier for the particle system velocity
+var amplitudeScalar = 5; // the multiplier for the particle system velocity
 var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var quadraticCurve = 3; // the power to raise velMult to after initial computation
+var quadraticCurve = 1.5; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -77,8 +79,9 @@ $('#songinfo').css('width', width - blockSize - blockMargin);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 function centerContent() {
-	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2 - 80);
-	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2 - 52);
+	console.log($(document).width() + ', ' + $('.content').width() + ', ');
+	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2);
+	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2);
 };	
 
 $(window).resize(function() {
@@ -177,46 +180,40 @@ function drawBlock() {
 }
 
 function setupAudioNodes() {
-	javascriptNode = context.createScriptProcessor(bufferInterval, 1, 1);
-	javascriptNode.connect(context.destination);
+	scriptProcessor = context.createScriptProcessor(bufferInterval, 1, 1);
+	scriptProcessor.connect(context.destination);
 
-	analyser = context.createAnalyser();
-	analyser.smoothingTimeConstant = 0.7;
-	analyser.minDecibels = -65;
-	//analyser.maxDecibels = -28;
+	analyzer = context.createAnalyser();
+	analyzer.connect(scriptProcessor);
+	analyzer.smoothingTimeConstant = 0.7;
+	analyzer.minDecibels = -65;
+	//analyzer.maxDecibels = -28;
 	try {
-		analyser.fftSize = 8192; // ideal bin count
-		console.log('Using fftSize of 8192 (woot woot!)');
+		analyzer.fftSize = 8192; // ideal bin count
+		console.log('Using fftSize of 8192 (woot!)');
 	} catch (ex) {
-		try {
-			analyser.fftSize = 4096; // fallback #1
-			console.log('Using fftSize of 4096');
-		} catch (ex) {
-			analyser.fftSize = 2048; // this will work for most if not all systems
-			console.log('Using fftSize of 2048');
-		}
+		analyzer.fftSize = 2048; // this will work for most if not all systems
+		console.log('Using fftSize of 2048');
 	}
 
-	sourceNode = context.createBufferSource();
-	sourceNode.connect(analyser);
-	analyser.connect(javascriptNode);
-
-	sourceNode.connect(context.destination);
+	bufferSource = context.createBufferSource();
+	bufferSource.connect(analyzer);
+	bufferSource.connect(context.destination);
 }
 
 $(document).keypress(function(event) {
 	if (event.which == 80 || event.which == 112) {
 		if (isPlaying) {
-			sourceNode.stop();
+			bufferSource.stop();
 			currentTime += Date.now() - started;
 			velMult = 0;
 		} else {
 			var newSource = context.createBufferSource();
-			newSource.buffer = sourceNode.buffer;
-			sourceNode = newSource
-			sourceNode.connect(analyser);
-			sourceNode.connect(context.destination);
-			sourceNode.start(0, currentTime / 1000);
+			newSource.buffer = bufferSource.buffer;
+			bufferSource = newSource
+			bufferSource.connect(analyzer);
+			bufferSource.connect(context.destination);
+			bufferSource.start(0, currentTime / 1000);
 			started = Date.now();
 		}
 		isPlaying = !isPlaying;
@@ -238,8 +235,8 @@ function loadSound(url) {
 
 
 function playSound(buffer) {
-	sourceNode.buffer = buffer;
-	sourceNode.start(0);
+	bufferSource.buffer = buffer;
+	bufferSource.start(0);
 	$('#loading').hide();
 	$('#pause-info').show();
 	isPlaying = true;
@@ -254,7 +251,7 @@ function onError(e) {
 var lastLowest = -1;
 
 var lastProcess = Date.now();
-javascriptNode.onaudioprocess = function() {
+scriptProcessor.onaudioprocess = function() {
 	var now = Date.now();
 	do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
 	lastProcess = Date.now();
@@ -264,8 +261,8 @@ javascriptNode.onaudioprocess = function() {
 		textHidden = true;
 	}
 	
-	var array =  new Uint8Array(analyser.frequencyBinCount);
-	analyser.getByteFrequencyData(array);
+	var array =  new Uint8Array(analyzer.frequencyBinCount);
+	analyzer.getByteFrequencyData(array);
 	ctx.clearRect(0, 0, width, height);
 	if (song.getGenre() == 'ayy lmao') {
 		switch (stage) {
@@ -323,8 +320,9 @@ function drawSpectrum(array) {
 	}
 	var lowest = height;
 	for (var i = 0; i < spectrumSize; i++) {
-		if (array[i] < lowest) {
-			lowest = array[i];
+		var abs = i + spectrumStart;
+		if (array[i + abs] < lowest) {
+			lowest = array[abs];
 		}
 	}
 	lowest /= 2;
@@ -336,25 +334,27 @@ function drawSpectrum(array) {
 		lastLowest += Math.min(lowest - lastLowest, 1);
 	}
 	for (var i = 0; i < spectrumSize; i++) {
-		if (array[i] >= lastLowest) {
-			array[i] = height * ((array[i] - lastLowest) / (height - lastLowest));
+		var abs = i + spectrumStart;
+		if (array[abs] >= lastLowest) {
+			array[abs] = height * ((array[abs] - lastLowest) / (height - lastLowest));
 		} else {
-			array[i] = 0;
+			array[abs] = 0;
 		}
 	}
 	
 	values = [];
 
 	for (var i = 0; i < spectrumSize; i++) {
+		var abs = i + spectrumStart;
 		if (begun) {
 			if (i == 0) {
-				var value = array[i] / 255 * height;
+				var value = array[abs] / 255 * height;
 			}
 			else if (i == spectrumSize - 1) {
-				var value = (array[i - 1] + array[i]) / 2  / 255 * height;
+				var value = (array[abs - 1] + array[abs]) / 2  / 255 * height;
 			}
 			else {
-				var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * height;
+				var value = (array[abs - 1] + array[abs] + array[abs + 1]) / 3  / 255 * height;
 			}
 			value = Math.min(value + 1, height);
 		} else {
@@ -362,9 +362,9 @@ function drawSpectrum(array) {
 		}
 		// create linear slope at head and tail of spectrum
 		if (i < headMargin) {
-			value *= (i + 1) / headMargin;
+			value *= Math.pow(i + 1, marginDecay) / Math.pow(headMargin, marginDecay);
 		} else if (spectrumSize - i <= tailMargin) {
-			value *= (spectrumSize - i) / tailMargin;
+			value *= Math.pow(spectrumSize - i, marginDecay) / Math.pow(tailMargin, marginDecay);
 		}
 		
 		values[i] = Math.max(Math.pow(value / height, 2.5) * height, 1);
