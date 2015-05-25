@@ -1,7 +1,9 @@
 var particleCount = 500; // total particle count including flecks
 var fleckCount = particleCount * 0.05;
+var bokehCount = particleCount * 0.15;
 var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
+var bokeh = new THREE.Geometry();
 
 var uniforms = {
 	color: {type: "c", value: new THREE.Color(0xFFFFFF)},
@@ -11,6 +13,11 @@ var texture = THREE.ImageUtils.loadTexture(
 	'./img/particle_alpha.png'
 )
 texture.minFilter = THREE.LinearFilter;
+
+var bokehTexture = THREE.ImageUtils.loadTexture(
+	'./img/bokeh.png'
+)
+bokehTexture.minFilter = THREE.LinearFilter;
 
 var pMaterial = new THREE.PointCloudMaterial({
 	color: 0xFFFFFF,
@@ -28,14 +35,22 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
+var bokehMaterial = new THREE.PointCloudMaterial({
+	color: color,
+	size: 150,
+	map: bokehTexture,
+	blending: THREE.AdditiveBlending,
+	transparent: true
+});
+
 var velocity = 1.0;
 
-var zPosRange = 400;
+var zPosRange = 350;
 
 var yVelRange = velocity * 2;
 
 for (var p = 0; p < particleCount; p++) {
-	var z = Math.random() * zPosRange - zPosRange / 2;
+	var z = Math.random() * zPosRange - (zPosRange / 2) - 50;
 	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var pX = Math.random() * xRange - xRange / 2,
@@ -81,10 +96,37 @@ for (var p = 0; p < fleckCount; p++) {
 	flecks.vertices.push(fleck);
 }
 
-// create the particle system
+var bokehVelocity = velocity;
+
+var bokehYVelRange = bokehVelocity * 2;
+
+var bokehZ = 150;
+
+for (var p = 0; p < bokehCount; p++) {
+	var z = bokehZ;
+	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
+	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
+	var pX = Math.random() * xRange - xRange / 2,
+		pY = Math.random() * yRange - yRange / 2,
+		pZ = z,
+		b = new THREE.Vector3(pX, pY, pZ);
+	b.bokeh = true;
+	  
+	  // create a velocity vector
+	b.velocity = new THREE.Vector3(
+		bokehVelocity,
+		Math.random() * bokehYVelRange - bokehYVelRange / 2,
+		0
+	);
+
+	// add it to the geometry
+	bokeh.vertices.push(b);
+}
+
+// create the particle systems
 var particleSystem = new THREE.PointCloud(particles, pMaterial);
-	
 var fleckSystem = new THREE.PointCloud(flecks, fleckMaterial);
+var bokehSystem = new THREE.PointCloud(bokeh, bokehMaterial);
 
 // also update the particle system to
 // sort the particles which enables
@@ -95,6 +137,10 @@ particleSystem.geometry.dynamic = true;
 fleckSystem.sortParticles = true;
 fleckSystem.geometry.dynamic = true;
 
+bokehSystem.sortParticles = true;
+bokehSystem.geometry.dynamic = true;
+
 // add it to the scene
 scene.add(particleSystem);
 scene.add(fleckSystem);
+scene.add(bokehSystem);
