@@ -131,10 +131,21 @@ function loadSong() {
 					},
 		async:		false
 	});
+	var keys = Object.keys(songs);
 	if (songName !== undefined) {
 		song = songs[songName];
+	} else if (genreName !== undefined) {
+		var genreArray = [];
+		var i = 0;
+		keys.forEach(function(key) {
+			var song = songs[key];
+			if (song.getGenre() === genreName) {
+				genreArray[i] = song;
+				++i;
+			}
+		})
+		song = genreArray[Math.floor(Math.random() * genreArray.length)];
 	} else {
-		var keys = Object.keys(songs);
 		var key = keys[Math.floor(Math.random() * count)];
 		song = songs[key];
 	}

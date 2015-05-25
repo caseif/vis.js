@@ -23,3 +23,10 @@ var QueryString = function () {
 } ();
 
 var songName = QueryString.song;
+if (songName !== undefined) {
+	songName = songName.replace('%20', ' ');
+}
+var genreName = QueryString.genre;
+if (genreName !== undefined) {
+	genreName = genreName.replace('%20', ' ');
+}
