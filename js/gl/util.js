@@ -22,7 +22,6 @@ function resetParticle(particle) {
 }
 
 function getValidSpawnPosition(bokeh, fleck) {
-	console.log(bokeh);
 	var z = bokeh ? bokehZ : (fleck ? fleckZ : Math.random() * zPosRange - zPosRange / 2); // random z-value
 	var x = -Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)); // x-value intersecting the frustum at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
