@@ -40,7 +40,7 @@ var height = width / 4;
 var headMargin = 8;
 var tailMargin = 8;
 var marginDecay = 2;
-var minMarginWeight = 0.5;
+var minMarginWeight = 0.3;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
@@ -188,7 +188,7 @@ function setupAudioNodes() {
 
 	analyzer = context.createAnalyser();
 	analyzer.connect(scriptProcessor);
-	analyzer.smoothingTimeConstant = 0.8;
+	analyzer.smoothingTimeConstant = 0.75;
 	//analyzer.minDecibels = -65;
 	analyzer.maxDecibels = -28;
 	try {
@@ -257,8 +257,6 @@ function onError(e) {
 	console.log(e);
 }
 
-var lastLowest = -1;
-
 var lastProcess = Date.now();
 scriptProcessor.onaudioprocess = function() {
 	var now = Date.now();
@@ -270,8 +268,9 @@ scriptProcessor.onaudioprocess = function() {
 		textHidden = true;
 	}
 	
-	var array =  new Uint8Array(analyzer.frequencyBinCount);
-	analyzer.getByteFrequencyData(array);
+	var initialArray =  new Uint8Array(analyzer.frequencyBinCount);
+	analyzer.getByteFrequencyData(initialArray);
+	var array = powerTransform(initialArray);
 	ctx.clearRect(0, 0, width, height);
 	if (song.getGenre() == 'ayy lmao') {
 		switch (stage) {
@@ -319,6 +318,15 @@ scriptProcessor.onaudioprocess = function() {
 	drawSpectrum(array);
 }
 
+// there's a backstory to this function's name that I don't care to go over
+function powerTransform(array) {
+	var newArray = new Uint8Array(spectrumSize);
+	for (var i = 0; i < spectrumSize; i++) {
+		newArray[i] = array[i + spectrumStart];
+	}
+	return newArray;
+}
+
 var lastSpectrum = [];
 var prevPeak = -1;
 
@@ -326,43 +334,19 @@ function drawSpectrum(array) {
 	if (isPlaying && lastSpectrum.length == 1) {
 		lastSpectrum = array;
 	}
-	var lowest = height;
-	for (var i = 0; i < spectrumSize; i++) {
-		var abs = i + spectrumStart;
-		if (array[i + abs] < lowest) {
-			lowest = array[abs];
-		}
-	}
-	lowest /= 2;
-	if (lastLowest == -1) {
-		lastLowest = lowest;
-	} else if (lowest < lastLowest) {
-		lastLowest -= Math.min(lastLowest - lowest, 1);
-	} else {
-		lastLowest += Math.min(lowest - lastLowest, 1);
-	}
-	for (var i = 0; i < spectrumSize; i++) {
-		var abs = i + spectrumStart;
-		if (array[abs] >= lastLowest) {
-			array[abs] = height * ((array[abs] - lastLowest) / (height - lastLowest));
-		} else {
-			array[abs] = 0;
-		}
-	}
 	
 	values = [];
 
 	for (var i = 0; i < spectrumSize; i++) {
-		var abs = i + spectrumStart;
 		if (begun) {
 			if (i == 0) {
-				var value = array[abs] / 255 * height;
+				var value = array[i] / 255 * height;
 			}
 			else if (i == spectrumSize - 1) {
-				var value = (array[abs - 1] + array[abs]) / 2  / 255 * height;
+				var value = (array[i - 1] + array[i]) / 2  / 255 * height;
 			}
 			else {
-				var value = (array[abs - 1] + array[abs] + array[abs + 1]) / 3  / 255 * height;
+				var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * height;
 			}
 			value = Math.min(value + 1, height);
 		} else {
