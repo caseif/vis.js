@@ -1,7 +1,8 @@
 function isInView(particle) {
 	var translated = new THREE.Vector3();
-	translated.x = particle.x - camera.position.x;
-	translated.y = particle.y - camera.position.y;
+	var size = particle.bokeh ? bokehMaterial.size : (particle.fleck ? fleckMaterial.size : pMaterial.size);
+	translated.x = particle.x - camera.position.x - size / 2;
+	translated.y = particle.y - camera.position.y + (particle.y < camera.position.y ? 1 : -1) * size / 2;
 	translated.z = particle.z - camera.position.z;
     return frustum.containsPoint(translated);
 }
