@@ -35,21 +35,21 @@ var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
 var spectrumStart = 5; // the first bin rendered in the spectrum
-var height = width / 5;
+var spectrumExponent = 3; // the exponent to raise spectrum values to
+var height = width / 4;
 var headMargin = 8;
 var tailMargin = 8;
 var marginDecay = 2;
-var minMarginWeight = 0.3;
+var minMarginWeight = 0.5;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 
 var velMult = 0;
 
-var amplitudeScalar = 5; // the multiplier for the particle system velocity
 var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var quadraticCurve = 1.5; // the power to raise velMult to after initial computation
+var ampUpper = 34; // the upper bound for amplitude analysis (exclusive)
+var quadraticCurve = 3; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -68,8 +68,8 @@ var minProcessPeriod = 18; // ms between calls to the process function
 
 var blockSize = 140;
 var blockMargin = 15;
-var blockWidthRatio = 0.82;
-var blockHeightRatio = 0.93;
+var blockWidthRatio = 0.63;
+var blockHeightRatio = 0.72;
 
 var lastMouseMove = Date.now();
 var mouseSleepTime = 3000;
@@ -188,9 +188,9 @@ function setupAudioNodes() {
 
 	analyzer = context.createAnalyser();
 	analyzer.connect(scriptProcessor);
-	analyzer.smoothingTimeConstant = 0.7;
-	analyzer.minDecibels = -65;
-	//analyzer.maxDecibels = -28;
+	analyzer.smoothingTimeConstant = 0.8;
+	//analyzer.minDecibels = -65;
+	analyzer.maxDecibels = -28;
 	try {
 		analyzer.fftSize = 8192; // ideal bin count
 		console.log('Using fftSize of 8192 (woot!)');
@@ -245,6 +245,12 @@ function playSound(buffer) {
 	isPlaying = true;
 	begun = true;
 	started = Date.now();
+}
+
+bufferSource.onended = function() {
+	if (started && isPlaying) {
+		location.reload(); // refresh when the song ends
+	}
 }
 
 function onError(e) {
@@ -308,7 +314,6 @@ scriptProcessor.onaudioprocess = function() {
 		// amplitude points in the observed range are at 100% of their potential value
 		velMult = sum / (ampUpper - ampLower);
 		velMult = Math.pow(velMult, quadraticCurve);
-		velMult *= amplitudeScalar;
 	}
 	
 	drawSpectrum(array);
@@ -372,7 +377,7 @@ function drawSpectrum(array) {
 			value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
 		}
 		
-		values[i] = Math.max(Math.pow(value / height, 2.5) * height, 1);
+		values[i] = Math.max(Math.pow(value / height, spectrumExponent) * height, 1);
 	}
 	
 	// drawing pass

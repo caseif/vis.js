@@ -28,11 +28,11 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 0.1;
+var velocity = 1.0;
 
 var zPosRange = 400;
 
-var yVelRange = 0.1;
+var yVelRange = velocity * 2;
 
 for (var p = 0; p < particleCount; p++) {
 	var z = Math.random() * zPosRange - zPosRange / 2;
@@ -45,7 +45,7 @@ for (var p = 0; p < particleCount; p++) {
 	  
 	  // create a velocity vector
 	particle.velocity = new THREE.Vector3(
-		0.1,
+		velocity,
 		Math.random() * yVelRange - yVelRange / 2,
 		0
 	);
@@ -54,9 +54,9 @@ for (var p = 0; p < particleCount; p++) {
 	particles.vertices.push(particle);
 }
 
-var fleckVelocity = 0.2;
+var fleckVelocity = velocity * 1.5;
 
-var fleckYVelRange = 0.15;
+var fleckYVelRange = fleckVelocity * 0.75;
 
 var fleckZ = 150;
 
