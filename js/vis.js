@@ -66,9 +66,9 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
-var blockSize = 140;
-var blockMargin = 15;
-var blockWidthRatio = 0.63;
+var blockSize = 185;
+var blockMargin = 30;
+var blockWidthRatio = 0.59;
 var blockHeightRatio = 0.72;
 
 var lastMouseMove = Date.now();
@@ -94,6 +94,7 @@ $(window).resize(function() {
 loadSong();
 setupAudioNodes();
 loadSound('music/' + song.getFileName()); // music file
+$('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
 if (song.getGenre() == 'ayy lmao') {
@@ -153,15 +154,21 @@ function loadSong() {
 	document.getElementById('title').innerHTML = '???';
 	document.title = '??? \u2014 ???';
 	if (song != undefined) {
-		var baseHeight = $('#artist').height();
+		var baseArtistHeight = $('#artist').height();
 		document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
-		while ($('#artist').height() > baseHeight) {
+		while ($('#artist').height() > baseArtistHeight) {
 			$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
 		}
+		var baseTitleHeight = $('#title').height();
 		document.getElementById('title').innerHTML =
 				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
 				+ song.getTitle().toUpperCase()
 				+ (song.getLink() != null ? '</a>' : '');
+		while ($('#title').height() > baseTitleHeight) {
+			console.log($('#title').height() + ', ' + baseTitleHeight);
+			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
+		}
+			console.log($('#title').height() + ', ' + baseTitleHeight);
 		document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
 		color = colors[song.getGenre()];
 	}
@@ -269,6 +276,7 @@ function onError(e) {
 }
 
 var lastProcess = Date.now();
+var lastLowest = -1;
 scriptProcessor.onaudioprocess = function() {
 	var now = Date.now();
 	do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
@@ -345,7 +353,7 @@ function drawSpectrum(array) {
 	if (isPlaying && lastSpectrum.length == 1) {
 		lastSpectrum = array;
 	}
-	
+
 	values = [];
 
 	for (var i = 0; i < spectrumSize; i++) {

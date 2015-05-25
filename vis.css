@@ -1,5 +1,15 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:700,900');
 
+@font-face {
+    font-family: Gotham-Book;
+    src: url(fonts/Gotham-Book.otf);
+}
+
+@font-face {
+    font-family: Gotham-Medium;
+    src: url(fonts/Gotham-Medium.otf);
+}
+
 html {
 	height: 100%;
 	font-family: sans-serif;
@@ -37,17 +47,18 @@ html {
 .content #artist {
 	color: #FFF;
 	display: block;
-	font-size: 6em;
-	font-family: 'Raleway', Lato, sans-serif;
+	font-size: 5.5em;
+	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
 	font-weight: 700;
 }
 
 .content #title {
 	color: #FFF;
 	display: block;
-	font-size: 2em;
-	font-family: 'Raleway', Lato, sans-serif;
+	font-size: 3.4em;
+	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
 	font-weight: 300;
+	margin-top: -15px;
 }
 
 .content #title a {
