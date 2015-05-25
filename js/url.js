@@ -30,3 +30,7 @@ var genreName = QueryString.genre;
 if (genreName !== undefined) {
 	genreName = genreName.replace('%20', ' ');
 }
+var artistName = QueryString.artist;
+if (artistName !== undefined) {
+	artistName = artistName.replace('%20', ' ');
+}

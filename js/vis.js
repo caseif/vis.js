@@ -146,6 +146,17 @@ function loadSong() {
 			}
 		})
 		song = genreArray[Math.floor(Math.random() * genreArray.length)];
+	} else if (artistName !== undefined) {
+		var artistArray = [];
+		var i = 0;
+		keys.forEach(function(key) {
+			var song = songs[key];
+			if (song.getArtist() === artistName) {
+				artistArray[i] = song;
+				++i;
+			}
+		})
+		song = artistArray[Math.floor(Math.random() * artistArray.length)];
 	} else {
 		var key = keys[Math.floor(Math.random() * count)];
 		song = songs[key];
