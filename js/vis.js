@@ -49,8 +49,8 @@ var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 var velMult = 0;
 
 var ampLower = 8; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
-var quadraticCurve = 6; // the power to raise velMult to after initial computation
+var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
+var particleExponent = 5; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -169,19 +169,21 @@ function loadSong() {
 		var baseArtistHeight = $('#artist').height();
 		document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
 		
-		while ($('#artist').height() > baseArtistHeight) {
+		while ($('#artist').height() >= baseArtistHeight) {
 			$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
 		}
+		$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 3) + 'px');
 		var baseTitleHeight = $('#title').height();
 		document.getElementById('title').innerHTML =
 				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
-				+ song.getTitle().toUpperCase()
+				+ selectiveToUpperCase(song.getTitle())
 				+ (song.getLink() != null ? '</a>' : '');
-		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').length) / 4 + 1;
-		while ($('#title').height() > baseTitleHeight * newLines) {
+		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace('^', '').length) / 4 + 1;
+		while ($('#title').height() >= baseTitleHeight * newLines) {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
-		document.title = song.getArtist() + ' \u2014 ' + selectiveToUpperCase(song.getTitle().replace('<br>', ' '));
+			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 3) + 'px');
+		document.title = song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
 		color = colors[song.getGenre()];
 	}
 	if (color == undefined) {
@@ -335,17 +337,6 @@ scriptProcessor.onaudioprocess = function() {
 	}
 	ctx.fillStyle = color; // bar color
 	
-	if (isPlaying) {
-		var sum = 0;
-		for (var i = ampLower; i < ampUpper; i++) {
-			sum += array[i] / height;
-		}
-		// the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
-		// amplitude points in the observed range are at 100% of their potential value
-		velMult = sum / (ampUpper - ampLower);
-		velMult = Math.pow(velMult, quadraticCurve);
-	}
-	
 	drawSpectrum(array);
 }
 
@@ -364,6 +355,17 @@ var prevPeak = -1;
 function drawSpectrum(array) {
 	if (isPlaying && lastSpectrum.length == 1) {
 		lastSpectrum = array;
+	}
+
+	if (isPlaying) {
+		var sum = 0;
+		for (var i = ampLower; i < ampUpper; i++) {
+			sum += array[i] / height;
+		}
+		// the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
+		// amplitude points in the observed range are at 100% of their potential value
+		velMult = sum / (ampUpper - ampLower);
+		velMult = Math.pow(velMult, particleExponent);
 	}
 
 	values = [];

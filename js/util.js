@@ -8,6 +8,7 @@ function isInView(particle) {
 }
 
 function resetParticle(particle) {
+	//TODO: respawn some particles along the top and bottom borders of the screen
 	var pos = getValidSpawnPosition(particle.bokeh, particle.fleck);
 	particle.x = pos.x;
 	particle.y = pos.y;
