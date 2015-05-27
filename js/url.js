@@ -24,13 +24,16 @@ var QueryString = function () {
 
 var songName = QueryString.song;
 if (songName !== undefined) {
-	songName = songName.replace('%20', ' ');
+	songName = decodeURIComponent(songName);
 }
 var genreName = QueryString.genre;
 if (genreName !== undefined) {
-	genreName = genreName.replace('%20', ' ');
+	genreName = decodeURIComponent(genreName);
+	if (genreName == 'DnB') {
+		genreName = 'Drum & Bass';
+	}
 }
 var artistName = QueryString.artist;
 if (artistName !== undefined) {
-	artistName = artistName.replace('%20', ' ');
+	artistName = decodeURIComponent(artistName);
 }

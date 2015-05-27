@@ -1,6 +1,6 @@
 var particleCount = 500; // total particle count including flecks
 var fleckCount = particleCount * 0.05;
-var bokehCount = particleCount * 0.15;
+var bokehCount = particleCount * 0.25;
 var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 var bokeh = new THREE.Geometry();
@@ -19,8 +19,12 @@ var bokehTexture = THREE.ImageUtils.loadTexture(
 )
 bokehTexture.minFilter = THREE.LinearFilter;
 
+var particleOpacity = 0.65;
+var bokehOpacity = 0.6;
+
 var pMaterial = new THREE.PointCloudMaterial({
 	color: 0xFFFFFF,
+	opacity: particleOpacity,
 	size: 5,
 	map: texture,
 	blending: THREE.AdditiveBlending,
@@ -29,6 +33,7 @@ var pMaterial = new THREE.PointCloudMaterial({
 
 var fleckMaterial = new THREE.PointCloudMaterial({
 	color: color,
+	opacity: particleOpacity,
 	size: 2,
 	map: texture,
 	blending: THREE.AdditiveBlending,
@@ -36,14 +41,15 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 });
 
 var bokehMaterial = new THREE.PointCloudMaterial({
-	color: color,
+	color: darken(brighten(color, 1.2), 1.2), // normalize it a little
+	opacity: bokehOpacity,
 	size: 150,
 	map: bokehTexture,
 	blending: THREE.AdditiveBlending,
 	transparent: true
 });
 
-var velocity = 1.0;
+var velocity = 2.5;
 
 var zPosRange = 350;
 
@@ -141,6 +147,6 @@ bokehSystem.sortParticles = true;
 bokehSystem.geometry.dynamic = true;
 
 // add it to the scene
+scene.add(bokehSystem);
 scene.add(particleSystem);
 scene.add(fleckSystem);
-scene.add(bokehSystem);

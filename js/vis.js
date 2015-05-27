@@ -6,17 +6,17 @@ if (! window.AudioContext) {
 }
 
 var colors = {
-	'EDM': '#C2C2C2',
-	'House': '#EA8C00',
+	'EDM': '#C1C1C1',
+	'House': '#EB8200',
 	'Drumstep': '#F12188',
-	'Drum & Bass': '#F71A00',
-	'Trance': '#0785E4',
-	'Electro': '#E6CE00',
-	'Glitch Hop': '#0B9753',
-	'Hardcore': '#009800',
-	'Nu Disco': '#1CABB1',
-	'Dubstep': '#951EF5',
-	'Trap': '#8C0F29',
+	'Drum & Bass': '#FF1900',
+	'Trance': '#0080E6',
+	'Electro': '#E5CE00',
+	'Glitch Hop': '#0A9655',
+	'Hardcore': '#009600',
+	'Nu Disco': '#16ACB0',
+	'Dubstep': '#941DE8',
+	'Trap': '#8C0F28',
 	'Future Bass': '#B8B8FF'
 };
 var color;
@@ -36,20 +36,20 @@ width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
 var spectrumStart = 5; // the first bin rendered in the spectrum
 var spectrumExponent = 3; // the exponent to raise spectrum values to
-var height = width / 4;
-var headMargin = 8;
-var tailMargin = 8;
+var height = width / 5;
+var headMargin = 7;
+var tailMargin = 7;
 var marginDecay = 2;
-var minMarginWeight = 0.3;
+var minMarginWeight = 0.4;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 
 var velMult = 0;
 
-var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 34; // the upper bound for amplitude analysis (exclusive)
-var quadraticCurve = 3; // the power to raise velMult to after initial computation
+var ampLower = 8; // the lower bound for amplitude analysis (inclusive)
+var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
+var quadraticCurve = 5; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -66,10 +66,10 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
-var blockSize = 185;
+var blockSize = 210;
 var blockMargin = 30;
-var blockWidthRatio = 0.59;
-var blockHeightRatio = 0.72;
+var blockWidthRatio = 0.63;
+var blockHeightRatio = 0.73;
 
 var lastMouseMove = Date.now();
 var mouseSleepTime = 3000;
@@ -175,12 +175,13 @@ function loadSong() {
 				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
 				+ song.getTitle().toUpperCase()
 				+ (song.getLink() != null ? '</a>' : '');
-		while ($('#title').height() > baseTitleHeight) {
+		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').length) / 4 + 1;
+		while ($('#title').height() > baseTitleHeight * newLines) {
 			console.log($('#title').height() + ', ' + baseTitleHeight);
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
 			console.log($('#title').height() + ', ' + baseTitleHeight);
-		document.title = song.getArtist() + ' \u2014 ' + song.getTitle();
+		document.title = song.getArtist() + ' \u2014 ' + song.getTitle().replace('<br>', ' ');
 		color = colors[song.getGenre()];
 	}
 	if (color == undefined) {

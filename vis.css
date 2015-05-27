@@ -14,7 +14,7 @@ html {
 	height: 100%;
 	font-family: sans-serif;
 	background-color: #111;
-	background: url('./img/bg.png');
+	/*background: url('./img/bg.png');*/
 }
 
 #loading {
@@ -58,7 +58,8 @@ html {
 	font-size: 3.4em;
 	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
 	font-weight: 300;
-	margin-top: -15px;
+	margin-top: -7px;
+	line-height: 98%;
 }
 
 .content #title a {
