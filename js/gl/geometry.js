@@ -55,11 +55,11 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 2.2;
+var velocity = 2.5;
 
 var zPosRange = 350;
 
-var yVelRange = velocity * 1.6;
+var yVelRange = velocity * 1.4;
 
 var posBias = 3.5; // the higher the number the more center-biased the particles
 var velBias = 2.5;

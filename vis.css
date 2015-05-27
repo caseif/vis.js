@@ -19,6 +19,7 @@ html {
 
 #loading {
 	color: #FFF;
+	position: absolute;
 }
 
 #pause-info {

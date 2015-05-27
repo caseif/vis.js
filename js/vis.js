@@ -177,10 +177,8 @@ function loadSong() {
 				+ (song.getLink() != null ? '</a>' : '');
 		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').length) / 4 + 1;
 		while ($('#title').height() > baseTitleHeight * newLines) {
-			console.log($('#title').height() + ', ' + baseTitleHeight);
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
-			console.log($('#title').height() + ', ' + baseTitleHeight);
 		document.title = song.getArtist() + ' \u2014 ' + song.getTitle().replace('<br>', ' ');
 		color = colors[song.getGenre()];
 	}
@@ -270,7 +268,7 @@ function loadSound(url) {
 function playSound(buffer) {
 	bufferSource.buffer = buffer;
 	bufferSource.start(0);
-	$('#loading').hide();
+	$('#loading').fadeOut(250);
 	$('#pause-info').show();
 	isPlaying = true;
 	begun = true;
