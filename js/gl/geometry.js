@@ -1,6 +1,7 @@
-var particleCount = 500; // total particle count including flecks
-var fleckCount = particleCount * 0.05;
-var bokehCount = particleCount * 0.25;
+var particleCount = 1000; // total normal particle count
+var fleckCount = particleCount * 0.05; // total fleck count
+var bokehCount = particleCount * 0.25; // total bokeh count
+
 var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 var bokeh = new THREE.Geometry();
