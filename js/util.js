@@ -104,3 +104,12 @@ function darken(hexString, factor) {
 function biasedRandom(range, bias) {
 	return Math.floor((range / 2) - Math.pow(Math.random() * Math.pow(range / 2, bias), 1 / bias)) * (Math.random() >= 0.5 ? 1 : -1);
 }
+
+function selectiveToUpperCase(str) {
+	str = str.toUpperCase();
+	var i;
+	while ((i = str.indexOf('^')) !== -1) {
+		str = str.replace(str.substring(i, i + 2), str.substring(i + 1, i + 2).toLowerCase());
+	}
+	return str;
+}

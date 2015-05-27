@@ -1,5 +1,7 @@
 # key|fileName|artist|title|genre|url/youtubeId
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
+# Newlines are denoted with <br>
+# Prefixing a character with ^ will force it to be lowercase
 gramophone|gramophone.mp3|Faux|Gramophone|EDM|USlOx7pi6BE
 gravity|gravity.mp3|Umpire|Gravity<br>(feat. Liz Kretschmer)|Dubstep|1iDTrK2EAfI
 pressure|pressure.mp3|Draper|Pressure<br>(feat. Laura Brehm)|Dubstep|j8F1NwrHBIU
@@ -122,4 +124,4 @@ hybrid|hybrid.mp3|Faux|Hybrid|EDM|https://soundcloud.com/faux_official/hybrid
 canvas|canvas.mp3|Rezonate|Canvas|Nu Disco|i0Ew3cl1gyc
 hummingbird|hummingbird.mp3|Tut Tut Child|Hummingbird<br>(feat. Augustus Ghost)|Dubstep|a4-Tb4rHZt8
 stronger|stronger.mp3|Stonebank|Stronger<br>(feat. EMEL)|Hardcore|I1NuCWfYeYc
-btctristam|btctristam.mp3|Karma Fields|Build The Cities<br>(Tristam Remix)|Electro|HYPE
+empireofsound|empireofsound.mp3|Tristam ^x Karma Fields|Build The Cities (Empire Of Sound)<br>(feat. Kerli)|Electro|HYPE

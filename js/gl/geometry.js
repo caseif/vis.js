@@ -1,4 +1,4 @@
-var particleCount = 1000; // total normal particle count
+var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080)) * 1000; // total normal particle count
 var fleckCount = particleCount * 0.05; // total fleck count
 var bokehCount = particleCount * 0.15; // total bokeh count
 
@@ -55,14 +55,14 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 2.5;
+var velocity = 5;
 
 var zPosRange = 350;
 
-var yVelRange = velocity * 1.4;
+var yVelRange = 3.5;
 
-var posBias = 3.5; // the higher the number the more center-biased the particles
-var velBias = 2.5;
+var posBias = 5; // the higher the number the more center-biased the particles
+var velBias = 2;
 
 for (var p = 0; p < particleCount; p++) {
 	var z = Math.random() * zPosRange - (zPosRange / 2);
@@ -95,7 +95,7 @@ for (var p = 0; p < fleckCount; p++) {
 	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var pX = Math.random() * xRange - xRange / 2,
-		pY = biasedRandom(yRange, posBias),
+		pY = Math.floor(Math.random() * yRange) - yRange / 2,
 		pZ = z,
 		fleck = new THREE.Vector3(pX, pY, pZ);
 	fleck.fleck = true;

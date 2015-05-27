@@ -31,6 +31,7 @@ var scriptProcessor;
 var width = $(document).width() * 0.9;
 var barCount = 80;
 var barMargin = 4;
+var spectrumSize = 91;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
@@ -49,7 +50,7 @@ var velMult = 0;
 
 var ampLower = 8; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 40; // the upper bound for amplitude analysis (exclusive)
-var quadraticCurve = 5; // the power to raise velMult to after initial computation
+var quadraticCurve = 6; // the power to raise velMult to after initial computation
 
 // dudududududu
 var red = 255;
@@ -166,7 +167,8 @@ function loadSong() {
 	document.title = '??? \u2014 ???';
 	if (song != undefined) {
 		var baseArtistHeight = $('#artist').height();
-		document.getElementById('artist').innerHTML = song.getArtist().toUpperCase();
+		document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
+		
 		while ($('#artist').height() > baseArtistHeight) {
 			$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
 		}
@@ -179,7 +181,7 @@ function loadSong() {
 		while ($('#title').height() > baseTitleHeight * newLines) {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
-		document.title = song.getArtist() + ' \u2014 ' + song.getTitle().replace('<br>', ' ');
+		document.title = song.getArtist() + ' \u2014 ' + selectiveToUpperCase(song.getTitle().replace('<br>', ' '));
 		color = colors[song.getGenre()];
 	}
 	if (color == undefined) {
@@ -392,7 +394,7 @@ function drawSpectrum(array) {
 		
 		values[i] = Math.max(Math.pow(value / height, spectrumExponent) * height, 1);
 	}
-	
+
 	// drawing pass
 	for (var i = 0; i < spectrumSize; i++) {
 		var value = values[i];
