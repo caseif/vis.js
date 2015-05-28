@@ -48,19 +48,21 @@ html {
 .content #artist {
 	color: #FFF;
 	display: block;
-	font-size: 5.5em;
+	font-size: 6.1em;
 	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
 	font-weight: 700;
+	letter-spacing: -5px;
 }
 
 .content #title {
 	color: #FFF;
 	display: block;
-	font-size: 3.4em;
+	font-size: 3.5em;
 	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
-	font-weight: 300;
+	font-weight: 400;
 	margin-top: -7px;
 	line-height: 98%;
+	margin-left: 5px;
 }
 
 .content #title a {
@@ -85,4 +87,19 @@ html {
 
 .kitty {
 	position: absolute;
+}
+
+/* stolen/borrowed from incept.tk/MCV2 */
+#vig {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    box-shadow: inset 0 0 20em 7em rgba(0,0,0,0.4);
+	z-index: 997;
+}
+
+.front {
+	z-index: 999;
 }

@@ -8,9 +8,10 @@
 		<link href='http://fonts.googleapis.com/css?family=Raleway:300,700' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
+		<div id="vig"></div>
 		<div id="loading">
-			<div>Loading music, please wait...</div>
-			<div id="kitteh"><video src="img/doalittlejig.webm" width=180 autoplay loop></video></div>
+			<div class="front">Loading music, please wait...</div>
+			<div id="kitteh" style="z-index: 996"><video src="img/doalittlejig.webm" width=180 autoplay loop></video></div>
 		</div>
 		<div class="content">
 			<canvas id="canvas" style="display: block;"></canvas>
@@ -18,10 +19,13 @@
 				<div id="artist"></div>
 				<div id="title"></div>
 			</div>
-			<div class="ayylmao"><img class='kitty' src="./img/cat.gif" alt="ayy lmao"></div>
+			<div class="ayylmao front"><img class='kitty' src="./img/cat.gif" alt="ayy lmao"></div>
 		</div>
-		<div id="pause-info" class="hide">Press P to pause</div>
-		<div id="github" class="hide"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
+
+		<div class="partsbg"></div>
+
+		<div id="pause-info" class="hide front">Press P to pause</div>
+		<div id="github" class="hide front"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
 
 		<script type="text/javascript" src="./js/util.js"></script>
 

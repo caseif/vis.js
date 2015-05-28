@@ -17,7 +17,8 @@ var colors = {
 	'Nu Disco': '#16ACB0',
 	'Dubstep': '#941DE8',
 	'Trap': '#8C0F28',
-	'Future Bass': '#B8B8FF'
+	'Future Bass': '#B8B8FF',
+	'BTC': '#000000'
 };
 var color;
 
@@ -28,7 +29,7 @@ var bufferSource;
 var analyzer;
 var scriptProcessor;
 //var barWidth = 16;
-var width = $(document).width() * 0.9;
+var width = $(document).width() * 0.83;
 var barCount = 80;
 var barMargin = 4;
 var spectrumSize = 91;
@@ -67,8 +68,9 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
-var blockSize = 210;
-var blockMargin = 30;
+var blockSize = 193;
+var blockTopPadding = 50;
+var blockSidePadding = 30;
 var blockWidthRatio = 0.63;
 var blockHeightRatio = 0.73;
 
@@ -77,14 +79,14 @@ var mouseSleepTime = 3000;
 var textHidden = false;
 
 $('#canvas').attr('width', width);
-$('#canvas').attr('height', height + blockSize + 2 * blockMargin);
-$('#songinfo').css('margin-top', -blockSize - blockMargin - 12);
-$('#songinfo').css('margin-left', blockSize + blockMargin);
-$('#songinfo').css('width', width - blockSize - blockMargin);
+$('#canvas').attr('height', height + blockSize + 2 * blockTopPadding);
+$('#songinfo').css('margin-top', -blockSize - blockTopPadding - 12);
+$('#songinfo').css('margin-left', blockSize + blockSidePadding);
+$('#songinfo').css('width', width - blockSize - blockSidePadding);
 var ctx = $("#canvas").get()[0].getContext("2d");
 
 function centerContent() {
-	$('.content').css('margin-top', ($(document).height() - $('.content').height()) / 2);
+	$('.content').css('margin-top', ($(document).height() - $('.content').height()) * 0.38);
 	$('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2);
 };	
 
@@ -135,13 +137,13 @@ function loadSong() {
 	});
 	var keys = Object.keys(songs);
 	if (songName !== undefined) {
-		song = songs[songName];
+		song = songs[songName.toLowerCase()];
 	} else if (genreName !== undefined) {
 		var genreArray = [];
 		var i = 0;
 		keys.forEach(function(key) {
 			var song = songs[key];
-			if (song.getGenre() === genreName) {
+			if (song.getGenre().toLowerCase() === genreName.toLowerCase()) {
 				genreArray[i] = song;
 				++i;
 			}
@@ -152,7 +154,7 @@ function loadSong() {
 		var i = 0;
 		keys.forEach(function(key) {
 			var song = songs[key];
-			if (song.getArtist() === artistName) {
+			if (song.getArtist().toLowerCase() === artistName.toLowerCase()) {
 				artistArray[i] = song;
 				++i;
 			}
@@ -172,7 +174,7 @@ function loadSong() {
 		while ($('#artist').height() >= baseArtistHeight) {
 			$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
 		}
-		$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 3) + 'px');
+		$('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 5) + 'px');
 		var baseTitleHeight = $('#title').height();
 		document.getElementById('title').innerHTML =
 				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
@@ -182,7 +184,7 @@ function loadSong() {
 		while ($('#title').height() >= baseTitleHeight * newLines) {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
-			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 3) + 'px');
+			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
 		document.title = song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
 		color = colors[song.getGenre()];
 	}
@@ -193,18 +195,30 @@ function loadSong() {
 	if (!song || song.getGenre() != 'ayy lmao') {
 		drawBlock();
 	}
+
+	// stolen/borrowed from incept.tk/MCV2
+	if (song.getGenre() == 'BTC') {
+		$('html').css('backgroundColor', '#E8E8E8');
+		$('.content #artist').css('color', '#000');
+		$('.content #title a').css('color', '#000');
+		$('.partsbg').css('filter', 'invert(100%)');
+		$('.partsbg').css('-webkit-filter', 'invert(100%)');
+		$('#pause-info').css('color', '#000');
+		$('#loading').css('color', '#000');
+		$('#github').css('color', '#000');
+	}
 }
 
 function drawBlock() {
 	ctx.fillStyle = color;
-	ctx.fillRect(0, height + blockMargin, blockSize, blockSize);
+	ctx.fillRect(0, height + blockTopPadding, blockSize, blockSize);
 	var img = new Image();
 	img.onload = function() {
 		ctx.fillStyle = 'white';
 		ctx.drawImage(
 			img,
 			blockSize * (1 - blockWidthRatio) / 2,
-			height + blockMargin + (blockSize * (1 - blockHeightRatio) / 2),
+			height + blockTopPadding + (blockSize * (1 - blockHeightRatio) / 2),
 			blockSize * blockWidthRatio,
 			blockSize * blockHeightRatio
 		);

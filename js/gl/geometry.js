@@ -26,10 +26,10 @@ var bokehTexture = THREE.ImageUtils.loadTexture(
 bokehTexture.minFilter = THREE.LinearFilter;
 
 var particleOpacity = 0.6;
-var bokehOpacity = 0.4;
+var bokehOpacity = 0.5;
 
 var pMaterial = new THREE.PointCloudMaterial({
-	color: 0xFFFFFF,
+	color: song.getGenre() === 'BTC' ? 0x000000 : 0xFFFFFF,
 	opacity: particleOpacity,
 	size: 5,
 	map: stdTexure,
@@ -61,8 +61,8 @@ var zPosRange = 350;
 
 var yVelRange = 2.5;
 
-var posBias = 4; // the higher the number the more center-biased the particles
-var velBias = 1.15;
+var posBias = 3; // the higher the number the more center-biased the particles
+var velBias = 1.1;
 
 for (var p = 0; p < particleCount; p++) {
 	var z = Math.random() * zPosRange - (zPosRange / 2);
@@ -157,5 +157,7 @@ bokehSystem.geometry.dynamic = true;
 
 // add it to the scene
 scene.add(particleSystem);
-scene.add(fleckSystem);
-scene.add(bokehSystem);
+if (song.getGenre() != 'BTC') {
+	scene.add(fleckSystem);
+	scene.add(bokehSystem);
+}
