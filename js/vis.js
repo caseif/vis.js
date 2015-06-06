@@ -35,7 +35,7 @@ var barMargin = 4;
 var spectrumSize = 91;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
-var spectrumSize = width / (barWidth + barMargin * 2); // the size of the visible spectrum
+var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
 var spectrumStart = 5; // the first bin rendered in the spectrum
 var spectrumExponent = 3; // the exponent to raise spectrum values to
 var height = width / 5;
@@ -75,7 +75,7 @@ var blockWidthRatio = 0.63;
 var blockHeightRatio = 0.73;
 
 var lastMouseMove = Date.now();
-var mouseSleepTime = 3000;
+var mouseSleepTime = 2000;
 var textHidden = false;
 
 $('#canvas').attr('width', width);
@@ -102,7 +102,7 @@ centerContent();
 
 if (song.getGenre() == 'ayy lmao') {
 	$('.ayylmao').show();
-	$('.kitty').css('margin-top', -blockSize + 4);
+	$('.kitty').css('margin-top', -blockSize + blockTopPadding - 21);
 	$('.kitty').attr('height', blockSize);
 }
 

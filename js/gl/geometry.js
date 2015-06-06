@@ -6,10 +6,6 @@ var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 var bokeh = new THREE.Geometry();
 
-var uniforms = {
-	color: {type: "c", value: new THREE.Color(0xFFFFFF)},
-};
-
 var stdTexure = THREE.ImageUtils.loadTexture(
 	'./img/particle.png'
 )
@@ -55,14 +51,14 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 1.6 * ($(document).width() / 1920);
+var velocity = 1.8 * Math.pow($(document).width() / 1920, 4);
 
 var zPosRange = 350;
 
 var yVelRange = 2.5;
 
-var posBias = 3; // the higher the number the more center-biased the particles
-var velBias = 1.1;
+var posBias = 4.5; // the higher the number the more center-biased the particles
+var velBias = 2.5;
 
 for (var p = 0; p < particleCount; p++) {
 	var z = Math.random() * zPosRange - (zPosRange / 2);

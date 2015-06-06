@@ -22,6 +22,10 @@ html {
 	position: absolute;
 }
 
+#canvas {
+	z-index: 996;
+}
+
 #pause-info {
 	position: absolute;
 	bottom: 8px;
@@ -101,5 +105,5 @@ html {
 }
 
 .front {
-	z-index: 999;
+	z-index: 9999;
 }
