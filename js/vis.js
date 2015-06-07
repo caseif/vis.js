@@ -42,7 +42,7 @@ var height = width / 5;
 var headMargin = 7;
 var tailMargin = 7;
 var marginDecay = 2;
-var minMarginWeight = 0.4;
+var minMarginWeight = 0.5;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);

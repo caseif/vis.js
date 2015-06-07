@@ -16,7 +16,7 @@ function resetParticle(particle) {
 	
 	var yRange = particle.bokeh ? bokehYVelRange : (particle.fleck ? fleckYVelRange : yVelRange);
 	particle.velocity = new THREE.Vector3(
-		particle.bokeh ? bokehVelocity : (particle.fleck ? fleckVelocity : velocity),
+		particle.bokeh ? Math.random() * (bokehMaxVelocity - bokehMinVelocity) + bokehMinVelocity : (particle.fleck ? fleckVelocity : velocity),
 		biasedRandom(yRange, velBias),
 		//Math.random() * yRange - yRange / 2,
 		0

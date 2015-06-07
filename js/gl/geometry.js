@@ -43,7 +43,7 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 });
 
 var bokehMaterial = new THREE.PointCloudMaterial({
-	color: darken(brighten(color, 1.2), 1.2), // normalize it a little
+	color: 0xFFFFFF,
 	opacity: bokehOpacity,
 	size: 50,
 	map: bokehTexture,
@@ -107,9 +107,10 @@ for (var p = 0; p < fleckCount; p++) {
 	flecks.vertices.push(fleck);
 }
 
-var bokehVelocity = velocity * 0.2;
+var bokehMinVelocity = velocity * 0.15;
+var bokehMaxVelocity = velocity * 0.25;
 
-var bokehYVelRange = bokehVelocity * 2;
+var bokehYVelRange = ((bokehMinVelocity + bokehMaxVelocity) * 0.5) * 2;
 
 var bokehZ = 250;
 
@@ -125,7 +126,7 @@ for (var p = 0; p < bokehCount; p++) {
 	  
 	  // create a velocity vector
 	b.velocity = new THREE.Vector3(
-		bokehVelocity,
+		Math.random() * (bokehMaxVelocity - bokehMinVelocity) + bokehMinVelocity,
 		Math.random() * bokehYVelRange - bokehYVelRange / 2,
 		0
 	);
