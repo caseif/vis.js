@@ -21,7 +21,7 @@ var bokehTexture = THREE.ImageUtils.loadTexture(
 )
 bokehTexture.minFilter = THREE.LinearFilter;
 
-var particleOpacity = 0.6;
+var particleOpacity = 0.7;
 var bokehOpacity = 0.5;
 
 var pMaterial = new THREE.PointCloudMaterial({
@@ -55,7 +55,7 @@ var velocity = 1.8 * Math.pow($(document).width() / 1920, 4);
 
 var zPosRange = 350;
 
-var yVelRange = 2.5;
+var yVelRange = 3;
 
 var posBias = 4.5; // the higher the number the more center-biased the particles
 var velBias = 2.5;
@@ -140,9 +140,6 @@ var particleSystem = new THREE.PointCloud(particles, pMaterial);
 var fleckSystem = new THREE.PointCloud(flecks, fleckMaterial);
 var bokehSystem = new THREE.PointCloud(bokeh, bokehMaterial);
 
-// also update the particle system to
-// sort the particles which enables
-// the behaviour we want
 particleSystem.sortParticles = true;
 particleSystem.geometry.dynamic = true;
 
