@@ -34,12 +34,13 @@ var spectrumSize = 63;
 var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
 //var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
-var spectrumStart = 7; // the first bin rendered in the spectrum
-var spectrumEnd = 230; // the last bin rendered in the spectrum
-var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
-var spectrumExponent = 5; // the exponent to raise spectrum values to //TODO: this should be on a diminishing scale
+var spectrumStart = 6; // the first bin rendered in the spectrum
+var spectrumEnd = 320; // the last bin rendered in the spectrum
+var spectrumScale = 1.7; // the logarithmic scale to adjust spectrum values to
+var maxSpectrumExponent = 5; // the maximum exponent to raise spectrum values to
+var minSpectrumExponent = 5; // the minimum exponent to raise spectrum values to
 var smoothing = 0.55;
-var height = width / 5;
+var height = width / 4.5;
 var headMargin = 7;
 var tailMargin = 7;
 var marginDecay = 1.5;
@@ -47,6 +48,8 @@ var minMarginWeight = 0.6;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
+
+var maxFftSize = 16384;
 
 var velMult = 0;
 
@@ -239,11 +242,12 @@ function setupAudioNodes() {
 	//analyzer.minDecibels = -65;
 	analyzer.maxDecibels = -28;
 	try {
-		analyzer.fftSize = 16384; // ideal bin count
+		analyzer.fftSize = maxFftSize; // ideal bin count
 		console.log('Using fftSize of ' + analyzer.fftSize + ' (woot!)');
 	} catch (ex) {
 		analyzer.fftSize = 2048; // this will work for most if not all systems
 		console.log('Using fftSize of ' + analyzer.fftSize);
+		alert('Could not set optimal fftSize! This may look a bit weird...');
 	}
 
 	bufferSource = context.createBufferSource();
@@ -305,7 +309,6 @@ function onError(e) {
 }
 
 var lastProcess = Date.now();
-var lastLowest = -1;
 scriptProcessor.onaudioprocess = function() {
 	var now = Date.now();
 	do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
@@ -355,7 +358,6 @@ scriptProcessor.onaudioprocess = function() {
 	drawSpectrum(array);
 }
 
-// there's a backstory to this function's name that I don't care to go over
 function powerTransform(array) {
 	var newArray = new Uint8Array(spectrumSize);
 	for (var i = 0; i < spectrumSize; i++) {
@@ -412,7 +414,9 @@ function drawSpectrum(array) {
 			value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
 		}
 		
-		values[i] = Math.max(Math.pow(value / height, spectrumExponent) * height, 1);
+		var exponent = (1 - (i / spectrumSize)) * (maxSpectrumExponent - minSpectrumExponent) + minSpectrumExponent
+		values[i] = Math.max(Math.pow(value / height, exponent) * height, 1);
+		values[i] *= (2 - values[i] / height);
 	}
 
 	// drawing pass

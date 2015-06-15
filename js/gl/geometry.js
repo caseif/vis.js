@@ -2,6 +2,7 @@ var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080
 var fleckCount = particleCount * 0.05; // total fleck count
 var bokehCount = particleCount * 0.15; // total bokeh count
 
+//TODO: split main system into foreground and background particles
 var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 var bokeh = new THREE.Geometry();
@@ -51,7 +52,7 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 1.8 * Math.pow($(document).width() / 1920, 4);
+var velocity = 2.2 * Math.pow($(document).width() / 1920, 4);
 
 var zPosRange = 350;
 
