@@ -28,13 +28,12 @@ var audioBuffer;
 var bufferSource;
 var analyzer;
 var scriptProcessor;
-//var barWidth = 16;
 var width = $(document).width() * 0.83;
-var barCount = 80;
-var barMargin = 4;
-var barWidth = width / (barCount + barMargin * 2);
+var barMargin = 7;
+var spectrumSize = 63;
+var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
-var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
+//var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
 var spectrumStart = 7; // the first bin rendered in the spectrum
 var spectrumEnd = 230; // the last bin rendered in the spectrum
 var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
@@ -419,6 +418,6 @@ function drawSpectrum(array) {
 	// drawing pass
 	for (var i = 0; i < spectrumSize; i++) {
 		var value = values[i];
-		ctx.fillRect(i * (barWidth + barMargin * 2), height - value, barWidth, value, value);
+		ctx.fillRect(i * (barWidth + barMargin), height - value, barWidth, value, value);
 	}
 };
