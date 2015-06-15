@@ -82,7 +82,6 @@ function getValidSpawnPosition(side, bokeh, fleck) {
 		var y = -getYRangeAtZ(z) / 2;
 		var xRange = getXRangeAtZ(z);
 		var x = Math.random() * xRange - xRange / 2;
-		console.log(x + ', ' + y);
 	} else { // bottom
 		var y = getYRangeAtZ(z) / 2;
 		var xRange = getXRangeAtZ(z);

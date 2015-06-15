@@ -32,17 +32,19 @@ var scriptProcessor;
 var width = $(document).width() * 0.83;
 var barCount = 80;
 var barMargin = 4;
-var spectrumSize = 91;
 var barWidth = width / (barCount + barMargin * 2);
 width -= width % (barWidth + barMargin * 2);
 var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
-var spectrumStart = 5; // the first bin rendered in the spectrum
-var spectrumExponent = 3; // the exponent to raise spectrum values to
+var spectrumStart = 7; // the first bin rendered in the spectrum
+var spectrumEnd = 230; // the last bin rendered in the spectrum
+var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
+var spectrumExponent = 5; // the exponent to raise spectrum values to //TODO: this should be on a diminishing scale
+var smoothing = 0.55;
 var height = width / 5;
 var headMargin = 7;
 var tailMargin = 7;
-var marginDecay = 2;
-var minMarginWeight = 0.5;
+var marginDecay = 1.5;
+var minMarginWeight = 0.6;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
@@ -234,15 +236,15 @@ function setupAudioNodes() {
 
 	analyzer = context.createAnalyser();
 	analyzer.connect(scriptProcessor);
-	analyzer.smoothingTimeConstant = 0.75;
+	analyzer.smoothingTimeConstant = smoothing;
 	//analyzer.minDecibels = -65;
 	analyzer.maxDecibels = -28;
 	try {
-		analyzer.fftSize = 8192; // ideal bin count
-		console.log('Using fftSize of 8192 (woot!)');
+		analyzer.fftSize = 16384; // ideal bin count
+		console.log('Using fftSize of ' + analyzer.fftSize + ' (woot!)');
 	} catch (ex) {
 		analyzer.fftSize = 2048; // this will work for most if not all systems
-		console.log('Using fftSize of 2048');
+		console.log('Using fftSize of ' + analyzer.fftSize);
 	}
 
 	bufferSource = context.createBufferSource();
@@ -358,7 +360,10 @@ scriptProcessor.onaudioprocess = function() {
 function powerTransform(array) {
 	var newArray = new Uint8Array(spectrumSize);
 	for (var i = 0; i < spectrumSize; i++) {
-		newArray[i] = array[i + spectrumStart];
+		//newArray[i] = array[i + spectrumStart];
+		var bin = Math.pow(i / spectrumSize, spectrumScale) * (spectrumEnd - spectrumStart) + spectrumStart;
+		newArray[i] = array[Math.floor(bin) + spectrumStart] * (bin % 1)
+				+ array[Math.floor(bin + 1) + spectrumStart] * (1 - (bin % 1))
 	}
 	return newArray;
 }
