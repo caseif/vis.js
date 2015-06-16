@@ -55,7 +55,8 @@ var velMult = 0;
 
 var ampLower = 8; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 5; // the power to raise velMult to after initial computation
+var particleExponent = 4; // the power to raise velMult to after initial computation
+var minParticleVelocity = 0.01; // the lowest multiplier for particle speeds
 
 // dudududududu
 var red = 255;
@@ -170,7 +171,7 @@ function loadSong() {
 	}
 	document.getElementById('artist').innerHTML = '???';
 	document.getElementById('title').innerHTML = '???';
-	document.title = '??? \u2014 ???';
+	document.title = '[vis.js] ??? \u2014 ???';
 	if (song != undefined) {
 		var baseArtistHeight = $('#artist').height();
 		document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
@@ -189,7 +190,7 @@ function loadSong() {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
-		document.title = song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
+		document.title = '[vis.js] ' + song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
 		color = colors[song.getGenre()];
 	}
 	if (color == undefined) {
@@ -379,7 +380,7 @@ function drawSpectrum(array) {
 		// the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
 		// amplitude points in the observed range are at 100% of their potential value
 		velMult = sum / (ampUpper - ampLower);
-		velMult = Math.pow(velMult, particleExponent);
+		velMult = Math.pow(velMult, particleExponent) * (1 - minParticleVelocity) + minParticleVelocity;
 	}
 
 	values = [];
