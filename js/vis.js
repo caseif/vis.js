@@ -171,7 +171,7 @@ function loadSong() {
 	}
 	document.getElementById('artist').innerHTML = '???';
 	document.getElementById('title').innerHTML = '???';
-	document.title = '??? \u2014 ???';
+	document.title = '[vis.js] ??? \u2014 ???';
 	if (song != undefined) {
 		var baseArtistHeight = $('#artist').height();
 		document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
@@ -190,7 +190,7 @@ function loadSong() {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
-		document.title = song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
+		document.title = '[vis.js] ' + song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
 		color = colors[song.getGenre()];
 	}
 	if (color == undefined) {
