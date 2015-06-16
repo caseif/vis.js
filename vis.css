@@ -93,7 +93,6 @@ html {
 	position: absolute;
 }
 
-/* stolen/borrowed from incept.tk/MCV2 */
 #vig {
 	position: fixed;
 	top: 0;
@@ -106,4 +105,32 @@ html {
 
 .front {
 	z-index: 9999;
+}
+
+#preloader {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color: rgba(18,18,17,0.95);
+	z-index:998;
+}
+
+#status {
+	width:200px;
+	height:150px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	background-image:url(./img/status.gif);
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:-100px 0 0 -100px;
+}
+
+.cattext{
+	color: #FFF; 
+	text-align: center; 
+	padding-bottom: 75px;
 }

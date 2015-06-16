@@ -44,4 +44,4 @@ renderer.setSize(starWidth, starHeight);
 
 // attach the render-supplied DOM element
 renderer.domElement.id = 'particles';
-$('.content').append(renderer.domElement);
+$('.partsbg').append(renderer.domElement);

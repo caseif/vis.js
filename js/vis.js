@@ -200,16 +200,10 @@ function loadSong() {
 		drawBlock();
 	}
 
-	// stolen/borrowed from incept.tk/MCV2
 	if (song.getGenre() == 'BTC') {
 		$('html').css('backgroundColor', '#E8E8E8');
 		$('.content #artist').css('color', '#000');
 		$('.content #title a').css('color', '#000');
-		$('.partsbg').css('filter', 'invert(100%)');
-		$('.partsbg').css('-webkit-filter', 'invert(100%)');
-		$('#pause-info').css('color', '#000');
-		$('#loading').css('color', '#000');
-		$('#github').css('color', '#000');
 	}
 }
 
@@ -291,8 +285,8 @@ function loadSound(url) {
 function playSound(buffer) {
 	bufferSource.buffer = buffer;
 	bufferSource.start(0);
-	$('#loading').fadeOut(250);
-	$('#pause-info').show();
+	$('#status').fadeOut(); // will first fade out the loading animation
+	$('#preloader').fadeOut('slow'); // will fade out the grey DIV that covers the website.
 	isPlaying = true;
 	begun = true;
 	started = Date.now();

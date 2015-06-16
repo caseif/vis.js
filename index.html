@@ -9,9 +9,9 @@
 	</head>
 	<body>
 		<div id="vig"></div>
-		<div id="loading">
-			<div class="front">Loading music, please wait...</div>
-			<div id="kitteh" style="z-index: 996"><video src="img/doalittlejig.webm" width=180 autoplay loop></video></div>
+		<!-- Preloader -->
+		<div id="preloader">
+			<div class="cattext" id="status">Fetching Audio...<br> (Funny, cus it's a cat.)</div>
 		</div>
 		<div class="content">
 			<canvas id="canvas" style="display: block;"></canvas>
@@ -24,7 +24,7 @@
 
 		<div class="partsbg"></div>
 
-		<div id="pause-info" class="hide front">Press P to pause</div>
+		<div id="pause-info" class="hide front">Press P to Pause</div>
 		<div id="github" class="hide front"><a href="https://github.com/caseif/vis" target="_blank">Github</a></div>
 
 		<script type="text/javascript" src="./js/util.js"></script>
