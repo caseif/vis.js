@@ -5,10 +5,10 @@ function Song(rawData) {
 			throw 'Invalid song data';
 		}
 		this.id = data[0];
-		this.file = data[1];
-		this.artist = data[2];
-		this.title = data[3];
-		this.genre = data[4];
+		this.artist = data[1];
+		this.title = data[2];
+		this.genre = data[3];
+		this.file = data[4];
 		if (data.length > 5) {
 			this.link = data[5];
 			if (!data[5].match('^http')) {
@@ -26,7 +26,7 @@ Song.prototype.getId = function() {
 	return this.id;
 }
 
-Song.prototype.getFileName = function() {
+Song.prototype.getFileId = function() {
 	return this.file;
 }
 

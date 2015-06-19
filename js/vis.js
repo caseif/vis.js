@@ -101,10 +101,10 @@ $(window).resize(function() {
 
 loadSong();
 setupAudioNodes();
-//var loc = window.location.pathname;
-//var protocol = window.location.href.split('/')[0];
-//var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
-loadSound('http://caseif.net/vis/music/' + song.getFileName()); // music file
+var loc = window.location.pathname;
+var protocol = window.location.href.split('/')[0];
+var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
@@ -274,9 +274,23 @@ $(document).keypress(function(event) {
 	}
 });
 
+function createCORSRequest(method, url){
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr){
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined"){
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        xhr = null;
+    }
+    return xhr;
+}
+
 function loadSound(url) {
-	var request = new XMLHttpRequest();
-	request.open('GET', url, true);
+	//var request = new XMLHttpRequest();
+	//request.open('GET', url, true);
+	var request = createCORSRequest('GET', url);
 	request.responseType = 'arraybuffer';
 
 	request.onload = function() {
