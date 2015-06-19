@@ -101,8 +101,10 @@ $(window).resize(function() {
 
 loadSong();
 setupAudioNodes();
-var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
-loadSound(prefix + '/music/' + song.getFileName()); // music file
+//var loc = window.location.pathname;
+//var protocol = window.location.href.split('/')[0];
+//var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+loadSound('http://caseif.net/vis/music/' + song.getFileName()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
@@ -124,7 +126,8 @@ function loadSong() {
 	var songs = [];
 	var count = 0;
 	var loc = window.location.pathname;
-	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+	var protocol = window.location.href.split('/')[0];
+	var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
 	var path = prefix + '/songs.csv';
 	$.ajax({
 		url:		path,
@@ -224,7 +227,8 @@ function drawBlock() {
 		);
 	}
 	var loc = window.location.pathname;
-	var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+	var protocol = window.location.href.split('/')[0];
+	var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
 	img.src = prefix + '/img/mcat.svg';
 }
 
