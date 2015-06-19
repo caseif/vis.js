@@ -101,7 +101,8 @@ $(window).resize(function() {
 
 loadSong();
 setupAudioNodes();
-loadSound('music/' + song.getFileName()); // music file
+var prefix = 'http://' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+loadSound(prefix + '/music/' + song.getFileName()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
