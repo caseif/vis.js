@@ -85,6 +85,14 @@ if (song.getGenre() == 'ayy lmao') {
     $('.kitty').attr('height', blockSize);
 }
 
+if (song.getGenre() == 'Mirai Sekai') {
+    $('.partsbg').hide();
+	$('#vig').hide();
+	$('.content').css('textShadow','0px 0px 20px rgba(0, 0, 0, 0.9)');
+	$('.mvbg').html('<video autoplay loop id="bgvid"><source src="'
+            + prefix + '/content/uc?export=download&id=0B8_nDMQp-qqCU0ZmcHNfR1pwZ0E" type="video/webm"></video>');
+}
+
 $('html').mousemove(function(event) {
     if (textHidden) {
         $('.hide').show();
@@ -210,7 +218,7 @@ function drawBlock() {
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
 
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = song.getGenre() === 'Mirai Sekai' ? 'black' : 'white';
         ctx.drawImage(
             img,
             blockSize * (1 - blockWidthRatio) / 2,
@@ -224,7 +232,7 @@ function drawBlock() {
     };
     prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
             + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-    img.src = '/img/mcat.svg'
+    img.src = song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg';
 }
 
 function setupAudioNodes() {
@@ -297,14 +305,18 @@ function loadSound(url) {
 }
 
 
-function playSound(buffer) {
-    bufferSource.buffer = buffer;
-    bufferSource.start(0);
-    $('#status').fadeOut(); // will first fade out the loading animation
-    $('#preloader').fadeOut('slow'); // will fade out the grey DIV that covers the website.
-    isPlaying = true;
-    begun = true;
-    started = Date.now();
+function playSound(buffer) {	
+	if (song.getGenre() == 'Mirai Sekai') {
+		//$('#bgvid').get(0).play();
+	}
+	
+	bufferSource.buffer = buffer;
+	bufferSource.start(0);
+	$('#status').fadeOut(); // will first fade out the loading animation
+	$('#preloader').fadeOut('slow'); // will fade out the grey DIV that covers the website.
+	isPlaying = true;
+	begun = true;
+	started = Date.now();
 }
 
 bufferSource.onended = function() {

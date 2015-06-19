@@ -49,7 +49,7 @@ html {
 }
 
 .content #songinfo {
-    text-shadow: 0 0 1px white;
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
 }
 
 .content #artist {
@@ -102,7 +102,7 @@ html {
 	left: 0;
 	right: 0;
 	bottom: 0;
-    box-shadow: inset 0 0 20em 7em rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 20em 7em rgba(0,0,0,0.5);
 	z-index: 997;
 }
 
@@ -136,4 +136,19 @@ html {
 	color: #FFF; 
 	text-align: center; 
 	padding-bottom: 75px;
+}
+
+video#bgvid {
+position: fixed;
+top: 50%;
+left: 50%;
+min-width: 100%;
+min-height: 100%;
+width: auto;
+height: auto;
+z-index: -100;
+-webkit-transform: translateX(-50%) translateY(-50%);
+transform: translateX(-50%) translateY(-50%);
+background-size: cover;
+-webkit-filter: brightness(85%);
 }
