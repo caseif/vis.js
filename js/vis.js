@@ -103,7 +103,7 @@ loadSong();
 setupAudioNodes();
 var loc = window.location.pathname;
 var protocol = window.location.href.split('/')[0];
-var prefix = protocol + '//' + window.location.hostname + loc.substring(0, loc.lastIndexOf('/'));
+var prefix = protocol + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
