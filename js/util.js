@@ -99,6 +99,7 @@ function getYRangeAtZ(z) {
 }
 
 function updateParticles() {
+	particleSystem.material.size = particleSize;
 	for (var i = 0; i < particles.vertices.length; i++) {
 		var particle = particles.vertices[i];
 		particle.x += particle.velocity.x * velMult;
