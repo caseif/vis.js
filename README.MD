@@ -4,6 +4,6 @@ vis.js is a visualizer for music files written in Javascript. Technologies utili
 and [jQuery](https://jquery.com/). This project is inspired by the [Monstercat](https://youtube.com/Monstercat)
 visualizer.
 
-See the visualizer in action [here](http://caseif.net/vis/).
+See the visualizer in action [here](http://vis.caseif.net/).
 
 Based on [Leafcat/vis](https://github.com/Leafcat/vis).
