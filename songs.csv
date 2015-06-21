@@ -2,7 +2,6 @@
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
 # Newlines are denoted with <br>
 # Prefixing a character with ^ will force it to be lowercase
-#test|Test|Test|None|...
 gramophone|Faux|Gramophone|EDM|0B8_nDMQp-qqCRy1odzBBVC0yM3c|USlOx7pi6BE
 gravity|Umpire|Gravity<br>(feat. Liz Kretschmer)|Dubstep|0B8_nDMQp-qqCRy1odzBBVC0yM3c|1iDTrK2EAfI
 pressure|Draper|Pressure<br>(feat. Laura Brehm)|Dubstep|0B8_nDMQp-qqCNFg1WEdXX0s1dTA|j8F1NwrHBIU
@@ -15,7 +14,7 @@ myfriend|Tristam|My Friend|Drumstep|0B8_nDMQp-qqCNFE4enhKSlEtS3c|M0CfCdQ2zPU
 dreams|Rogue|Dreams<br>(feat. Laura Brehm)|Drumstep|0B8_nDMQp-qqCdDdHbFVsVnZKRFk|yYPXVcgZo-U
 onceagain|Tristam|Once Again|Glitch Hop|0B8_nDMQp-qqCZGdhb3ZNZjhHYWM|59M5z0c8YtE
 puresunlight|Mr Fijiwiji, Laura Brehm, & AgNO3|Pure Sunlight|Industrial EDM|0B8_nDMQp-qqCeUtfLXFFWHlwRnc|ppF_QrKYAv1NE
-rainbowroad|nanobii|Rainbow Road|Hardcore|0B8_nDMQp-qqCeUtfLXFFWHlwRnc|a0Aauep0VWs
+rainbowroad|nanobii|Rainbow Road|Hardcore|0B8_nDMQp-qqCU3ZGamRqSTg3Y0E|a0Aauep0VWs
 btmaerochord|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit)<br>(Aero Chord Remix)|Trap|0B8_nDMQp-qqCUFVLZDU1dHJKZmc|L10QuAncJx0
 btmnoisestorm|Excision & Pegboard Nerds|Bring The Madness (feat. Mayor Apeshit)<br>(Noisestorm Remix)|Breaks|0B8_nDMQp-qqCX0FvX0dweDNvbzg|zOMFGuM5xww
 sandstorm|Darude|Sandstorm|ayy lmao|0B8_nDMQp-qqCZFE1SU8yN2w1UHc|2HQaBWziYvY
