@@ -6,19 +6,23 @@ if (! window.AudioContext) {
 }
 
 var colors = {
-	'EDM': '#C1C1C1',
-	'House': '#EB8200',
+	'Trap': '#8C0F28',
 	'Drumstep': '#F12188',
 	'Drum & Bass': '#FF1900',
-	'Trance': '#0080E6',
+	'House': '#EB8200',
 	'Electro': '#E5CE00',
-	'Glitch Hop': '#0A9655',
 	'Hardcore': '#009600',
-	'Nu Disco': '#16ACB0',
+	'Glitch Hop': '#0A9655',
+	'Disco': '#16ACB0',
+	'Trance': '#0080E6',
 	'Dubstep': '#941DE8',
-	'Trap': '#8C0F28',
 	'Future Bass': '#B8B8FF',
-	'BTC': '#000000'
+	'EDM': '#C1C1C1',
+	// begin custom colors
+	'Chillout': '#F4C2C2',
+	'Pop': '#B3E234',
+	'Breaks': '#E06D61',
+	'BTC': '#000000' // this one is treated specially
 };
 var color;
 

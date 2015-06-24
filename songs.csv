@@ -1,4 +1,4 @@
-# key|artist|title|genre|googleDriveId|url/youtubeId
+# key|artist|title|genreColor|googleDriveId|url/youtubeId
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
 # Newlines are denoted with <br>
 # Prefixing a character with ^ will force it to be lowercase
@@ -40,7 +40,7 @@ minty|Volant|Minty|Glitch Hop|0B8_nDMQp-qqCMmU3d0E5aDljTEE|7BhYmwFSOas
 ideekay|Ephixa|Ideekay|Glitch Hop|0B8_nDMQp-qqCcmgyRUc1TUxkeW8|5v7T7L3g1yw
 somewobbles|Ephixa|Some Wobbles|Dubstep|0B8_nDMQp-qqCZGNLQUdOSDJkTUU|WT7CBNJjwc0
 fullgrizzly|Going Quantum & Stephen Walking|Full Grizzly|Dubstep|0B8_nDMQp-qqCdVMwejhRZEVUbGM|obVlQinLQnQ
-findthatsomeone|Televisor|Find That Someone<br>(feat. J.U.D.G.E.)|Nu Disco|0B8_nDMQp-qqCTnBDYlJvLUJlc0E|h7aunPoTU64
+findthatsomeone|Televisor|Find That Someone<br>(feat. J.U.D.G.E.)|Disco|0B8_nDMQp-qqCTnBDYlJvLUJlc0E|h7aunPoTU64
 animebae|Sushi Killer & Kevin Villecco|Anime Bae|Future Bass|0B8_nDMQp-qqCT28tYU9yY2RWeDQ|YHHjfYxLyuA
 kaleidoscope|Kasbo|Kaleidoscope|Future Bass|0B8_nDMQp-qqCd3hqZkhWUVA1T1E|rI-t2M0t63s
 dadsinspace|Stephen Walking|Dads In Space|Future Funk|0B8_nDMQp-qqCOXZKaENvcllLNDA|ra2E_mjQMvg
@@ -62,15 +62,15 @@ mrdoctor|Tristam|Mr. Doctor|Dubstep|0B8_nDMQp-qqCcFBDTlBjWTRWa2s|https://pro.bea
 flyingspaghettimonster|Doctor P|Flying Spaghetti Monster|Glitch Hop|0B8_nDMQp-qqCWGh5LWFZcG9INTQ|KvkUY2LZ5uc
 fairytaler|F.O.O.L|Fairytaler|Dubstep|0B8_nDMQp-qqCa2E2dmpJTzA4bGc|yiqznDG-uE0
 genesis|Protostar|Genesis|Glitch Hop|0B8_nDMQp-qqCazAzRy1VU0x4UTQ|exFVjpFRvq4
-seeyou|WRLD & Richard Caddock|See You|Nu Disco|0B8_nDMQp-qqCdENGRU5OZ2xiLTA|BGPGzDvAnDs
+seeyou|WRLD & Richard Caddock|See You|Pop|0B8_nDMQp-qqCdENGRU5OZ2xiLTA|BGPGzDvAnDs
 orbit|WRLD|Orbit<br>(feat. Richard Caddock)|Future Bass|0B8_nDMQp-qqCY0pBaTRlNWtnUUU|dpciZ0D-Hhc
-onelook|LVTHER|One Look<br>(feat. Mammals)|Nu Disco|0B8_nDMQp-qqCZ0hKYVI0MGlERFk|RJOkI8k_VU0
+onelook|LVTHER|One Look<br>(feat. Mammals)|Pop|0B8_nDMQp-qqCZ0hKYVI0MGlERFk|RJOkI8k_VU0
 precipitate|AZEDIA|Precipitate|Dubstep|0B8_nDMQp-qqCYUFKa2N6VFcxczQ|C9o_ODo-380
 valkyrie|Varien|Valkyrie|Symphonic Rock|0B8_nDMQp-qqCaGVrQXJUUWZiNDg|ddFAIkUb7A0
 valkyrie2|Varien|Valkyrie II: Lacuna|Symphonic Rock|0B8_nDMQp-qqCcjBkTE9FLXBvc28|iiyUN5qyZlw
 smoothcriminal|Haywyre|Smooth Criminal|Glitch Hop|0B8_nDMQp-qqCaUxqNjU4NzZyVzA|vLXS0EGwCZg
 thewayilikeit|Mandy Capristo|The Way I Like It<br>(Mutrix Remix)|Dubstep|0B8_nDMQp-qqCcnRtc2c4eGxhR0U|DBhcVV7T83g
-rescueme|Insan3lik3|Rescue Me<br>(feat. Jonny Rose)|Nu Disco|0B8_nDMQp-qqCdml5UVZTblZQU28|XLxSMT6CdKk
+rescueme|Insan3lik3|Rescue Me<br>(feat. Jonny Rose)|Pop|0B8_nDMQp-qqCdml5UVZTblZQU28|XLxSMT6CdKk
 flight|Tristam & Braken|Flight|Drumstep|0B8_nDMQp-qqCUFA4LTBGaHNmaGc|OVMuwa-HRCQ
 boundless|Aero Chord|Boundless|Trap|0B8_nDMQp-qqCdldXNXUwQk9QMTQ|mNn34ErU6kM
 rattlesnake|Rogue|Rattlesnake|Trap|0B8_nDMQp-qqCNWZnajR1SWdhcUU|x0E39ug6t70
@@ -113,7 +113,7 @@ truth|Tristam|Truth|Electro|0B8_nDMQp-qqCWDJTUjYzRG5YWDA|cj73hUrwM1s
 fullcircle|Volant|Full Circle|Glitch Hop|0B8_nDMQp-qqCOW1hM0l1eHViN2|jV7jmUfGiK4
 barracuda|Noisestorm|Barracuda|Breaks|0B8_nDMQp-qqCVlVtU0tUaEJJbEU|KKRRWQq5f5E
 usandthealiens|Stephen Walking|The Difference Between Us And The Aliens|Electro Soul|0B8_nDMQp-qqCY1BMbWhuaVVQYmc|dFEBpDW-K7E
-memory|Direct|Memory<br>(feat. Holly Drummond)|Downtempo|0B8_nDMQp-qqCMDNoS18xVDZwVGc|xr_D_1fyFFs
+memory|Direct|Memory<br>(feat. Holly Drummond)|Chillout|0B8_nDMQp-qqCMDNoS18xVDZwVGc|xr_D_1fyFFs
 parallax|Direct|Parallax|Dubstep|0B8_nDMQp-qqCeHZTbHUzejV3aW8|8W24WN-KTuM
 freemyworld|Direct|Free My World|Dubstep|0B8_nDMQp-qqCMjNVdFZIaC1ZYU0|dkayDe5JDjk
 birdsonthewire|Tut Tut Child|Birds On The Wire<br>(feat. Augustus Ghost)|Chillout|0B8_nDMQp-qqCZW1ZeTgzSmZPRDg|neMBksYWNi0
@@ -121,7 +121,7 @@ portavista|Hyper Potions|Porta Vista|Future Bass|0B8_nDMQp-qqCYVh2MWRkN1lXeEk|vx
 hypnotic|Vanic ^x Zella Day|Hypnotic|Future Bass|0B8_nDMQp-qqCNHJSME15eHFHWnM|O8K2QRwKq54
 raw|Going Quantum|Raw|Trap|0B8_nDMQp-qqCdXluZHQ4OVFXT3c|CRt7vZj4WXM
 hybrid|Faux|Hybrid|EDM|0B8_nDMQp-qqCX2twTWRRSUJ3Ukk|https://soundcloud.com/faux_official/hybrid
-canvas|Rezonate|Canvas|Nu Disco|0B8_nDMQp-qqCMFZxaW1kMEJwdjA|i0Ew3cl1gyc
+canvas|Rezonate|Canvas|Pop|0B8_nDMQp-qqCMFZxaW1kMEJwdjA|i0Ew3cl1gyc
 hummingbird|Tut Tut Child|Hummingbird<br>(feat. Augustus Ghost)|Dubstep|0B8_nDMQp-qqCZEpOSjd0MjVreG8|a4-Tb4rHZt8
 stronger|Stonebank|Stronger<br>(feat. EMEL)|Hardcore|0B8_nDMQp-qqCVzdyMmZxSHRWX1U|I1NuCWfYeYc
 empireofsound|Tristam ^x Karma Fields|Build The Cities (Empire Of Sound)<br>(feat. Kerli)|BTC|0B8_nDMQp-qqCVUs3ZDhmWTg5Yk0|k1I3z3g1zas
@@ -146,19 +146,19 @@ breakthefall|Laura Welsh|Break The Fall<br>(Gemini Remix)|Dubstep|0B8_nDMQp-qqCX
 trythis|Pegboard Nerds|Try This|Drumstep|0B8_nDMQp-qqCT2c5U3VIbElfSFk|ggqI-HH8yXc
 sweetspot|Flo Rida|Sweet Spot(feat. Jennifer Lopez)<br>(Mutrix Remix)|Trap|0B8_nDMQp-qqCeUNGeXByUUk1OUU|https://soundcloud.com/mutrix/j-lo-sweet-spot-mutrix-remix
 chairs|Tristam|Chairs|Dubstep|0B8_nDMQp-qqCODFCUktjQnJQYmc|s91jgcmQoB0
-deya|Televisor|Deya<br>(feat. Patrick Baker)|Nu Disco|0B8_nDMQp-qqCTWJjU2xyd05EQ0E|e68GH7rNzHA
+deya|Televisor|Deya<br>(feat. Patrick Baker)|Disco|0B8_nDMQp-qqCTWJjU2xyd05EQ0E|e68GH7rNzHA
 thepressure|Stonebank|The Pressure|Hardcore|0B8_nDMQp-qqCRnpZcm9COVh3cXM|45eSOGguEew
 weare|Rich Edwards|We Are<br>(feat. Danyka Nadeau)|House|0B8_nDMQp-qqCR1duQXoyRE5xbnM|81leOXZ0hYE
 back2you|Hellberg|Back2You|House|0B8_nDMQp-qqCTDdZUzRtNG5UOGM|uerwAo2cJQI
-sharkcity|Stephen Walking|Shark City|Electro Soul|0B8_nDMQp-qqCejk5Zmg4aFJ4ODA|BQQupaQbiVY
+sharkcity|Stephen Walking|Shark City|Pop|0B8_nDMQp-qqCejk5Zmg4aFJ4ODA|BQQupaQbiVY
 nightafternight|Rogue|Night After Night|Electro|0B8_nDMQp-qqCWkFrOWlveG9pdEU|c6P7iqvq1Og
 divided|Slips & Slurs|Divided|Trap|0B8_nDMQp-qqCSi1hRU9BR0dHQTA|HM1bHWLOgrw
 edmmegamix|Muzzy|E.D.M Big Room House ultramegamix|ayy lmao|0B8_nDMQp-qqCbVpOTjN3YUlwZjA|9BcfQQurIfw
 followme|Tristam|Follow Me|Dubstep|0B8_nDMQp-qqCTzVidFdELUVzcVE|oIr5Eamemv8
 gina|Mr FijiWiji|Gina|Drumstep|0B8_nDMQp-qqCdGh6elFDLXV5OWM|sVNn8Wgzqws
 hello|Going Quantum|Hello?|Dubstep|0B8_nDMQp-qqCTHY0LTdEZC1kMVk|DFT6qm3oIjg
-closer|Laszlo|Closer|Synthpop|0B8_nDMQp-qqCeDFBYW9sU01Da0E|NNmCC4bj2q4
-rebirth|Rezonate|Rebirth<br>(feat. Ashley Apollodor)|Nu Disco|0B8_nDMQp-qqCLXJHNE4tNldaR2c|9ifK1KHOTk0
+closer|Laszlo|Closer|Pop|0B8_nDMQp-qqCeDFBYW9sU01Da0E|NNmCC4bj2q4
+rebirth|Rezonate|Rebirth<br>(feat. Ashley Apollodor)|Disco|0B8_nDMQp-qqCLXJHNE4tNldaR2c|9ifK1KHOTk0
 thetravelingstranger|Faux|The Traveling Stranger|Dubstep|0B8_nDMQp-qqCZDZidDFwUWVYLUU|https://soundcloud.com/faux_official/the-traveling-stranger
 btcgrabbitz|Karma Fields|Build The Cities (feat. Kerli)<br>Grabbitz Remix|BTC|0B8_nDMQp-qqCR3RNZDZhdGNYM00|wg2GJ4f2DXQ
 btcproject46|Karma Fields|Build The Cities (feat. Kerli)<br>Project 46 Remix|BTC|0B8_nDMQp-qqCWUluV2dOR0dnbXM|NQ8rE7oPJZI
