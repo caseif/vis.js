@@ -3,7 +3,7 @@
 # Newlines are denoted with <br>
 # Prefixing a character with ^ will force it to be lowercase
 gramophone|Faux|Gramophone|EDM|0B8_nDMQp-qqCRy1odzBBVC0yM3c|USlOx7pi6BE
-gravity|Umpire|Gravity<br>(feat. Liz Kretschmer)|Dubstep|0B8_nDMQp-qqCRy1odzBBVC0yM3c|1iDTrK2EAfI
+gravity|Umpire|Gravity<br>(feat. Liz Kretschmer)|Dubstep|0B8_nDMQp-qqCcm1BcGhCZUVoOGc|1iDTrK2EAfI
 pressure|Draper|Pressure<br>(feat. Laura Brehm)|Dubstep|0B8_nDMQp-qqCNFg1WEdXX0s1dTA|j8F1NwrHBIU
 equinox|Skrillex|First Of The Year (Equinox)|Dubstep|0B8_nDMQp-qqCTERfdXFYRWdncm8|2cXDgFwE13g
 triumph|WRLD|Triumph|Future Bass|0B8_nDMQp-qqCS2N0Tkl1NkRHMWM|5YxVMyeIGvA
@@ -28,7 +28,7 @@ menandmachines|Draper|Men & Machines|Dubstep|0B8_nDMQp-qqCUFI3Y2JfVUxUTTQ|irkaE4
 seeingstars|FutureFreqs|Seeing Stars|Drumstep|0B8_nDMQp-qqCOWxVT1p4RkJWbDA|tZCaxrF8gJ0
 swedenfaux|C418|Sweden<br>(Faux Remix)|Drum & Bass|0B8_nDMQp-qqCRWNVNWl6UXlSd1E|https://soundcloud.com/faux_official/c418-sweden-entropy-remix
 surface|Aero Chord|Surface|Trap|0B8_nDMQp-qqCQ3FQUi1IWFRYUEE|BrCKvKXvN2c
-insight|Haywyre|Insight|Electronic|0B8_nDMQp-qqCczZ0c2xxR0FGa0U|UGeNoml0OHc
+insight|Haywyre|Insight|Glitch Hop|0B8_nDMQp-qqCczZ0c2xxR0FGa0U|UGeNoml0OHc
 more|Subformat|More<br>(feat. Charli Brix)|Drum & Bass|0B8_nDMQp-qqCQ005TVVYdFY3YjQ|LKZWZtRUPVY
 sunofagun|Oh Land|Sun Of A Gun<br>(Jacob Plant Remix)|Dubstep|0B8_nDMQp-qqCeWpRSXM4NDRPajA|vs__1a1gbPo
 freshprincerazihel|Will Smith|The Fresh Prince Of Bel-Air<br>(Razihel Remix)|Dubstep|0B8_nDMQp-qqCYnVxeXZpNzZRdnM|-iBugy2xVPs
@@ -110,7 +110,7 @@ pixelate|Onnanoko|Pixelate|Future Bass|0B8_nDMQp-qqCdVVCSy03WjlsNGs|https://soun
 beatitmutrix|Michael Jackson|Beat It<br>(Mutrix Remix)|Dubstep|0B8_nDMQp-qqCdEtkQUVtdHhaQjA|https://soundcloud.com/mutrix/beat-it-mutrix-remix-michael
 breakitdown|Oscillator Z|Break It Down|Dubstep|0B8_nDMQp-qqCMTB4SkhCaTVueEU|XtqeSUd1u7M
 truth|Tristam|Truth|Electro|0B8_nDMQp-qqCWDJTUjYzRG5YWDA|cj73hUrwM1s
-fullcircle|Volant|Full Circle|Glitch Hop|0B8_nDMQp-qqCOW1hM0l1eHViN2|jV7jmUfGiK4
+fullcircle|Volant|Full Circle|Glitch Hop|0B8_nDMQp-qqCOW1hM0l1eHViN2c|jV7jmUfGiK4
 barracuda|Noisestorm|Barracuda|Breaks|0B8_nDMQp-qqCVlVtU0tUaEJJbEU|KKRRWQq5f5E
 usandthealiens|Stephen Walking|The Difference Between Us And The Aliens|Electro Soul|0B8_nDMQp-qqCY1BMbWhuaVVQYmc|dFEBpDW-K7E
 memory|Direct|Memory<br>(feat. Holly Drummond)|Chillout|0B8_nDMQp-qqCMDNoS18xVDZwVGc|xr_D_1fyFFs
@@ -170,3 +170,13 @@ something|AZEDIA|Something|Dubstep|0B8_nDMQp-qqCelRBdmJEUXJUM0U|https://soundclo
 diamonds|Going Quantum ^x Noisestorm|Diamonds In The Rough<br>(feat. Mayor Apeshit & Danyka Nadeau)|ayy lmao|0B8_nDMQp-qqCcEJmeWZ5Ukx2QTA|https://soundcloud.com/inceptsquared/raw-sushi-remix
 roses|Deon Custom|Roses|Future Bass|0B8_nDMQp-qqCSGgwYmdSWkJ1X3M|zGERGT06AsM
 titans|Razihel & Aero Chord|Titans|Trap|0B8_nDMQp-qqCMmRXT3FnX3luaVE|dcyYFKeOT0o
+hipstercutthroat|DotEXE|Hipster Cutthroat|Glitch Hop|0B8_nDMQp-qqCWmIzWGRCYXkyelk|ou03DhIp3zI
+killingtime|Droptek|Killing Time<br>(feat. Isabel Higuero)|Drum & Bass|0B8_nDMQp-qqCV3F2OWMzZmpsMTA|qykmob6NB8g
+getcrazy|Muzzy|Get Crazy|Drum & Bass|0B8_nDMQp-qqCQm9xZHNtRTRNOVE|3N2PHSZTYoM
+everythingsdifferent|Bustre|Everything's Different|Drum & Bass|0B8_nDMQp-qqCcjZONzlET0phbGM|erTfXrHnpt0
+turbopenguin|Sound Remedy & Nitro Fun|Turbo Penguin|Electro|0B8_nDMQp-qqCLTBPNUl0NWtXb2s|5tAsUGEqob4
+safeandsound|Nitro Fun|Safe & Sound<br>(feat. Danyka Nadeau)|Electro|0B8_nDMQp-qqCVG9jSzg2dUpOaFE|mc9LKJMedaY
+breathe|Tut Tut Child|Breathe<br>(feat. Danyka Nadeau)|Drumstep|0B8_nDMQp-qqCekl0Zlp4bVFnVnM|kDA0zNbQG5Q
+videoboy|Soulero|Video Boy|Electro|0B8_nDMQp-qqCNHlWWnVyY0xvZVk|liR1nIewOyE
+lawofthejungle|Laszlo|Law Of The Jungle|Future Bass|0B8_nDMQp-qqCSllZX2tsY0J4ZEk|zMHvZXirECc
+mcatlive|Didrick|Monstercat Live Performance<br>3 Year Anniversary Mix)|EDM|0B8_nDMQp-qqCWlh6WFNoN1RNdGs|Rch4cbV0yK8
