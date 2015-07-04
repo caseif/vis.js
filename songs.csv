@@ -2,7 +2,7 @@
 # The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
 # Newlines are denoted with <br>
 # Prefixing a character with ^ will force it to be lowercase
-gramophone|Faux|Gramophone|EDM|0B8_nDMQp-qqCRy1odzBBVC0yM3c|USlOx7pi6BE
+gramophone|Faux|Gramophone|Indie Dance|0B8_nDMQp-qqCRy1odzBBVC0yM3c|USlOx7pi6BE
 gravity|Umpire|Gravity<br>(feat. Liz Kretschmer)|Dubstep|0B8_nDMQp-qqCcm1BcGhCZUVoOGc|1iDTrK2EAfI
 pressure|Draper|Pressure<br>(feat. Laura Brehm)|Dubstep|0B8_nDMQp-qqCNFg1WEdXX0s1dTA|j8F1NwrHBIU
 equinox|Skrillex|First Of The Year (Equinox)|Dubstep|0B8_nDMQp-qqCTERfdXFYRWdncm8|2cXDgFwE13g
@@ -120,7 +120,7 @@ birdsonthewire|Tut Tut Child|Birds On The Wire<br>(feat. Augustus Ghost)|Chillou
 portavista|Hyper Potions|Porta Vista|Future Bass|0B8_nDMQp-qqCYVh2MWRkN1lXeEk|vxOewDbARxk
 hypnotic|Vanic ^x Zella Day|Hypnotic|Future Bass|0B8_nDMQp-qqCNHJSME15eHFHWnM|O8K2QRwKq54
 raw|Going Quantum|Raw|Trap|0B8_nDMQp-qqCdXluZHQ4OVFXT3c|CRt7vZj4WXM
-hybrid|Faux|Hybrid|EDM|0B8_nDMQp-qqCX2twTWRRSUJ3Ukk|https://soundcloud.com/faux_official/hybrid
+hybrid|Faux|Hybrid|Pop|0B8_nDMQp-qqCX2twTWRRSUJ3Ukk|https://soundcloud.com/faux_official/hybrid
 canvas|Rezonate|Canvas|Pop|0B8_nDMQp-qqCMFZxaW1kMEJwdjA|i0Ew3cl1gyc
 hummingbird|Tut Tut Child|Hummingbird<br>(feat. Augustus Ghost)|Dubstep|0B8_nDMQp-qqCZEpOSjd0MjVreG8|a4-Tb4rHZt8
 stronger|Stonebank|Stronger<br>(feat. EMEL)|Hardcore|0B8_nDMQp-qqCVzdyMmZxSHRWX1U|I1NuCWfYeYc
@@ -180,3 +180,7 @@ breathe|Tut Tut Child|Breathe<br>(feat. Danyka Nadeau)|Drumstep|0B8_nDMQp-qqCekl
 videoboy|Soulero|Video Boy|Electro|0B8_nDMQp-qqCNHlWWnVyY0xvZVk|liR1nIewOyE
 lawofthejungle|Laszlo|Law Of The Jungle|Future Bass|0B8_nDMQp-qqCSllZX2tsY0J4ZEk|zMHvZXirECc
 mcatlive|Didrick|Monstercat Live Performance<br>3 Year Anniversary Mix)|EDM|0B8_nDMQp-qqCWlh6WFNoN1RNdGs|Rch4cbV0yK8
+$cow|Faux|$Cow|EDM|0B8_nDMQp-qqCU0ozbjFIS3E3Yms|https://soundcloud.com/faux_official/cow
+swampthing|Pegboard Nerds|Swamp Thing|Breaks|0B8_nDMQp-qqCM2RSVGlxU0kxTEE|SDiJiGuUeBo
+adventures|Hyper Potions & Subtact|Adventures|Future Bass|0B8_nDMQp-qqCSFBJOWpPUDdSZGM|TKZUhs9Gcdo
+watching|Summer Was Fun|Watching (feat. Colordrive)|Pop|0B8_nDMQp-qqCYVd1YXFSNktWY2s|2KqRYAiyU3A
