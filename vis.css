@@ -48,10 +48,14 @@ html {
 	position: absolute;
 }
 
+.content #songinfo {
+    text-shadow: 0 0 1px white;
+}
+
 .content #artist {
 	color: #FFF;
 	display: block;
-	font-size: 6.1em;
+	font-size: 6em;
 	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
 	font-weight: 700;
 	letter-spacing: -5px;
@@ -60,7 +64,7 @@ html {
 .content #title {
 	color: #FFF;
 	display: block;
-	font-size: 3.5em;
+	font-size: 3.4em;
 	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
 	font-weight: 400;
 	margin-top: -7px;

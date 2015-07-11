@@ -38,9 +38,9 @@ var spectrumSize = 63;
 var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
 //var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
-var spectrumStart = 6; // the first bin rendered in the spectrum
-var spectrumEnd = 320; // the last bin rendered in the spectrum
-var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
+var spectrumStart = 4; // the first bin rendered in the spectrum
+var spectrumEnd = 380; // the last bin rendered in the spectrum
+var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
 var spectrumExponent = 5; // the exponent to raise spectrum values to
 var smoothing = 0.45;
 var height = width / 4.5;
@@ -97,6 +97,10 @@ $('#songinfo').css('margin-top', -blockSize - blockTopPadding - 12);
 $('#songinfo').css('margin-left', blockSize + blockSidePadding);
 $('#songinfo').css('width', width - blockSize - blockSidePadding);
 var ctx = $("#canvas").get()[0].getContext("2d");
+ctx.shadowColor = 'black';
+ctx.shadowBlur = 12;
+ctx.shadowOffsetX = -2;
+ctx.shadowOffsetY = -2;
 
 function centerContent() {
 	$('.content').css('margin-top', ($(document).height() - $('.content').height()) * 0.38);
@@ -344,7 +348,7 @@ scriptProcessor.onaudioprocess = function() {
 	var initialArray =  new Uint8Array(analyzer.frequencyBinCount);
 	analyzer.getByteFrequencyData(initialArray);
 	var array = powerTransform(initialArray);
-	ctx.clearRect(0, 0, width, height);
+	ctx.clearRect(-ctx.shadowBlur, -ctx.shadowBlur, width + ctx.shadowBlur, height + ctx.shadowBlur);
 	if (song.getGenre() == 'ayy lmao') {
 		switch (stage) {
 			case 0:
@@ -446,4 +450,5 @@ function drawSpectrum(array) {
 		var value = values[i];
 		ctx.fillRect(i * (barWidth + barMargin), height - value, barWidth, value, value);
 	}
+    ctx.clearRect(0, height, width, blockTopPadding);
 };
