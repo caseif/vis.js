@@ -5,25 +5,6 @@ if (! window.AudioContext) {
 	window.AudioContext = window.webkitAudioContext;
 }
 
-var colors = {
-	'Trap': '#8C0F28',
-	'Drumstep': '#F12188',
-	'Drum & Bass': '#FF1900',
-	'House': '#EB8200',
-	'Electro': '#E5CE00',
-	'Hardcore': '#009600',
-	'Glitch Hop': '#0A9655',
-	'Disco': '#16ACB0',
-	'Trance': '#0080E6',
-	'Dubstep': '#941DE8',
-	'Future Bass': '#B8B8FF',
-	'EDM': '#C1C1C1',
-	// begin custom colors
-	'Chillout': '#F4C2C2',
-	'Pop': '#B3E234',
-	'Breaks': '#E06D61',
-	'BTC': '#000000' // this one is treated specially
-};
 var color;
 
 var song;
@@ -159,12 +140,24 @@ function loadSong() {
 	var keys = Object.keys(songs);
 	if (songName !== undefined) {
 		song = songs[songName.toLowerCase()];
-	} else if (genreName !== undefined) {
+	} else if (subgenreName !== undefined) {
+        var genreArray = [];
+		var i = 0;
+		keys.forEach(function(key) {
+			var song = songs[key];
+			if (song.getGenre().toLowerCase() === subgenreName.toLowerCase()) {
+				genreArray[i] = song;
+				++i;
+			}
+		})
+		song = genreArray[Math.floor(Math.random() * genreArray.length)];
+    } else if (genreName !== undefined) {
 		var genreArray = [];
 		var i = 0;
 		keys.forEach(function(key) {
 			var song = songs[key];
-			if (song.getGenre().toLowerCase() === genreName.toLowerCase()) {
+			if ((subgenres[song.getGenre()] !== undefined && subgenres[song.getGenre()].toLowerCase() === genreName.toLowerCase())
+                    || (song.getGenre().toLowerCase()=== genreName.toLowerCase())) {
 				genreArray[i] = song;
 				++i;
 			}
@@ -207,7 +200,7 @@ function loadSong() {
 		}
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
 		document.title = '[vis.js] ' + song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
-		color = colors[song.getGenre()];
+		color = getColor(song.getGenre());
 	}
 	if (color == undefined) {
 		color = colors['EDM']

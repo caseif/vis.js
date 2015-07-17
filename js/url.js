@@ -26,12 +26,17 @@ var songName = QueryString.song;
 if (songName !== undefined) {
 	songName = decodeURIComponent(songName);
 }
-var genreName = QueryString.genre;
-if (genreName !== undefined) {
-	genreName = decodeURIComponent(genreName);
-	if (genreName == 'DnB') {
-		genreName = 'Drum & Bass';
-	}
+var subgenreName = QueryString.subgenre;
+if (subgenreName !== undefined) {
+	subgenreName = decodeURIComponent(subgenreName);
+} else {
+    var genreName = QueryString.genre;
+    if (genreName !== undefined) {
+        genreName = decodeURIComponent(genreName);
+        if (genreName == 'DnB') {
+            genreName = 'Drum & Bass';
+        }
+    }
 }
 var artistName = QueryString.artist;
 if (artistName !== undefined) {

@@ -52,7 +52,7 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocity = 1.8 * Math.pow($(document).width() / 1920, 4);
+var velocity = 1.6 * Math.pow($(document).width() / 1920, 4);
 
 var zPosRange = 350;
 
