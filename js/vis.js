@@ -251,8 +251,8 @@ function setupAudioNodes() {
 	analyzer = context.createAnalyser();
 	analyzer.connect(scriptProcessor);
 	analyzer.smoothingTimeConstant = smoothing;
-	//analyzer.minDecibels = -65;
-	analyzer.maxDecibels = -28;
+	analyzer.minDecibels = -110;
+	analyzer.maxDecibels = -30;
 	try {
 		analyzer.fftSize = maxFftSize; // ideal bin count
 		console.log('Using fftSize of ' + analyzer.fftSize + ' (woot!)');
