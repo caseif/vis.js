@@ -1,6 +1,6 @@
 var mainGenres = {
 	'Trap': '#8C0F28',
-	'Drumstep': '#F12188',
+	'Drumstep': '#F01E87',
 	'Drum & Bass': '#E10403',
 	'Trance': '#0080E6', // must come before electro
 	'Breaks': '#E06D61', // must come before electro
@@ -10,7 +10,7 @@ var mainGenres = {
 	'Glitch Hop': '#0A9655',
 	'Post Disco': '#16ACB0',
 	'Dubstep': '#941DE8',
-	'Future Bass': '#B8B8FF',
+	'Future Bass': '#979EFF',
 	'EDM': '#C1C1C1',
 	// begin custom colors
 	'Chillout': '#F4C2C2',
