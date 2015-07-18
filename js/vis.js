@@ -27,7 +27,7 @@ var smoothing = 0.45;
 var height = width / 4.5;
 var headMargin = 7;
 var tailMargin = 0;
-var marginDecay = 1.5;
+var marginDecay = 1.6;
 var minMarginWeight = 0.6;
 // margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
@@ -79,7 +79,7 @@ $('#songinfo').css('margin-left', blockSize + blockSidePadding);
 $('#songinfo').css('width', width - blockSize - blockSidePadding);
 var ctx = $("#canvas").get()[0].getContext("2d");
 ctx.shadowColor = 'black';
-ctx.shadowBlur = 12;
+ctx.shadowBlur = 6;
 ctx.shadowOffsetX = -2;
 ctx.shadowOffsetY = -2;
 
