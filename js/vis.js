@@ -214,6 +214,7 @@ function loadSong() {
 		$('html').css('backgroundColor', '#E8E8E8');
 		$('.content #artist').css('color', '#000');
 		$('.content #title a').css('color', '#000');
+        ctx.shadowBlur = 0;
 	}
 }
 
