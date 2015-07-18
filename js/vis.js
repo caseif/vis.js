@@ -80,8 +80,8 @@ $('#songinfo').css('width', width - blockSize - blockSidePadding);
 var ctx = $("#canvas").get()[0].getContext("2d");
 ctx.shadowColor = 'black';
 ctx.shadowBlur = 6;
-ctx.shadowOffsetX = -2;
-ctx.shadowOffsetY = -2;
+ctx.shadowOffsetX = -1;
+ctx.shadowOffsetY = -1;
 
 function centerContent() {
 	$('.content').css('margin-top', ($(document).height() - $('.content').height()) * 0.38);
