@@ -203,7 +203,7 @@ function loadSong() {
 		color = getColor(song.getGenre());
 	}
 	if (color == undefined) {
-		color = colors['EDM']
+		color = mainGenres['EDM']
 	}
 	
 	if (!song || song.getGenre() != 'ayy lmao') {
