@@ -1,7 +1,7 @@
 var mainGenres = {
 	'Trap': '#8C0F28',
 	'Drumstep': '#F12188',
-	'Drum & Bass': '#FF1900',
+	'Drum & Bass': '#E10403',
 	'Trance': '#0080E6', // must come before electro
 	'Breaks': '#E06D61', // must come before electro
 	'Electro': '#E5CE00', // must come before house
@@ -44,7 +44,9 @@ var subgenres = {
     'Brostep': 'Dubstep',
     'Garage': 'Dubstep',
 
-    'Nu Funk': 'Breaks'
+    'Nu Funk': 'Breaks',
+    
+    'Industrial': 'EDM'
 };
 
 function getColor(genre) {
