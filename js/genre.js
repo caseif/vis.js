@@ -4,7 +4,7 @@ var mainGenres = {
 	'Drum & Bass': '#E10403',
 	'Trance': '#0080E6', // must come before electro
 	'Breaks': '#E06D61', // must come before electro
-	'Electro': '#E5CE00', // must come before house
+	'Electro House': '#E5CE00', // must come before house
 	'House': '#EB8200',
 	'Hardcore': '#009600',
 	'Glitch Hop': '#0A9655',
@@ -24,11 +24,11 @@ var subgenres = {
     'Neurofunk': 'Drum & Bass',
     'Techstep': 'Drum & Bass',
 
-    'Big Room House': 'Electro',
-    'Bounce': 'Electro',
-    'Complextro': 'Electro',
-    'Moombah': 'Electro',
-    'Outrun': 'Electro',
+    'Big Room House': 'Electro House',
+    'Bounce': 'Electro House',
+    'Complextro': 'Electro House',
+    'Moombah': 'Electro House',
+    'Outrun': 'Electro House',
 
     'Freeform': 'Hardcore',
     'Hardstyle': 'Hardcore',
@@ -37,6 +37,7 @@ var subgenres = {
 
     'Electro Soul': 'Post Disco',
     'Indie Dance': 'Post Disco',
+    'Indie Pop': 'Post Disco',
     'Nu Disco': 'Post Disco',
     'Synthpop': 'Post Disco',
     'Synthwave': 'Post Disco',
@@ -45,6 +46,8 @@ var subgenres = {
     'Garage': 'Dubstep',
 
     'Nu Funk': 'Breaks',
+
+    'Downtempo': 'Chillout',
     
     'Industrial': 'EDM'
 };

@@ -23,7 +23,7 @@ var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 380; // the last bin rendered in the spectrum
 var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
 var spectrumExponent = 5; // the exponent to raise spectrum values to
-var smoothing = 0.45;
+var smoothing = 0.4;
 var height = width / 4.5;
 var headMargin = 7;
 var tailMargin = 0;
@@ -168,7 +168,7 @@ function loadSong() {
 		var i = 0;
 		keys.forEach(function(key) {
 			var song = songs[key];
-			if (song.getArtist().toLowerCase() === artistName.toLowerCase()) {
+			if (song.getArtist().toLowerCase().replace(/\^/g, '') === artistName.toLowerCase()) {
 				artistArray[i] = song;
 				++i;
 			}
@@ -194,12 +194,12 @@ function loadSong() {
 				(song.getLink() != null ? '<a href="' + song.getLink() + '" target="_blank">' : '')
 				+ selectiveToUpperCase(song.getTitle())
 				+ (song.getLink() != null ? '</a>' : '');
-		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace('^', '').length) / 4 + 1;
+		var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
 		while ($('#title').height() >= baseTitleHeight * newLines) {
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
 		}
 			$('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
-		document.title = '[vis.js] ' + song.getArtist().replace('^', '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace('^', '');
+		document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
 		color = getColor(song.getGenre());
 	}
 	if (color == undefined) {
