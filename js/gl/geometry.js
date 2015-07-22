@@ -1,6 +1,6 @@
 var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080)) * 1000; // total normal particle count
 var fleckCount = particleCount * 0.05; // total fleck count
-var bokehCount = particleCount * 0.15; // total bokeh count
+var bokehCount = particleCount * 0.2; // total bokeh count
 
 //TODO: split main system into foreground and background particles
 var particles = new THREE.Geometry();
@@ -46,7 +46,7 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 var bokehMaterial = new THREE.PointCloudMaterial({
 	color: 0xFFFFFF,
 	opacity: bokehOpacity,
-	size: 50,
+	size: 100,
 	map: bokehTexture,
 	blending: THREE.AdditiveBlending,
 	transparent: true
@@ -108,15 +108,16 @@ for (var p = 0; p < fleckCount; p++) {
 	flecks.vertices.push(fleck);
 }
 
-var bokehMinVelocity = velocity * 0.15;
-var bokehMaxVelocity = velocity * 0.25;
+var bokehMinVelocity = velocity * 0.25;
+var bokehMaxVelocity = velocity * 0.5;
 
 var bokehYVelRange = ((bokehMinVelocity + bokehMaxVelocity) * 0.5) * 2;
 
-var bokehZ = 250;
+var bokehZ = 200;
 
 for (var p = 0; p < bokehCount; p++) {
 	var z = bokehZ;
+    //var z = Math.random() * zPosRange - (zPosRange / 2);
 	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var pX = Math.random() * xRange - xRange / 2,
