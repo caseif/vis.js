@@ -6,7 +6,7 @@ var mainGenres = {
 	'Breaks': '#E06D61', // must come before electro
 	'Electro House': '#E5CE00', // must come before house
 	'House': '#EB8200',
-	'Hardcore': '#009600',
+	'Hardcore': '#0DB106',
 	'Glitch Hop': '#0A9655',
 	'Post Disco': '#16ACB0',
 	'Dubstep': '#941DE8',
@@ -31,6 +31,7 @@ var subgenres = {
     'Outrun': 'Electro House',
 
     'Freeform': 'Hardcore',
+    'Hard Dance': 'Hardcore',
     'Hardstyle': 'Hardcore',
 
     'Nu Style': 'Trance',

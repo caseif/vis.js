@@ -42,10 +42,11 @@ var maxParticleSize = 7;
 var particleSize = minParticleSize;
 var particleSizeExponent = 2;
 
-var ampLower = 8; // the lower bound for amplitude analysis (inclusive)
+var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 4; // the power to raise velMult to after initial computation
-var minParticleVelocity = 0.0075; // the lowest multiplier for particle speeds
+var particleExponent = 5; // the power to raise velMult to after initial computation
+var minParticleVelocity = 0.005; // the lowest multiplier for particle speeds
+var particleVelocity = 2.6; // the scalar for particle velocity
 
 // dudududududu
 var red = 255;
