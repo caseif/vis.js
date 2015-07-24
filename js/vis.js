@@ -22,7 +22,9 @@ width -= width % (barWidth + barMargin * 2);
 var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 380; // the last bin rendered in the spectrum
 var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
-var spectrumExponent = 5; // the exponent to raise spectrum values to
+var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
+var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
+var spectrumExponentScale = 3; // the scale for spectrum exponents
 var smoothing = 0.4;
 var height = width / 4.5;
 var headMargin = 7;
@@ -451,7 +453,8 @@ function drawSpectrum(array) {
             value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
         }
 
-        values[i] = Math.max(Math.pow(value / height, spectrumExponent) * height, 1);
+        var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
+        values[i] = Math.max(Math.pow(value / height, exp) * height, 1);
     }
 
     // drawing pass
