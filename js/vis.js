@@ -24,7 +24,7 @@ var spectrumEnd = 380; // the last bin rendered in the spectrum
 var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
 var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
-var spectrumExponentScale = 3; // the scale for spectrum exponents
+var spectrumExponentScale = 2; // the scale for spectrum exponents
 var smoothingPoints = 5; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
 var smoothingPasses = 5; // number of smoothing passes to execute
@@ -35,7 +35,7 @@ var headMargin = 7;
 var tailMargin = 0;
 var marginDecay = 1.6;
 var minMarginWeight = 0.6;
-// margin weighting follows a quadratic slope passing through (0, minMarginWeight) and (marginSize, 1)
+// margin weighting follows a polynomial slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 
