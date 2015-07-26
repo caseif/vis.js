@@ -183,3 +183,43 @@ function selectiveToUpperCase(str) {
 	}
 	return str;
 }
+
+/**
+ * Applies a triangular smoothing algorithm to the given array.
+ *
+ * @param array The array to apply the algorithm to
+ * @param points The number of points to use (more points are more expensive)
+ * 
+ */
+function triangleSmooth(array, points, power, passes) {
+    var half = Math.floor(points / 2); // I got sick of calling Math.floor() since JS is weakly-typed
+    var smoothingDivisor = fuckyTriangleSumThing(half + 1, power);
+    var lastArray = array;
+    for (var i = 0; i < passes; i++) {
+        var newArray = [];
+        for (i = 0; i < half; i++) {
+            newArray[i] = lastArray[i];
+            newArray[lastArray.length - i - 1] = lastArray[lastArray.length - i - 1];
+        }
+        for (i = half; i < lastArray.length - half; i++) {
+            var midScalar = half + 1;
+            var sum = lastArray[i] * Math.pow(midScalar, power);
+            for (j = 1; j <= half; j++) {
+                sum += lastArray[i + j] * Math.pow(midScalar - j, power);
+                sum += lastArray[i - j] * Math.pow(midScalar - j, power);
+            }
+            newArray[i] = sum / smoothingDivisor;
+        }
+        lastArray = newArray;
+    }
+    return lastArray;
+}
+
+// I HAVE TWO FULL PAGES OF TRYING TO WRITE AN EQUATION FOR THIS, I'M ALLOWED TO CHEAT AT THIS POINT
+function fuckyTriangleSumThing(row, power) {
+    var sum = Math.pow(row, power);
+    for (var i = 1; i < row; i++) {
+        sum += 2 * Math.pow(i, power);
+    }
+    return sum;
+}

@@ -18,14 +18,18 @@ var barMargin = 7;
 var spectrumSize = 63;
 var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
-//var spectrumSize = Math.floor(width / (barWidth + barMargin * 2)); // the size of the visible spectrum
+
 var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 380; // the last bin rendered in the spectrum
 var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
-var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
+var minSpectrumExponent = 4; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 3; // the scale for spectrum exponents
-var smoothing = 0.4;
+var smoothingPoints = 5; // points to use for algorithmic smoothing. Must be an odd number.
+var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
+var smoothingPasses = 5; // number of smoothing passes to execute
+var temporalSmoothing = 0.25; // passed directly to the JS analyzer node
+
 var height = width / 4.5;
 var headMargin = 7;
 var tailMargin = 0;
@@ -241,7 +245,7 @@ function setupAudioNodes() {
 
     analyzer = context.createAnalyser();
     analyzer.connect(scriptProcessor);
-    analyzer.smoothingTimeConstant = smoothing;
+    analyzer.smoothingTimeConstant = temporalSmoothing;
     analyzer.minDecibels = -110;
     analyzer.maxDecibels = -30;
     try {
@@ -454,7 +458,14 @@ function drawSpectrum(array) {
         }
 
         var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
-        values[i] = Math.max(Math.pow(value / height, exp) * height, 1);
+        values[i] = value;
+        //values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
+    }
+    
+    values = triangleSmooth(values, smoothingPoints, smoothingExponent, smoothingPasses);
+    
+    for (var i = 0; i < values.length; i++) {
+        values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
     }
 
     // drawing pass
