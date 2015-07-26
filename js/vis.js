@@ -28,7 +28,7 @@ var spectrumExponentScale = 3; // the scale for spectrum exponents
 var smoothingPoints = 5; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
 var smoothingPasses = 5; // number of smoothing passes to execute
-var temporalSmoothing = 0.25; // passed directly to the JS analyzer node
+var temporalSmoothing = 0.35; // passed directly to the JS analyzer node
 
 var height = width / 4.5;
 var headMargin = 7;
