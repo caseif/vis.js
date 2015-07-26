@@ -20,8 +20,8 @@ var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
 
 var spectrumStart = 4; // the first bin rendered in the spectrum
-var spectrumEnd = 380; // the last bin rendered in the spectrum
-var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
+var spectrumEnd = 700; // the last bin rendered in the spectrum
+var spectrumScale = 2; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
 var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 2; // the scale for spectrum exponents
