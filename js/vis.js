@@ -23,7 +23,7 @@ var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 380; // the last bin rendered in the spectrum
 var spectrumScale = 1.6; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
-var minSpectrumExponent = 4; // the min exponent to raise spectrum values to
+var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 3; // the scale for spectrum exponents
 var smoothingPoints = 5; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
@@ -458,7 +458,6 @@ function drawSpectrum(array) {
             value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
         }
 
-        var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
         values[i] = value;
         //values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
     }
@@ -466,6 +465,7 @@ function drawSpectrum(array) {
     values = triangleSmooth(values);
     
     for (var i = 0; i < values.length; i++) {
+        var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
         values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
     }
 
