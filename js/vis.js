@@ -101,6 +101,7 @@ $(window).resize(function() {
 
 loadSong();
 setupAudioNodes();
+calculateSmoothingConstants();
 var prefix = window.location.href.split('/')[0] + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
@@ -462,7 +463,7 @@ function drawSpectrum(array) {
         //values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
     }
     
-    values = triangleSmooth(values, smoothingPoints, smoothingExponent, smoothingPasses);
+    values = triangleSmooth(values);
     
     for (var i = 0; i < values.length; i++) {
         values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
@@ -475,3 +476,44 @@ function drawSpectrum(array) {
     }
     ctx.clearRect(0, height, width, blockTopPadding);
 };
+
+
+// Technically this should be in util.js but I need optimization and I don't
+// feel like restructuring to allow use of this file's smoothing constants
+function calculateSmoothingConstants() {
+    half = Math.floor(smoothingPoints / 2); // I got sick of calling Math.floor() since JS is weakly-typed
+    smoothingDivisor = fuckyTriangleSumThing(half + 1, smoothingExponent);
+    powers = [];
+    for (i = 0; i <= half; i++) {
+        powers[i] = Math.pow(i + 1, smoothingExponent);
+    }
+}
+
+/**
+ * Applies a triangular smoothing algorithm to the given array.
+ *
+ * @param array The array to apply the algorithm to
+ *
+ * @return The smoothed array
+ */
+function triangleSmooth(array) {
+    var lastArray = array;
+    for (var i = 0; i < smoothingPasses; i++) {
+        var newArray = [];
+        for (i = 0; i < half; i++) {
+            newArray[i] = lastArray[i];
+            newArray[lastArray.length - i - 1] = lastArray[lastArray.length - i - 1];
+        }
+        for (i = half; i < lastArray.length - half; i++) {
+            var midScalar = half + 1;
+            var sum = lastArray[i] * powers[half];
+            for (j = 1; j <= half; j++) {
+                sum += lastArray[i + j] * powers[midScalar - j - 1];
+                sum += lastArray[i - j] * powers[midScalar - j - 1];
+            }
+            newArray[i] = sum / smoothingDivisor;
+        }
+        lastArray = newArray;
+    }
+    return lastArray;
+}
