@@ -254,7 +254,6 @@ function drawBlock() {
     };
     prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
             + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-    // Edge doesn't do colored SVGs so we have to use a PNG for now
     img.src = '/img/mcat.svg'
 }
 
