@@ -224,13 +224,23 @@ function loadSong() {
 }
 
 function drawBlock() {
-	var origBlur = ctx.shadowBlur;
     ctx.fillStyle = color;
     ctx.fillRect(0, height + blockTopPadding, blockSize, blockSize);
     var img = new Image();
     img.onload = function() {
+        var origBlur = ctx.shadowBlur;
 		ctx.shadowBlur = 0;
-        //ctx.fillStyle = 'white';
+
+        // Edge renders the shadow in front of the image for some reason, so it has to be "disabled" or the cat will
+        // appear black instead of white. Shame, because it looks pretty cool.
+
+        // We don't need to worry about a check because other browsers don't render it if the blur is 0.
+        var origXOff = ctx.shadowOffsetX;
+        var origYOff = ctx.shadowOffsetY;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+
+        ctx.fillStyle = 'white';
         ctx.drawImage(
             img,
             blockSize * (1 - blockWidthRatio) / 2,
@@ -239,10 +249,13 @@ function drawBlock() {
             blockSize * blockHeightRatio
         );
 		ctx.shadowBlur = origBlur;
+        ctx.shadowOffsetX = origXOff;
+        ctx.shadowOffsetY = origYOff;
     };
     prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
             + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-    img.src = prefix + '/img/mcat.svg';
+    // Edge doesn't do colored SVGs so we have to use a PNG for now
+    img.src = '/img/mcat.svg'
 }
 
 function setupAudioNodes() {
