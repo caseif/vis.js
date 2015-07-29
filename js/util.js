@@ -1,3 +1,5 @@
+var resRatio = $(document).width() / 1920;
+
 var leftChance = 0.92;
 var rightChance = 0.02;
 var topBottomChance = 0.06;

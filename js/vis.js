@@ -14,7 +14,7 @@ var bufferSource;
 var analyzer;
 var scriptProcessor;
 var width = $(document).width() * 0.83;
-var barMargin = 7;
+var barMargin = 7 * resRatio;
 var spectrumSize = 63;
 var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
@@ -69,9 +69,9 @@ var started = 0;
 var currentTime = 0;
 var minProcessPeriod = 18; // ms between calls to the process function
 
-var blockSize = 193;
-var blockTopPadding = 50;
-var blockSidePadding = 30;
+var blockSize = 193 * resRatio;
+var blockTopPadding = 50 * resRatio;
+var blockSidePadding = 30 * resRatio;
 var blockWidthRatio = 0.63;
 var blockHeightRatio = 0.73;
 
@@ -104,6 +104,8 @@ setupAudioNodes();
 calculateSmoothingConstants();
 var prefix = window.location.href.split('/')[0] + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
+$('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * resRatio + 'px');
+$('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
@@ -226,10 +228,9 @@ function drawBlock() {
     ctx.fillStyle = color;
     ctx.fillRect(0, height + blockTopPadding, blockSize, blockSize);
     var img = new Image();
-    img.onload = function(svgXml) {
-        console.log(svgXml);
+    img.onload = function() {
 		ctx.shadowBlur = 0;
-        ctx.fillStyle = 'white';
+        //ctx.fillStyle = 'white';
         ctx.drawImage(
             img,
             blockSize * (1 - blockWidthRatio) / 2,
