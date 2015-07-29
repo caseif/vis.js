@@ -20,8 +20,8 @@ var barWidth = width / spectrumSize - barMargin;
 width -= width % (barWidth + barMargin * 2);
 
 var spectrumStart = 4; // the first bin rendered in the spectrum
-var spectrumEnd = 700; // the last bin rendered in the spectrum
-var spectrumScale = 2; // the logarithmic scale to adjust spectrum values to
+var spectrumEnd = 400; // the last bin rendered in the spectrum
+var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
 var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 2; // the scale for spectrum exponents
@@ -145,38 +145,38 @@ function loadSong() {
         async:        false
     });
     var keys = Object.keys(songs);
-    var genreArray = [];
-        var i = 0;
+    var subArray = [];
+    var i = 0;
     if (songName !== undefined) {
         song = songs[songName.toLowerCase()];
     } else if (subgenreName !== undefined) {
         keys.forEach(function(key) {
             var track = songs[key];
             if (track.getGenre().toLowerCase() === subgenreName.toLowerCase()) {
-                genreArray[i] = track;
+                subArray[i] = track;
                 ++i;
             }
         });
-        song = genreArray[Math.floor(Math.random() * genreArray.length)];
+        song = subArray[Math.floor(Math.random() * subArray.length)];
     } else if (genreName !== undefined) {
         keys.forEach(function(key) {
             var track = songs[key];
             if ((subgenres[track.getGenre()] !== undefined && subgenres[track.getGenre()].toLowerCase() === genreName.toLowerCase())
                     || (track.getGenre().toLowerCase()=== genreName.toLowerCase())) {
-                genreArray[i] = track;
+                subArray[i] = track;
                 ++i;
             }
         });
-        song = genreArray[Math.floor(Math.random() * genreArray.length)];
+        song = subArray[Math.floor(Math.random() * subArray.length)];
     } else if (artistName !== undefined) {
         keys.forEach(function(key) {
             var track = songs[key];
             if (track.getArtist().toLowerCase().replace(/\^/g, '') === artistName.toLowerCase()) {
-                artistArray[i] = track;
+                subArray[i] = track;
                 ++i;
             }
         });
-        song = artistArray[Math.floor(Math.random() * artistArray.length)];
+        song = subArray[Math.floor(Math.random() * subArray.length)];
     } else {
         var key = keys[Math.floor(Math.random() * count)];
         song = songs[key];
@@ -222,10 +222,13 @@ function loadSong() {
 }
 
 function drawBlock() {
+	var origBlur = ctx.shadowBlur;
     ctx.fillStyle = color;
     ctx.fillRect(0, height + blockTopPadding, blockSize, blockSize);
     var img = new Image();
-    img.onload = function() {
+    img.onload = function(svgXml) {
+        console.log(svgXml);
+		ctx.shadowBlur = 0;
         ctx.fillStyle = 'white';
         ctx.drawImage(
             img,
@@ -234,6 +237,7 @@ function drawBlock() {
             blockSize * blockWidthRatio,
             blockSize * blockHeightRatio
         );
+		ctx.shadowBlur = origBlur;
     };
     prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
             + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
