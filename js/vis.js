@@ -99,13 +99,13 @@ $(window).resize(function() {
     centerContent();
 });
 
+$('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * resRatio + 'px');
+$('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
 loadSong();
 setupAudioNodes();
 calculateSmoothingConstants();
 var prefix = window.location.href.split('/')[0] + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
-$('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * resRatio + 'px');
-$('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
