@@ -25,9 +25,9 @@ var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
 var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
 var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 2; // the scale for spectrum exponents
-var smoothingPoints = 5; // points to use for algorithmic smoothing. Must be an odd number.
+var smoothingPoints = 3; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
-var smoothingPasses = 5; // number of smoothing passes to execute
+var smoothingPasses = 1; // number of smoothing passes to execute
 var temporalSmoothing = 0.35; // passed directly to the JS analyzer node
 
 var height = width / 4.5;
@@ -431,6 +431,8 @@ function powerTransform(array) {
 var lastSpectrum = [];
 var prevPeak = -1;
 
+var avgs = [];
+var interval = 100;
 function drawSpectrum(array) {
     if (isPlaying && lastSpectrum.length == 1) {
         lastSpectrum = array;
@@ -479,7 +481,18 @@ function drawSpectrum(array) {
         //values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
     }
     
-    values = triangleSmooth(values);
+    //values = triangleSmooth(values);
+    var time = window.performance.now();
+    values = smooth(values);
+    avgs[avgs.length] = window.performance.now() - time;
+    if (avgs.length == interval) {
+        var sum = 0;
+        avgs.forEach(function(value) {
+            sum += value;
+        });
+        console.log(sum / avgs.length + ' microseconds');
+        avgs = [];
+    }
     
     for (var i = 0; i < values.length; i++) {
         var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
@@ -493,6 +506,11 @@ function drawSpectrum(array) {
     }
     ctx.clearRect(0, height, width, blockTopPadding);
 };
+
+// mostly for debugging purposes
+function smooth(array) {
+    return savitskyGolaySmooth(array);
+}
 
 
 // Technically this should be in util.js but I need optimization and I don't
@@ -509,19 +527,21 @@ function calculateSmoothingConstants() {
 /**
  * Applies a triangular smoothing algorithm to the given array.
  *
+ * Note: not used at the moment.
+ *
  * @param array The array to apply the algorithm to
  *
  * @return The smoothed array
  */
 function triangleSmooth(array) {
     var lastArray = array;
-    for (var i = 0; i < smoothingPasses; i++) {
+    for (var pass = 0; pass < smoothingPasses; pass++) {
         var newArray = [];
-        for (i = 0; i < half; i++) {
+        for (var i = 0; i < half; i++) {
             newArray[i] = lastArray[i];
             newArray[lastArray.length - i - 1] = lastArray[lastArray.length - i - 1];
         }
-        for (i = half; i < lastArray.length - half; i++) {
+        for (var i = half; i < lastArray.length - half; i++) {
             var midScalar = half + 1;
             var sum = lastArray[i] * powers[half];
             for (j = 1; j <= half; j++) {
@@ -533,4 +553,36 @@ function triangleSmooth(array) {
         lastArray = newArray;
     }
     return lastArray;
+}
+
+/**
+ * Applies a Savitsky-Golay smoothing algorithm to the given array.
+ *
+ * See {@link http://www.wire.tu-bs.de/OLDWEB/mameyer/cmr/savgol.pdf} for more
+ * info.
+ *
+ * @param array The array to apply the algorithm to
+ *
+ * @return The smoothed array
+ */
+function savitskyGolaySmooth(array) {
+    var lastArray = array;
+    for (var pass = 0; pass < smoothingPasses; pass++) {
+        var sidePoints = Math.floor(smoothingPoints / 2); // our window is centered so this is both nL and nR
+        var cn = 1 / (2 * sidePoints + 1); // constant
+        var newArray = [];
+        for (var i = 0; i < sidePoints; i++) {
+            newArray[i] = lastArray[i];
+            newArray[lastArray.length - i - 1] = lastArray[lastArray.length - i - 1];
+        }
+        for (var i = sidePoints; i < lastArray.length - sidePoints; i++) {
+            var sum = 0;
+            for (var n = -sidePoints; n <= sidePoints; n++) {
+                sum += cn * lastArray[i + n] + n;
+            }
+            newArray[i] = sum;
+        }
+        lastArray = newArray;
+    }
+    return newArray;
 }
