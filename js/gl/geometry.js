@@ -1,6 +1,6 @@
-var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080)) * 1000; // total normal particle count
-var fleckCount = particleCount * 0.05; // total fleck count
-var bokehCount = particleCount * 0.2; // total bokeh count
+var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080)) * baseParticleCount;
+var fleckCount = particleCount * fleckCount; // total fleck count
+var bokehCount = particleCount * bokehCount; // total bokeh count
 
 //TODO: split main system into foreground and background particles
 var particles = new THREE.Geometry();
@@ -21,9 +21,6 @@ var bokehTexture = THREE.ImageUtils.loadTexture(
 	'./img/bokeh.png'
 )
 bokehTexture.minFilter = THREE.LinearFilter;
-
-var particleOpacity = 0.7;
-var bokehOpacity = 0.5;
 
 var pMaterial = new THREE.PointCloudMaterial({
 	color: song.getGenre() === 'BTC' ? 0x000000 : 0xFFFFFF,
@@ -53,13 +50,9 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 });
 
 var velocity = particleVelocity * Math.pow(resRatio, 4);
+var fleckVelocity = velocity * fleckVelocityScalar;
 
 var zPosRange = 350;
-
-var yVelRange = 3;
-
-var posBias = 4.5; // the higher the number the more center-biased the particles
-var velBias = 2.5;
 
 for (var p = 0; p < particleCount; p++) {
 	var z = Math.random() * zPosRange - (zPosRange / 2);
@@ -81,9 +74,7 @@ for (var p = 0; p < particleCount; p++) {
 	particles.vertices.push(particle);
 }
 
-var fleckVelocity = velocity * 2;
-
-var fleckYVelRange = fleckVelocity * 0.75;
+fleckYVelScalar *= fleckVelocity;
 
 var fleckZ = 150;
 
@@ -100,7 +91,7 @@ for (var p = 0; p < fleckCount; p++) {
 	  // create a velocity vector
 	fleck.velocity = new THREE.Vector3(
 		fleckVelocity,
-		biasedRandom(fleckYVelRange, velBias),
+		biasedRandom(fleckYVelScalar, velBias),
 		0
 	);
 

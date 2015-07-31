@@ -13,53 +13,26 @@ var audioBuffer;
 var bufferSource;
 var analyzer;
 var scriptProcessor;
-var width = $(document).width() * 0.83;
-var barMargin = 7 * resRatio;
-var spectrumSize = 63;
-var barWidth = width / spectrumSize - barMargin;
-width -= width % (barWidth + barMargin * 2);
 
-var spectrumStart = 4; // the first bin rendered in the spectrum
-var spectrumEnd = 400; // the last bin rendered in the spectrum
-var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
-var maxSpectrumExponent = 5; // the max exponent to raise spectrum values to
-var minSpectrumExponent = 3; // the min exponent to raise spectrum values to
-var spectrumExponentScale = 2; // the scale for spectrum exponents
-var smoothingPoints = 3; // points to use for algorithmic smoothing. Must be an odd number.
-var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
-var smoothingPasses = 1; // number of smoothing passes to execute
-var temporalSmoothing = 0.35; // passed directly to the JS analyzer node
+var spectrumWidth = $(document).width() * 0.83;
+spectrumSpacing *= resRatio;
+var barWidth = spectrumWidth / spectrumSize - spectrumSpacing;
+spectrumWidth -= spectrumWidth % (barWidth + spectrumSpacing * 2);
 
-var height = width / 4.5;
-var headMargin = 7;
-var tailMargin = 0;
-var marginDecay = 1.6;
-var minMarginWeight = 0.6;
+var spectrumHeight = spectrumWidth / spectrumDimensionScalar;
+var marginDecay = 1.6; // I admittedly forget how this works but it probably shouldn't be changed from 1.6
 // margin weighting follows a polynomial slope passing through (0, minMarginWeight) and (marginSize, 1)
 var headMarginSlope = (1 - minMarginWeight) / Math.pow(headMargin, marginDecay);
 var tailMarginSlope = (1 - minMarginWeight) / Math.pow(tailMargin, marginDecay);
 
-var maxFftSize = 16384;
-
 var velMult = 0;
-
-var minParticleSize = 4;
-var maxParticleSize = 7;
 var particleSize = minParticleSize;
-var particleSizeExponent = 2;
-
-var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
-var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 5; // the power to raise velMult to after initial computation
-var minParticleVelocity = 0.005; // the lowest multiplier for particle speeds
-var particleVelocity = 2.6; // the scalar for particle velocity
 
 // dudududududu
 var red = 255;
 var green = 0;
 var blue = 0;
 var stage = 0;
-var cycleSpeed = 4;
 
 var begun = false;
 var ended = false;
@@ -72,23 +45,20 @@ var minProcessPeriod = 18; // ms between calls to the process function
 var blockSize = 193 * resRatio;
 var blockTopPadding = 50 * resRatio;
 var blockSidePadding = 30 * resRatio;
-var blockWidthRatio = 0.63;
-var blockHeightRatio = 0.73;
 
 var lastMouseMove = Date.now();
-var mouseSleepTime = 2000;
 var textHidden = false;
 
-$('#canvas').attr('width', width);
-$('#canvas').attr('height', height + blockSize + 2 * blockTopPadding);
+$('#canvas').attr('width', spectrumWidth);
+$('#canvas').attr('height', spectrumHeight + blockSize + 2 * blockTopPadding);
 $('#songinfo').css('margin-top', -blockSize - blockTopPadding - 12);
 $('#songinfo').css('margin-left', blockSize + blockSidePadding);
-$('#songinfo').css('width', width - blockSize - blockSidePadding);
+$('#songinfo').css('width', spectrumWidth - blockSize - blockSidePadding);
 var ctx = $("#canvas").get()[0].getContext("2d");
 ctx.shadowColor = 'black';
-ctx.shadowBlur = 6;
-ctx.shadowOffsetX = -1;
-ctx.shadowOffsetY = -1;
+ctx.shadowBlur = spectrumShadowBlur;
+ctx.shadowOffsetX = spectrumShadowOffsetX;
+ctx.shadowOffsetY = spectrumShadowOffsetY;
 
 function centerContent() {
     $('.content').css('margin-top', ($(document).height() - $('.content').height()) * 0.38);
@@ -103,7 +73,7 @@ $('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * 
 $('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
 loadSong();
 setupAudioNodes();
-calculateSmoothingConstants();
+//calculateSmoothingConstants(); // only necessary for triangular smoothing
 var prefix = window.location.href.split('/')[0] + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
@@ -225,7 +195,7 @@ function loadSong() {
 
 function drawBlock() {
     ctx.fillStyle = color;
-    ctx.fillRect(0, height + blockTopPadding, blockSize, blockSize);
+    ctx.fillRect(0, spectrumHeight + blockTopPadding, blockSize, blockSize);
     var img = new Image();
     img.onload = function() {
         var origBlur = ctx.shadowBlur;
@@ -244,7 +214,7 @@ function drawBlock() {
         ctx.drawImage(
             img,
             blockSize * (1 - blockWidthRatio) / 2,
-            height + blockTopPadding + (blockSize * (1 - blockHeightRatio) / 2),
+            spectrumHeight + blockTopPadding + (blockSize * (1 - blockHeightRatio) / 2),
             blockSize * blockWidthRatio,
             blockSize * blockHeightRatio
         );
@@ -361,7 +331,7 @@ scriptProcessor.onaudioprocess = function() {
     var initialArray =  new Uint8Array(analyzer.frequencyBinCount);
     analyzer.getByteFrequencyData(initialArray);
     var array = powerTransform(initialArray);
-    ctx.clearRect(-ctx.shadowBlur, -ctx.shadowBlur, width + ctx.shadowBlur, height + ctx.shadowBlur);
+    ctx.clearRect(-ctx.shadowBlur, -ctx.shadowBlur, spectrumWidth + ctx.shadowBlur, spectrumHeight + ctx.shadowBlur);
     if (song.getGenre() == 'ayy lmao') {
         switch (stage) {
             case 0:
@@ -431,8 +401,6 @@ function powerTransform(array) {
 var lastSpectrum = [];
 var prevPeak = -1;
 
-var avgs = [];
-var interval = 100;
 function drawSpectrum(array) {
     if (isPlaying && lastSpectrum.length == 1) {
         lastSpectrum = array;
@@ -441,7 +409,7 @@ function drawSpectrum(array) {
     if (isPlaying) {
         var sum = 0;
         for (var i = ampLower; i < ampUpper; i++) {
-            sum += array[i] / height;
+            sum += array[i] / spectrumHeight;
         }
         // the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
         // amplitude points in the observed range are at 100% of their potential value
@@ -456,15 +424,15 @@ function drawSpectrum(array) {
     for (var i = 0; i < spectrumSize; i++) {
         if (begun) {
             if (i == 0) {
-                var value = array[i] / 255 * height;
+                var value = array[i] / 255 * spectrumHeight;
             }
             else if (i == spectrumSize - 1) {
-                var value = (array[i - 1] + array[i]) / 2  / 255 * height;
+                var value = (array[i - 1] + array[i]) / 2  / 255 * spectrumHeight;
             }
             else {
-                var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * height;
+                var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * spectrumHeight;
             }
-            value = Math.min(value + 1, height);
+            value = Math.min(value + 1, spectrumHeight);
         } else {
             value = 1;
         }
@@ -478,33 +446,23 @@ function drawSpectrum(array) {
         }
 
         values[i] = value;
-        //values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
+        //values[i] = Math.max(Math.pow(values[i] / spectrumHeight, exp) * spectrumHeight, 1);
     }
     
     //values = triangleSmooth(values);
-    var time = window.performance.now();
     values = smooth(values);
-    avgs[avgs.length] = window.performance.now() - time;
-    if (avgs.length == interval) {
-        var sum = 0;
-        avgs.forEach(function(value) {
-            sum += value;
-        });
-        console.log(sum / avgs.length + ' microseconds');
-        avgs = [];
-    }
     
     for (var i = 0; i < values.length; i++) {
-        var exp = (maxSpectrumExponent - minSpectrumExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + minSpectrumExponent;
-        values[i] = Math.max(Math.pow(values[i] / height, exp) * height, 1);
+        var exp = (spectrumMaxExponent - spectrumMinExponent) * (1 - Math.pow(i / spectrumSize, spectrumExponentScale)) + spectrumMinExponent;
+        values[i] = Math.max(Math.pow(values[i] / spectrumHeight, exp) * spectrumHeight, 1);
     }
 
     // drawing pass
     for (var i = 0; i < spectrumSize; i++) {
         var value = values[i];
-        ctx.fillRect(i * (barWidth + barMargin), height - value, barWidth, value, value);
+        ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
     }
-    ctx.clearRect(0, height, width, blockTopPadding);
+    ctx.clearRect(0, spectrumHeight, spectrumWidth, blockTopPadding);
 };
 
 // mostly for debugging purposes
