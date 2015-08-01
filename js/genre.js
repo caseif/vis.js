@@ -49,6 +49,8 @@ var subgenres = {
     'Nu Funk': 'Breaks',
 
     'Downtempo': 'Chillout',
+
+    'Neofolk': 'Rock',
     
     'Industrial': 'EDM'
 };

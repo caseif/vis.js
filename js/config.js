@@ -29,7 +29,7 @@ var spectrumShadowOffsetY = -1; // the y-offset of the spectrum's drop shadow
 var smoothingPoints = 3; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
 var smoothingPasses = 1; // number of smoothing passes to execute
-var temporalSmoothing = 0.35; // passed directly to the JS analyzer node
+var temporalSmoothing = 0.25; // passed directly to the JS analyzer node
 
 /* ************************************ */
 /* * Spectrum margin dropoff settings * */
@@ -56,11 +56,11 @@ var particleSizeExponent = 2; // the exponent to apply during dynamic particle s
 var yVelRange = 3; // the range for particle y-velocities
 var posBias = 4.5; // bias for particle positions (higher values = more center-biased)
 // VELOCITY
-var velBias = 2.5; // bia for particle velocities (higher values = more center-biased)
+var particleVelocity = 2.8; // the scalar for particle velocity
+var velBias = 2.5; // bias for particle velocities (higher values = more center-biased)
 var fleckVelocityScalar = 2; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
 var minParticleVelocity = 0.005; // the lowest multiplier for particle speeds
-var particleVelocity = 2.6; // the scalar for particle velocity
 
 /* ****************************** */
 /* * Particle analysis settings * */
