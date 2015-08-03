@@ -3,7 +3,7 @@ var mainGenres = {
 	'Drumstep': '#F01E87',
 	'Drum & Bass': '#E10403',
 	'Trance': '#0080E6', // must come before electro
-	'Breaks': '#E06D61', // must come before electro
+	'Breaks': '#E06D61', // technically custom but must come before electro
 	'Electro House': '#E5CE00', // must come before house
 	'House': '#EB8200',
 	'Hardcore': '#0DB106',

@@ -134,7 +134,7 @@ function loadSong() {
         keys.forEach(function(key) {
             var track = songs[key];
             if ((subgenres[track.getGenre()] !== undefined && subgenres[track.getGenre()].toLowerCase() === genreName.toLowerCase())
-                    || (track.getGenre().toLowerCase()=== genreName.toLowerCase())) {
+                    || (track.getGenre().toLowerCase().indexOf(genreName.toLowerCase()) !== -1)) {
                 subArray[i] = track;
                 ++i;
             }
