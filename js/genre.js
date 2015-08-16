@@ -15,6 +15,7 @@ var mainGenres = {
 	// begin custom colors
 	'Chillout': '#F4C2C2',
     'Rock': '#B4D7BF',
+    'Pop': '#B3E234',
 	'BTC': '#000000' // this one is treated specially
 };
 
@@ -42,7 +43,6 @@ var subgenres = {
 
     'Electro Soul': 'Post Disco',
     'Indie Dance': 'Post Disco',
-    'Indie Pop': 'Post Disco',
     'Nu Disco': 'Post Disco',
     'Synthpop': 'Post Disco',
     'Synthwave': 'Post Disco',
