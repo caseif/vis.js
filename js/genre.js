@@ -30,9 +30,13 @@ var subgenres = {
     'Moombah': 'Electro House',
     'Outrun': 'Electro House',
 
+    'Electro Swing': 'House',
+
     'Freeform': 'Hardcore',
     'Hard Dance': 'Hardcore',
     'Hardstyle': 'Hardcore',
+
+    'Neurohop': 'Glitch Hop',
 
     'Nu Style': 'Trance',
 
@@ -45,6 +49,8 @@ var subgenres = {
 
     'Brostep': 'Dubstep',
     'Garage': 'Dubstep',
+    'Neurostep': 'Dubstep',
+    'Riddim': 'Dubstep',
 
     'Nu Funk': 'Breaks',
 
