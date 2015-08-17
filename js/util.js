@@ -46,7 +46,7 @@ function resetParticle(particle) {
 	var yRange = particle.bokeh ? bokehYVelRange : (particle.fleck ? fleckYVelScalar : yVelRange);
 	var velVector = new THREE.Vector3(
 		particle.bokeh ? Math.random() * (bokehMaxVelocity - bokehMinVelocity) + bokehMinVelocity : (particle.fleck ? fleckVelocity : velocity),
-		biasedRandom(yRange, velBias),
+		centerBiasedRandom(yRange, velBias),
 		//Math.random() * yRange - yRange / 2,
 		0
 	);
@@ -71,15 +71,15 @@ function resetParticle(particle) {
  * @return The generated spawn position
  */
 function getValidSpawnPosition(side, bokeh, fleck) {
-	var z = bokeh ? bokehZ : (fleck ? fleckZ : Math.random() * zPosRange - zPosRange / 2); // random z-value
+	var z = bokeh ? bokehZ : (fleck ? fleckZ : biasedRandom(zPosRange, zPosBias) + zModifier); // random z-value
 	if (side == 0 || fleck) { // left
 		var x = -getXRangeAtZ(z) / 2; // x-value intersecting the frustum at this z-value
 		var yRange = getYRangeAtZ(z); // maximum range on the y-axis at this z-value
-		var y = bokeh ? Math.random() * yRange - yRange / 2 : biasedRandom(yRange, posBias); // random y-value within calculated range
+		var y = bokeh ? Math.random() * yRange - yRange / 2 : centerBiasedRandom(yRange, xPosBias); // random y-value within calculated range
 	} else if (side == 2) { // right
 		var x = getXRangeAtZ(z) / 2;
 		var yRange = getYRangeAtZ(z);
-		var y = bokeh ? Math.random() * yRange - yRange / 2 : biasedRandom(yRange, posBias); // random y-value within calculated range
+		var y = bokeh ? Math.random() * yRange - yRange / 2 : centerBiasedRandom(yRange, xPosBias); // random y-value within calculated range
 	} else if (side == 1) { // top
 		var y = -getYRangeAtZ(z) / 2;
 		var xRange = getXRangeAtZ(z);
@@ -173,8 +173,12 @@ function darken(hexString, factor) {
 	return newColor;
 }
 
+function centerBiasedRandom(range, bias) {
+	return biasedRandom(range / 2, bias) * (Math.random() >= 0.5 ? 1 : -1);
+}
+
 function biasedRandom(range, bias) {
-	return ((range / 2) - Math.pow(Math.random() * Math.pow(range / 2, bias), 1 / bias)) * (Math.random() >= 0.5 ? 1 : -1);
+	return (range - Math.pow(Math.random() * Math.pow(range, bias), 1 / bias));
 }
 
 function selectiveToUpperCase(str) {

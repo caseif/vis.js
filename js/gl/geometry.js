@@ -52,21 +52,19 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 var velocity = particleVelocity * Math.pow(resRatio, 4);
 var fleckVelocity = velocity * fleckVelocityScalar;
 
-var zPosRange = 350;
-
 for (var p = 0; p < particleCount; p++) {
-	var z = Math.random() * zPosRange - (zPosRange / 2);
+	var z = biasedRandom(zPosRange, zPosBias) + zModifier;
 	var xRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE)) * 2; // maximum range on the x-axis at this z-value
 	var yRange = Math.abs(camera.position.z - z) * Math.tan(toRads(VIEW_ANGLE / ASPECT)) * 2; // maximum range on the y-axis at this z-value
 	var pX = Math.random() * xRange - xRange / 2,
-		pY = biasedRandom(yRange, posBias),
+		pY = centerBiasedRandom(yRange, xPosBias),
 		pZ = z,
 		particle = new THREE.Vector3(pX, pY, pZ);
 	  
 	  // create a velocity vector
 	particle.velocity = new THREE.Vector3(
 		velocity,
-		biasedRandom(yVelRange, velBias),
+		centerBiasedRandom(yVelRange, velBias),
 		0
 	);
 
@@ -91,7 +89,7 @@ for (var p = 0; p < fleckCount; p++) {
 	  // create a velocity vector
 	fleck.velocity = new THREE.Vector3(
 		fleckVelocity,
-		biasedRandom(fleckYVelScalar, velBias),
+		centerBiasedRandom(fleckYVelScalar, velBias),
 		0
 	);
 
