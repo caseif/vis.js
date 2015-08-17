@@ -43,7 +43,7 @@ var minMarginWeight = 0.6; // the minimum weight applied to bars in the dropoff 
 /* *************************** */
 // COUNT
 var baseParticleCount = 1500; // the number of particles at 1080p
-var fleckCount = 0.05; // fleck count relative to base particle count
+var fleckCount = 0.035; // fleck count relative to base particle count
 var bokehCount = 0.2; // bokeh count relative to base particle count
 // OPACITY
 var particleOpacity = 0.7; // opacity of primary particles
@@ -57,9 +57,9 @@ var yVelRange = 3; // the range for particle y-velocities
 var xPosBias = 4.5; // bias for particle x-positions (higher values = more center-biased)
 var zPosRange = 450; // the range of z-particles
 var zModifier = -250; // the amount to add to z-positions
-var zPosBias = 2; // bias for particle z-positions (higher values = more far-biased)
+var zPosBias = 2.2; // bias for particle z-positions (higher values = more far-biased)
 // VELOCITY
-var particleVelocity = 2.8; // the scalar for particle velocity
+var particleVelocity = 4; // the scalar for particle velocity
 var velBias = 2.5; // bias for particle velocities (higher values = more center-biased)
 var fleckVelocityScalar = 1.75; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
