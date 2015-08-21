@@ -42,9 +42,9 @@ var minMarginWeight = 0.6; // the minimum weight applied to bars in the dropoff 
 /* * Basic particle settings * */
 /* *************************** */
 // COUNT
-var baseParticleCount = 1500; // the number of particles at 1080p
-var fleckCount = 0.035; // fleck count relative to base particle count
-var bokehCount = 0.2; // bokeh count relative to base particle count
+var baseParticleCount = 2000; // the number of particles at 1080p
+var fleckCount = 50; // total fleck count
+var bokehCount = 250; // total bokeh count
 // OPACITY
 var particleOpacity = 0.7; // opacity of primary particles
 var bokehOpacity = 0.5; // opacity of bokeh (raising this above 0.5 results in weird behavior)
@@ -57,7 +57,7 @@ var yVelRange = 3; // the range for particle y-velocities
 var xPosBias = 4.5; // bias for particle x-positions (higher values = more center-biased)
 var zPosRange = 450; // the range of z-particles
 var zModifier = -250; // the amount to add to z-positions
-var zPosBias = 2.2; // bias for particle z-positions (higher values = more far-biased)
+var zPosBias = 2.3; // bias for particle z-positions (higher values = more far-biased)
 // VELOCITY
 var particleVelocity = 4; // the scalar for particle velocity
 var velBias = 2.5; // bias for particle velocities (higher values = more center-biased)

@@ -1,6 +1,4 @@
 var particleCount = (($(document).width() * $(document).height()) / (1920 * 1080)) * baseParticleCount;
-var fleckCount = particleCount * fleckCount; // total fleck count
-var bokehCount = particleCount * bokehCount; // total bokeh count
 
 //TODO: split main system into foreground and background particles
 var particles = new THREE.Geometry();
