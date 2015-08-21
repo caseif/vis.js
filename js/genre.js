@@ -28,17 +28,17 @@ var subgenres = {
     'Big Room House': 'Electro House',
     'Bounce': 'Electro House',
     'Complextro': 'Electro House',
-    'Moombah': 'Electro House',
     'Outrun': 'Electro House',
 
     'Electro Swing': 'House',
 
     'Freeform': 'Hardcore',
     'Hard Dance': 'Hardcore',
-    'Hardstyle': 'Hardcore',
 
+    'Moombah': 'Glitch Hop',
     'Neurohop': 'Glitch Hop',
 
+    'Hardstyle': 'Trance',
     'Nu Style': 'Trance',
 
     'Electro Soul': 'Post Disco',
