@@ -1,6 +1,6 @@
-// NOTE: Not all config values may necessarily be changed at runtime. Some are
-// mutated internally after intialization, meaning changing them at runtime may
-// not work as expected.
+// NOTE: Not all config values may necessarily be changed by the user at
+// runtime. Some are mutated internally after intialization, meaning changing
+// them at runtime may not work as expected.
 
 /* *************************** */
 /* * Basic spectrum settings * */
@@ -59,7 +59,7 @@ var zPosRange = 450; // the range of z-particles
 var zModifier = -250; // the amount to add to z-positions
 var zPosBias = 2.3; // bias for particle z-positions (higher values = more far-biased)
 // VELOCITY
-var particleVelocity = 4; // the scalar for particle velocity
+var particleVelocity = 4.5; // the scalar for particle velocity
 var velBias = 2.5; // bias for particle velocities (higher values = more center-biased)
 var fleckVelocityScalar = 1.75; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
@@ -68,9 +68,9 @@ var minParticleVelocity = 0.005; // the lowest multiplier for particle speeds
 /* ****************************** */
 /* * Particle analysis settings * */
 /* ****************************** */
-var ampLower = 4; // the lower bound for amplitude analysis (inclusive)
+var ampLower = 5; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 5; // the power to raise velMult to after initial computation
+var particleExponent = 4.5; // the power to raise velMult to after initial computation
 
 /* ***************** */
 /* * Misc settings * */

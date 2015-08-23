@@ -411,8 +411,6 @@ function drawSpectrum(array) {
         for (var i = ampLower; i < ampUpper; i++) {
             sum += array[i] / spectrumHeight;
         }
-        // the next line effecitvely uses the weighted sum to generate a float between 0.0 and 1.0, 1 meaning all
-        // amplitude points in the observed range are at 100% of their potential value
         velMult = sum / (ampUpper - ampLower);
         particleSize = velMult;
         velMult = Math.pow(velMult, particleExponent) * (1 - minParticleVelocity) + minParticleVelocity;
