@@ -425,7 +425,7 @@ function drawSpectrum(array) {
         }
         velMult = sum / (ampUpper - ampLower);
         particleSize = velMult;
-        velMult = Math.pow(velMult, particleExponent) * (1 - minParticleVelocity) + minParticleVelocity;
+        velMult = Math.pow(velMult, particleExponent) * (1 - absMinParticleVelocity) + absMinParticleVelocity;
         particleSize = (maxParticleSize - minParticleSize) * Math.pow(particleSize, particleSizeExponent) + minParticleSize;
     }
 

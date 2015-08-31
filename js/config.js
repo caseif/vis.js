@@ -59,18 +59,19 @@ var zPosRange = 450; // the range of z-particles
 var zModifier = -250; // the amount to add to z-positions
 var zPosBias = 2.3; // bias for particle z-positions (higher values = more far-biased)
 // VELOCITY
-var particleVelocity = 4.5; // the scalar for particle velocity
-var velBias = 2.5; // bias for particle velocities (higher values = more center-biased)
+var minParticleVelocity = 3.5; // the minimum scalar for particle velocity
+var maxParticleVelocity = 4.5; // the maximum scalar for particle velocity
+var velBias = 2; // bias for particle velocities (higher values = more center-biased)
 var fleckVelocityScalar = 1.75; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
-var minParticleVelocity = 0.005; // the lowest multiplier for particle speeds
+var absMinParticleVelocity = 0.005; // the absolute lowest speed for particles
 
 /* ****************************** */
 /* * Particle analysis settings * */
 /* ****************************** */
-var ampLower = 5; // the lower bound for amplitude analysis (inclusive)
+var ampLower = 7; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 4.5; // the power to raise velMult to after initial computation
+var particleExponent = 4.75; // the power to raise velMult to after initial computation
 
 /* ***************** */
 /* * Misc settings * */
