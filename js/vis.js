@@ -79,8 +79,8 @@ $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
 centerContent();
 
 if (song.getGenre() == 'ayy lmao') {
-    $('.ayylmao').show();
-    $('.kitty').css('margin-top', -blockSize + blockTopPadding - 21);
+    $('.ayylmao').html('<img class="kitty" src="./img/cat.gif" alt="ayy lmao">');
+    $('.kitty').css('margin-top', -blockSize + blockTopPadding - 9);
     $('.kitty').attr('height', blockSize);
 }
 
