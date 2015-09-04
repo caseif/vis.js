@@ -53,6 +53,7 @@ function resetParticle(particle) {
 		centerBiasedRandom(yRange, velBias),
 		0
 	);
+    velVector = velVector.multiply(new THREE.Vector3(velocityResScale, velocityResScale, velocityResScale));
 	if (side == 0) {
 		particle.velocity = velVector;
 	} else if (side == 2) {

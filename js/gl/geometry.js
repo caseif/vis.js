@@ -47,7 +47,7 @@ var bokehMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var velocityResScale = Math.pow(resRatio, 4);
+var velocityResScale = Math.pow(resRatio, 5);
 var fleckVelocity = maxParticleVelocity * fleckVelocityScalar;
 
 for (var p = 0; p < particleCount; p++) {
@@ -62,7 +62,7 @@ for (var p = 0; p < particleCount; p++) {
 	  // create a velocity vector
 	particle.velocity = new THREE.Vector3(
 		velocityResScale * (Math.random() * (maxParticleVelocity - minParticleVelocity) + minParticleVelocity),
-		centerBiasedRandom(yVelRange, velBias),
+		velocityResScale * centerBiasedRandom(yVelRange, velBias),
 		0
 	);
 
@@ -87,16 +87,13 @@ for (var p = 0; p < fleckCount; p++) {
 	  // create a velocity vector
 	fleck.velocity = new THREE.Vector3(
 		velocityResScale * fleckVelocity,
-		centerBiasedRandom(fleckYVelScalar, velBias),
+		velocityResScale * centerBiasedRandom(fleckYVelScalar, velBias),
 		0
 	);
 
 	// add it to the geometry
 	flecks.vertices.push(fleck);
 }
-
-var bokehMinVelocity = maxParticleVelocity * 0.25;
-var bokehMaxVelocity = maxParticleVelocity * 0.5;
 
 var bokehYVelRange = ((bokehMinVelocity + bokehMaxVelocity) * 0.5) * 2;
 
@@ -116,7 +113,7 @@ for (var p = 0; p < bokehCount; p++) {
 	  // create a velocity vector
 	b.velocity = new THREE.Vector3(
 		velocityResScale * (Math.random() * (bokehMaxVelocity - bokehMinVelocity) + bokehMinVelocity),
-		Math.random() * bokehYVelRange - bokehYVelRange / 2,
+		velocityResScale * (Math.random() * bokehYVelRange - bokehYVelRange / 2),
 		0
 	);
 
