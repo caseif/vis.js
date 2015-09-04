@@ -27,7 +27,6 @@ var spectrumShadowOffsetY = -1; // the y-offset of the spectrum's drop shadow
 /* * Smoothing settings * */
 /* ********************** */
 var smoothingPoints = 3; // points to use for algorithmic smoothing. Must be an odd number.
-var smoothingExponent = 2; // lower values = more extreme smoothing. Values below 1 may eat your firstborn.
 var smoothingPasses = 1; // number of smoothing passes to execute
 var temporalSmoothing = 0.25; // passed directly to the JS analyzer node
 

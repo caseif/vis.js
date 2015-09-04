@@ -73,7 +73,6 @@ $('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * 
 $('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
 loadSong();
 setupAudioNodes();
-//calculateSmoothingConstants(); // only necessary for triangular smoothing
 var prefix = window.location.href.split('/')[0] + '//' + window.location.hostname;
 loadSound(prefix + '/content/uc?export=download&id=' + song.getFileId()); // music file
 $('#songinfo').css('padding-top', (blockSize - $('#songinfo').height()) / 2);
@@ -291,8 +290,6 @@ function createCORSRequest(method, url){
 }
 
 function loadSound(url) {
-    //var request = new XMLHttpRequest();
-    //request.open('GET', url, true);
     var request = createCORSRequest('GET', url);
     request.responseType = 'arraybuffer';
 
@@ -305,11 +302,7 @@ function loadSound(url) {
 }
 
 
-function playSound(buffer) {	
-	if (song.getGenre() == 'Mirai Sekai') {
-		//$('#bgvid').get(0).play();
-	}
-	
+function playSound(buffer) {
 	bufferSource.buffer = buffer;
 	bufferSource.start(0);
 	$('#status').fadeOut(); // will first fade out the loading animation
@@ -402,7 +395,6 @@ scriptProcessor.onaudioprocess = function() {
 function powerTransform(array) {
     var newArray = new Uint8Array(spectrumSize);
     for (var i = 0; i < spectrumSize; i++) {
-        //newArray[i] = array[i + spectrumStart];
         var bin = Math.pow(i / spectrumSize, spectrumScale) * (spectrumEnd - spectrumStart) + spectrumStart;
         newArray[i] = array[Math.floor(bin) + spectrumStart] * (bin % 1)
                 + array[Math.floor(bin + 1) + spectrumStart] * (1 - (bin % 1))
@@ -446,20 +438,15 @@ function drawSpectrum(array) {
         } else {
             value = 1;
         }
-        // create linear slope at head and tail of spectrum
         if (i < headMargin) {
-            //value *= Math.pow(i + 1, marginDecay) / Math.pow(headMargin, marginDecay);
             value *= headMarginSlope * Math.pow(i + 1, marginDecay) + minMarginWeight;
         } else if (spectrumSize - i <= tailMargin) {
-            //value *= Math.pow(spectrumSize - i, marginDecay) / Math.pow(tailMargin, marginDecay);
             value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
         }
 
         values[i] = value;
-        //values[i] = Math.max(Math.pow(values[i] / spectrumHeight, exp) * spectrumHeight, 1);
     }
     
-    //values = triangleSmooth(values);
     values = smooth(values);
     
     for (var i = 0; i < values.length; i++) {
@@ -478,49 +465,6 @@ function drawSpectrum(array) {
 // mostly for debugging purposes
 function smooth(array) {
     return savitskyGolaySmooth(array);
-}
-
-
-// Technically this should be in util.js but I need optimization and I don't
-// feel like restructuring to allow use of this file's smoothing constants
-function calculateSmoothingConstants() {
-    half = Math.floor(smoothingPoints / 2); // I got sick of calling Math.floor() since JS is weakly-typed
-    smoothingDivisor = fuckyTriangleSumThing(half + 1, smoothingExponent);
-    powers = [];
-    for (i = 0; i <= half; i++) {
-        powers[i] = Math.pow(i + 1, smoothingExponent);
-    }
-}
-
-/**
- * Applies a triangular smoothing algorithm to the given array.
- *
- * Note: not used at the moment.
- *
- * @param array The array to apply the algorithm to
- *
- * @return The smoothed array
- */
-function triangleSmooth(array) {
-    var lastArray = array;
-    for (var pass = 0; pass < smoothingPasses; pass++) {
-        var newArray = [];
-        for (var i = 0; i < half; i++) {
-            newArray[i] = lastArray[i];
-            newArray[lastArray.length - i - 1] = lastArray[lastArray.length - i - 1];
-        }
-        for (var i = half; i < lastArray.length - half; i++) {
-            var midScalar = half + 1;
-            var sum = lastArray[i] * powers[half];
-            for (j = 1; j <= half; j++) {
-                sum += lastArray[i + j] * powers[midScalar - j - 1];
-                sum += lastArray[i - j] * powers[midScalar - j - 1];
-            }
-            newArray[i] = sum / smoothingDivisor;
-        }
-        lastArray = newArray;
-    }
-    return lastArray;
 }
 
 /**

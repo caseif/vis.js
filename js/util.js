@@ -9,8 +9,8 @@ var frustumPadding = 50; // the units to pad the frustum by
 function isInView(particle) {
 	var translated = new THREE.Vector3();
 	var size = particle.bokeh ? bokehMaterial.size : (particle.fleck ? fleckMaterial.size : pMaterial.size);
-	translated.x = particle.x; // - size / 2;
-	translated.y = particle.y; // - (particle.y < camera.position.y ? 1 : -1) * size / 2;
+	translated.x = particle.x;
+	translated.y = particle.y;
 	translated.z = particle.z - camera.position.z;
 	if (translated.x < 0) {
 		translated.x += frustumPadding;
@@ -51,7 +51,6 @@ function resetParticle(particle) {
                         ? fleckVelocity
                         : Math.random() * (maxParticleVelocity - minParticleVelocity) + minParticleVelocity),
 		centerBiasedRandom(yRange, velBias),
-		//Math.random() * yRange - yRange / 2,
 		0
 	);
 	if (side == 0) {
@@ -192,13 +191,4 @@ function selectiveToUpperCase(str) {
 		str = str.replace(str.substring(i, i + 2), str.substring(i + 1, i + 2).toLowerCase());
 	}
 	return str;
-}
-
-// I HAVE TWO FULL PAGES OF TRYING TO WRITE AN EQUATION FOR THIS, I'M ALLOWED TO CHEAT AT THIS POINT
-function fuckyTriangleSumThing(row, power) {
-    var sum = Math.pow(row, power);
-    for (var i = 1; i < row; i++) {
-        sum += 2 * Math.pow(i, power);
-    }
-    return sum;
 }

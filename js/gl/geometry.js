@@ -140,7 +140,7 @@ bokehSystem.geometry.dynamic = true;
 
 // add it to the scene
 scene.add(particleSystem);
-if (song.getGenre() != 'BTC') {
+if (song.getGenre() != 'BTC' && song.getGenre() != 'Mirai Sekai') {
 	scene.add(fleckSystem);
 	scene.add(bokehSystem);
 }
