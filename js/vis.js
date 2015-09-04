@@ -17,7 +17,7 @@ var scriptProcessor;
 var spectrumWidth = $(document).width() * 0.83;
 spectrumSpacing *= resRatio;
 var barWidth = spectrumWidth / spectrumSize - spectrumSpacing;
-spectrumWidth -= spectrumWidth % (barWidth + spectrumSpacing * 2);
+spectrumWidth -= (spectrumWidth % (barWidth + spectrumSpacing)) - spectrumSpacing;
 
 var spectrumHeight = spectrumWidth / spectrumDimensionScalar;
 var marginDecay = 1.6; // I admittedly forget how this works but it probably shouldn't be changed from 1.6
