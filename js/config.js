@@ -61,7 +61,7 @@ var zPosBias = 2.3; // bias for particle z-positions (higher values = more far-b
 var velBias = 2; // bias for particle velocities (higher values = more center-biased)
 var minParticleVelocity = 3.5; // the minimum scalar for particle velocity
 var maxParticleVelocity = 4.5; // the maximum scalar for particle velocity
-var absMinParticleVelocity = 0.005; // the absolute lowest speed for particles
+var absMinParticleVelocity = 0.001; // the absolute lowest speed for particles
 var fleckVelocityScalar = 1.75; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
 var bokehMinVelocity = maxParticleVelocity * 0.15; // the minimum velocity of bokeh
