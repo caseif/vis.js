@@ -1,9 +1,5 @@
 var resRatio = $(document).width() / 1920;
 
-var leftChance = 0.92;
-var rightChance = 0.02;
-var topBottomChance = 0.06;
-
 var frustumPadding = 50; // the units to pad the frustum by
 
 function isInView(particle) {
@@ -44,7 +40,7 @@ function resetParticle(particle) {
 	particle.z = pos.z;
 
 	var yRange = particle.bokeh ? bokehYVelRange : (particle.fleck ? fleckYVelScalar : yVelRange);
-	var velVector = new THREE.Vector3(
+	var velVector = new THREE.Vector3((side != 0 ? 0.5 : 1) *
 		particle.bokeh
                 ? Math.random() * (bokehMaxVelocity - bokehMinVelocity) + bokehMinVelocity
                 : (particle.fleck

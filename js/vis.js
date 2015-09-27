@@ -196,6 +196,7 @@ function loadSong() {
         $('html').css('backgroundColor', '#E8E8E8');
         $('.content #artist').css('color', '#000');
         $('.content #title a').css('color', '#000');
+        $('.content #songinfo').css('text-shadow', '0 0 0 rgba(0, 0, 0, 0.4)');
         ctx.shadowBlur = 0;
     }
 }
@@ -241,8 +242,8 @@ function setupAudioNodes() {
     analyzer = context.createAnalyser();
     analyzer.connect(scriptProcessor);
     analyzer.smoothingTimeConstant = temporalSmoothing;
-    analyzer.minDecibels = -110;
-    analyzer.maxDecibels = -30;
+    analyzer.minDecibels = -100;
+    analyzer.maxDecibels = -33;
     try {
         analyzer.fftSize = maxFftSize; // ideal bin count
         console.log('Using fftSize of ' + analyzer.fftSize + ' (woot!)');
