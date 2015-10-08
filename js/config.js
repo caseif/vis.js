@@ -75,7 +75,7 @@ var bokehMaxVelocity = maxParticleVelocity * 0.3; // the maximum velocity of bok
 /* ****************************** */
 var ampLower = 7; // the lower bound for amplitude analysis (inclusive)
 var ampUpper = 30; // the upper bound for amplitude analysis (exclusive)
-var particleExponent = 4.75; // the power to raise velMult to after initial computation
+var particleExponent = 4.5; // the power to raise velMult to after initial computation
 
 /* ***************** */
 /* * Misc settings * */
