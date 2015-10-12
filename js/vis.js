@@ -9,6 +9,7 @@ var color;
 
 var song;
 var context = new AudioContext();
+var gainNode;
 var audioBuffer;
 var bufferSource;
 var analyzer;
@@ -47,7 +48,9 @@ var blockTopPadding = 50 * resRatio;
 var blockSidePadding = 30 * resRatio;
 
 var lastMouseMove = Date.now();
+var lastVolumeChange = Date.now();
 var textHidden = false;
+var volumeHidden = false;
 
 $('#canvas').attr('width', spectrumWidth);
 $('#canvas').attr('height', spectrumHeight + blockSize + 2 * blockTopPadding);
@@ -94,6 +97,7 @@ if (song.getGenre() == 'Mirai Sekai') {
 
 $('html').mousemove(function(event) {
     if (textHidden) {
+        $('.hide').stop(false, true);
         $('.hide').show();
         textHidden = false;
     }
@@ -236,6 +240,14 @@ function drawBlock() {
 }
 
 function setupAudioNodes() {
+    bufferSource = context.createBufferSource();
+    bufferSource.connect(context.destination);
+
+    gainNode = context.createGain();
+    gainNode.gain.value = 0;
+    bufferSource.connect(gainNode);
+    gainNode.connect(context.destination);
+
     scriptProcessor = context.createScriptProcessor(bufferInterval, 1, 1);
     scriptProcessor.connect(context.destination);
 
@@ -252,14 +264,16 @@ function setupAudioNodes() {
         console.log('Using fftSize of ' + analyzer.fftSize);
         alert('Could not set optimal fftSize! This may look a bit weird...');
     }
-
-    bufferSource = context.createBufferSource();
     bufferSource.connect(analyzer);
-    bufferSource.connect(context.destination);
 }
 
-$(document).keypress(function(event) {
-    if (event.which == 80 || event.which == 112) {
+var KEY_UP = 38;
+var KEY_DOWN = 40;
+var KEY_P_UPPER = 80;
+var KEY_P_LOWER = 112;
+
+$(document).keypress(function (event) {
+    if (event.which == KEY_P_UPPER || event.which == KEY_P_LOWER) {
         if (isPlaying) {
             bufferSource.stop();
             currentTime += Date.now() - started;
@@ -275,6 +289,25 @@ $(document).keypress(function(event) {
         }
         isPlaying = !isPlaying;
     }
+});
+
+$(document).keydown(function (event) {
+    if (event.which == KEY_UP) {
+        gainNode.gain.value = Math.min(gainNode.gain.value + volumeStep, 0);
+    } else if (event.which == KEY_DOWN) {
+        gainNode.gain.value = Math.max(gainNode.gain.value - volumeStep, -1);
+    }
+    else {
+        return;
+    }
+
+    if (volumeHidden) {
+        $('#volume-info').stop(false, true);
+        $('#volume-info').show();
+        volumeHidden = false;
+    }
+    $('#volume-value').html(Math.round((gainNode.gain.value + 1) * 100) + '%');
+    lastVolumeChange = Date.now();
 });
 
 function createCORSRequest(method, url){
@@ -330,8 +363,12 @@ scriptProcessor.onaudioprocess = function() {
     lastProcess = Date.now();
 
     if (started && !textHidden && Date.now() - lastMouseMove >= mouseSleepTime) {
-        $('.hide').fadeOut(500);
         textHidden = true;
+        $('.hide').fadeOut(500);
+    }
+    if (!volumeHidden && Date.now() - lastVolumeChange >= mouseSleepTime) {
+        volumeHidden = true;
+        $('#volume-info').fadeOut(500);
     }
 
     var initialArray =  new Uint8Array(analyzer.frequencyBinCount);

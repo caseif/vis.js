@@ -2,6 +2,11 @@
 // runtime. Some are mutated internally after intialization, meaning changing
 // them at runtime may not work as expected.
 
+/* *********************** */
+/* * Audio node settings * */
+/* *********************** */
+var volumeStep = 0.05; // the step for each volume notch as a fraction of 1
+
 /* *************************** */
 /* * Basic spectrum settings * */
 /* *************************** */
@@ -83,4 +88,4 @@ var particleExponent = 4.5; // the power to raise velMult to after initial compu
 var cycleSpeed = 4; // the (arbitrary) scalar for cycling rainbow spectrums
 var blockWidthRatio = 0.63; // the width of the Monstercat logo relative to its containing block
 var blockHeightRatio = 0.73; // the height of the Monstercat logo relative to its containing block
-var mouseSleepTime = 2000; // inactivity period in milliseconds before the bottom text is hidden
+var mouseSleepTime = 1000; // inactivity period in milliseconds before the bottom text is hidden
