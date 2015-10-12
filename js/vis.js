@@ -351,7 +351,6 @@ function playSound(buffer) {
 
 function setOnEnded() {
     bufferSource.onended = function() {
-        console.log('ended');
         if (started && isPlaying) {
             location.reload(); // refresh when the song ends
         }
