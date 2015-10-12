@@ -241,6 +241,7 @@ function drawBlock() {
 
 function setupAudioNodes() {
     bufferSource = context.createBufferSource();
+    setOnEnded();
     bufferSource.connect(context.destination);
 
     gainNode = context.createGain();
@@ -282,7 +283,9 @@ $(document).keypress(function (event) {
             var newSource = context.createBufferSource();
             newSource.buffer = bufferSource.buffer;
             bufferSource = newSource;
+            setOnEnded();
             bufferSource.connect(analyzer);
+            bufferSource.connect(gainNode);
             bufferSource.connect(context.destination);
             bufferSource.start(0, currentTime / 1000);
             started = Date.now();
@@ -346,11 +349,14 @@ function playSound(buffer) {
 	started = Date.now();
 }
 
-bufferSource.onended = function() {
-    if (started && isPlaying) {
-        location.reload(); // refresh when the song ends
-    }
-};
+function setOnEnded() {
+    bufferSource.onended = function() {
+        console.log('ended');
+        if (started && isPlaying) {
+            location.reload(); // refresh when the song ends
+        }
+    };
+}
 
 function onError(e) {
     console.log(e);
