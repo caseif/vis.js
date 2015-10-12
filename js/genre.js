@@ -10,7 +10,7 @@ var mainGenres = {
 	'Glitch Hop': '#0A9655',
 	'Post Disco': '#16ACB0',
 	'Dubstep': '#941DE8',
-	'Future Bass': '#979EFF',
+	'Future Bass': '#9B98FC',
 	'EDM': '#C1C1C1',
 	// begin custom colors
 	'Chillout': '#F4C2C2',
