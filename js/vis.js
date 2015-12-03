@@ -363,6 +363,11 @@ function onError(e) {
 
 var lastProcess = Date.now();
 scriptProcessor.onaudioprocess = function() {
+    // don't do anything if the audio is paused
+    if (!isPlaying) {
+        return;
+    }
+
     var now = Date.now();
     do { now = Date.now(); } while (now - lastProcess < minProcessPeriod);
     lastProcess = Date.now();
