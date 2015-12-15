@@ -9,14 +9,6 @@ function Song(rawData) {
 		this.title = data[2];
 		this.genre = data[3];
 		this.file = data[4];
-		if (data.length > 5) {
-			this.link = data[5];
-			if (!data[5].match('^http')) {
-				this.link = 'http://youtu.be/' + this.link;
-			}
-		} else {
-			this.link = null;
-		}
 	} else {
 		throw 'non-song';
 	}
@@ -40,8 +32,4 @@ Song.prototype.getArtist = function() {
 
 Song.prototype.getGenre = function() {
 	return this.genre;
-}
-
-Song.prototype.getLink = function() {
-	return this.link;
 }
