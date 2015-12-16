@@ -5,22 +5,24 @@ var particles = new THREE.Geometry();
 var flecks = new THREE.Geometry();
 var bokeh = new THREE.Geometry();
 
-var stdTexure = THREE.ImageUtils.loadTexture(
+textureLoader = new THREE.TextureLoader();
+
+var stdTexure = textureLoader.load(
 	'./img/particle.png'
 )
 stdTexure.minFilter = THREE.LinearFilter;
 
-var fleckTexture = THREE.ImageUtils.loadTexture(
+var fleckTexture = textureLoader.load(
 	'./img/fleck.png'
 )
 fleckTexture.minFilter = THREE.LinearFilter;
 
-var bokehTexture = THREE.ImageUtils.loadTexture(
+var bokehTexture = textureLoader.load(
 	'./img/bokeh.png'
 )
 bokehTexture.minFilter = THREE.LinearFilter;
 
-var pMaterial = new THREE.PointCloudMaterial({
+var pMaterial = new THREE.PointsMaterial({
 	color: song.getGenre() === 'BTC' ? 0x000000 : 0xFFFFFF,
 	opacity: particleOpacity,
 	size: 5,
@@ -29,7 +31,7 @@ var pMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var fleckMaterial = new THREE.PointCloudMaterial({
+var fleckMaterial = new THREE.PointsMaterial({
 	color: color,
 	opacity: particleOpacity,
 	size: 4,
@@ -38,7 +40,7 @@ var fleckMaterial = new THREE.PointCloudMaterial({
 	transparent: true
 });
 
-var bokehMaterial = new THREE.PointCloudMaterial({
+var bokehMaterial = new THREE.PointsMaterial({
 	color: 0xFFFFFF,
 	opacity: bokehOpacity,
 	size: 100,
@@ -122,9 +124,9 @@ for (var p = 0; p < bokehCount; p++) {
 }
 
 // create the particle systems
-var particleSystem = new THREE.PointCloud(particles, pMaterial);
-var fleckSystem = new THREE.PointCloud(flecks, fleckMaterial);
-var bokehSystem = new THREE.PointCloud(bokeh, bokehMaterial);
+var particleSystem = new THREE.Points(particles, pMaterial);
+var fleckSystem = new THREE.Points(flecks, fleckMaterial);
+var bokehSystem = new THREE.Points(bokeh, bokehMaterial);
 
 particleSystem.sortParticles = true;
 particleSystem.geometry.dynamic = true;
