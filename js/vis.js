@@ -68,9 +68,7 @@ function centerContent() {
     $('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2);
 }
 
-$(window).resize(function() {
-    centerContent();
-});
+$(window).resize(() => { centerContent() });
 
 $('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * resRatio + 'px');
 $('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
@@ -95,7 +93,7 @@ if (song.getGenre() == 'Mirai Sekai') {
             + prefix + '/content/uc?export=download&id=0B8_nDMQp-qqCU0ZmcHNfR1pwZ0E" type="video/webm"></video>');
 }
 
-$('html').mousemove(function(event) {
+$('html').mousemove(event => {
     if (textHidden) {
         $('.hide').stop(false, true);
         $('.hide').show();
@@ -112,9 +110,9 @@ function loadSong() {
     var path = prefix + '/songs.csv';
     $.ajax({
         url:        path,
-        success:    function(csv) {
+        success:    csv => {
                         var lines = csv.split('\n');
-                        lines.forEach(function(line) {
+                        lines.forEach(line => {
                             try {
                                 var s = new Song(line);
                                 songs[s.getId()] = s;
@@ -133,7 +131,7 @@ function loadSong() {
     if (songName !== undefined) {
         song = songs[songName.toLowerCase()];
     } else if (subgenreName !== undefined) {
-        keys.forEach(function(key) {
+        keys.forEach(key => {
             var track = songs[key];
             if (track.getGenre().toLowerCase() === subgenreName.toLowerCase()) {
                 subArray[i] = track;
@@ -142,7 +140,7 @@ function loadSong() {
         });
         song = subArray[Math.floor(Math.random() * subArray.length)];
     } else if (genreName !== undefined) {
-        keys.forEach(function(key) {
+        keys.forEach(key => {
             var track = songs[key];
             if ((subgenres[track.getGenre()] !== undefined && subgenres[track.getGenre()].toLowerCase() === genreName.toLowerCase())
                     || (track.getGenre().toLowerCase().indexOf(genreName.toLowerCase()) !== -1)) {
@@ -152,7 +150,7 @@ function loadSong() {
         });
         song = subArray[Math.floor(Math.random() * subArray.length)];
     } else if (artistName !== undefined) {
-        keys.forEach(function(key) {
+        keys.forEach(key => {
             var track = songs[key];
             if (track.getArtist().toLowerCase().replace(/\^/g, '') === artistName.toLowerCase()) {
                 subArray[i] = track;
@@ -206,7 +204,7 @@ function drawBlock() {
     ctx.fillStyle = color;
     ctx.fillRect(0, spectrumHeight + blockTopPadding, blockSize, blockSize);
     var img = new Image();
-    img.onload = function() {
+    img.onload = () => {
         var origBlur = ctx.shadowBlur;
 		ctx.shadowBlur = 0;
 
@@ -270,7 +268,7 @@ var KEY_DOWN = 40;
 var KEY_P_UPPER = 80;
 var KEY_P_LOWER = 112;
 
-$(document).keypress(function (event) {
+$(document).keypress(event => {
     if (event.which == KEY_P_UPPER || event.which == KEY_P_LOWER) {
         if (started) {
             if (isPlaying) {
@@ -293,7 +291,7 @@ $(document).keypress(function (event) {
     }
 });
 
-$(document).keydown(function (event) {
+$(document).keydown(event => {
     if (event.which == KEY_UP) {
         gainNode.gain.value = Math.min(gainNode.gain.value + volumeStep, 0);
     } else if (event.which == KEY_DOWN) {
@@ -329,7 +327,7 @@ function loadSound(url) {
     var request = createCORSRequest('GET', url);
     request.responseType = 'arraybuffer';
 
-    request.onload = function() {
+    request.onload = () => {
         context.decodeAudioData(request.response, function(buffer) {
             playSound(buffer);
         }, onError);
@@ -349,7 +347,7 @@ function playSound(buffer) {
 }
 
 function setOnEnded() {
-    bufferSource.onended = function() {
+    bufferSource.onended = () => {
         if (started && isPlaying) {
             location.reload(); // refresh when the song ends
         }
@@ -361,7 +359,7 @@ function onError(e) {
 }
 
 var lastProcess = Date.now();
-scriptProcessor.onaudioprocess = function() {
+scriptProcessor.onaudioprocess = () => {
     // don't do anything if the audio is paused
     if (!isPlaying) {
         return;
@@ -382,7 +380,7 @@ scriptProcessor.onaudioprocess = function() {
 
     var initialArray =  new Uint8Array(analyzer.frequencyBinCount);
     analyzer.getByteFrequencyData(initialArray);
-    var array = powerTransform(initialArray);
+    var array = transformAmplitude(initialArray);
     ctx.clearRect(-ctx.shadowBlur, -ctx.shadowBlur, spectrumWidth + ctx.shadowBlur, spectrumHeight + ctx.shadowBlur);
     if (song.getGenre() == 'ayy lmao') {
         switch (stage) {
@@ -439,7 +437,7 @@ scriptProcessor.onaudioprocess = function() {
     drawSpectrum(array);
 };
 
-function powerTransform(array) {
+function transformAmplitude(array) {
     var newArray = new Uint8Array(spectrumSize);
     for (var i = 0; i < spectrumSize; i++) {
         var bin = Math.pow(i / spectrumSize, spectrumScale) * (spectrumEnd - spectrumStart) + spectrumStart;
