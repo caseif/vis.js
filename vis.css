@@ -156,3 +156,10 @@ video#bgvid {
     background-size: cover;
     -webkit-filter: brightness(85%);
 }
+
+.mvbg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
+}
