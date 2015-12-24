@@ -93,7 +93,7 @@ if (song.getGenre() == 'Mirai Sekai') {
             + prefix + '/content/uc?export=download&id=0B8_nDMQp-qqCU0ZmcHNfR1pwZ0E" type="video/webm"></video>');
 } else if (song.getGenre() == 'pinkcloud') {
     var arr = ['7YBEo6D', 'Bbpq19Q', '6MPcxXC'];
-    $('.mvbg').html('<img src="https://i.imgur.com/' + arr[Math.floor(Math.random() * arr.length)] + '.jpg">');
+    $('.mvbg').html('<img src="https://i.imgur.com/' + arr[Math.floor(Math.random() * arr.length)] + '.jpg" width="100%">');
 }
 
 $('html').mousemove(event => {
