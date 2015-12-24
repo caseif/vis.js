@@ -246,6 +246,10 @@ function setupAudioNodes() {
     gainNode.gain.value = 0;
     bufferSource.connect(gainNode);
     gainNode.connect(context.destination);
+    var vol = getCookie('volume');
+    if (vol != null) {
+        gainNode.gain.value = vol;
+    }
 
     scriptProcessor = context.createScriptProcessor(bufferInterval, 1, 1);
     scriptProcessor.connect(context.destination);
@@ -297,8 +301,11 @@ $(document).keypress(event => {
 $(document).keydown(event => {
     if (event.which == KEY_UP) {
         gainNode.gain.value = Math.min(gainNode.gain.value + volumeStep, 0);
+        setCookie('volume', gainNode.gain.value);
+        
     } else if (event.which == KEY_DOWN) {
         gainNode.gain.value = Math.max(gainNode.gain.value - volumeStep, -1);
+        setCookie('volume', gainNode.gain.value);
     }
     else {
         return;
