@@ -12,9 +12,13 @@ visualizer.
 
 :warning: Mozilla Firefox (works but sometimes freezes the browser)
 
-:x: Microsoft Internet Explorer
+:warning: Safari (Safari caps `fftSize` at 2048, resulting in odd/glitchy spectrum behavior)
+
+:x: Microsoft Internet Explorer (no support for the AudioNode API)
 
 ## Common Issues
+
+First and foremost, verify that you're using a supported browser as per the above section.
 
 **Spectrum is jittery/choppy**
 
