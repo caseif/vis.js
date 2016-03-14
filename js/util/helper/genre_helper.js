@@ -27,6 +27,7 @@ var subgenres = {
     'Neurofunk': 'Drum & Bass',
     'Techstep': 'Drum & Bass',
 
+    'Bass House': 'Electro House',
     'Big Room House': 'Electro House',
     'Bounce': 'Electro House',
     'Complextro': 'Electro House',

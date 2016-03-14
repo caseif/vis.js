@@ -30,21 +30,44 @@
 		<div id="pause-info" class="hide front">Press P to Pause</div>
 		<div id="github" class="hide front"><a href="https://github.com/caseif/vis.js" target="_blank">Github</a></div>
 
+        <!-- Config script -->
+		<script type="text/javascript" src="./js/util/config.js"></script>
+
         <!-- Utility scripts -->
-		<script type="text/javascript" src="./js/config.js"></script>
-		<script type="text/javascript" src="./js/util.js"></script>
-		<script type="text/javascript" src="./js/url.js"></script>
-		<script type="text/javascript" src="./js/song.js"></script>
-		<script type="text/javascript" src="./js/genre.js"></script>
+		<script type="text/javascript" src="./js/util/helper/net/async_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/net/cookie_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/net/url_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/color_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/genre_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/misc_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/random_helper.js"></script>
+
+        <!-- Abstract models -->
+        <script type="text/javascript" src="./js/model/song.js"></script>
+
+        <!-- Algorithmic spectrum analysis/transformation scripts -->
+        <script type="text/javascript" src="./js/analysis/spectrum_algorithms.js"></script>
+
+        <!-- AudioNode scripts -->
+        <script type="text/javascript" src="./js/audio/node_helper.js"></script>
+        <script type="text/javascript" src="./js/audio/loader.js"></script>
+
+        <!-- User IO scripts -->
+        <script type="text/javascript" src="./js/io/keyhandler.js"></script>
+        <script type="text/javascript" src="./js/io/volume.js"></script>
+
+        <!-- Visual/GUI scripts -->
+        <script type="text/javascript" src="./js/visual/gui.js"></script>
+        <script type="text/javascript" src="./js/visual/spectrum.js"></script>
 
         <!-- Main script -->
 		<script type="text/javascript" src="./js/vis.js"></script>
 
-		<!-- WebGL stuff -->
-		<script type="text/javascript" src="./js/gl/scene.js"></script>
-		<script type="text/javascript" src="./js/gl/geometry.js"></script>
-		<script type="text/javascript" src="./js/gl/light.js"></script>
-		<script type="text/javascript" src="./js/gl/render.js"></script>
-		
+        <!-- WebGL scripts -->
+		<script type="text/javascript" src="./js/visual/gl/geom_util.js"></script>
+		<script type="text/javascript" src="./js/visual/gl/scene.js"></script>
+		<script type="text/javascript" src="./js/visual/gl/geometry.js"></script>
+		<script type="text/javascript" src="./js/visual/gl/light.js"></script>
+		<script type="text/javascript" src="./js/visual/gl/render.js"></script>
 	</body>
 </html>

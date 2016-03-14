@@ -1,5 +1,3 @@
-var resRatio = $(document).width() / 1920;
-
 var frustumPadding = 50; // the units to pad the frustum by
 
 function isInView(particle) {
@@ -141,75 +139,4 @@ function updateParticles() {
 
 function toRads(degs) {
 	return degs * Math.PI / 180;
-}
-
-function brighten(hexString, factor) {
-	hexString = hexString.replace('#', '');
-	var redHex = hexString.substring(0, 2);
-	var greenHex = hexString.substring(2, 4);
-	var blueHex = hexString.substring(4, 6);
-	var newRed = Math.floor((parseInt('0x' + redHex) * (1 / factor) + 255 * ((factor - 1) / factor)));
-	var newGreen = Math.floor((parseInt('0x' + greenHex) * (1 / factor) + 255 * ((factor - 1) / factor)));
-	var newBlue = Math.floor((parseInt('0x' + blueHex) * (1 / factor) + 255 * ((factor - 1) / factor)));
-	var newColor = '#'
-			+ newRed.toString(16).toUpperCase()
-			+ newGreen.toString(16).toUpperCase()
-			+ newBlue.toString(16).toUpperCase();
-	return newColor;
-}
-
-function darken(hexString, factor) {
-	hexString = hexString.replace('#', '');
-	var redHex = hexString.substring(0, 2);
-	var greenHex = hexString.substring(2, 4);
-	var blueHex = hexString.substring(4, 6);
-	var newRed = Math.floor((parseInt('0x' + redHex) * (1 / factor)));
-	var newGreen = Math.floor((parseInt('0x' + greenHex) * (1 / factor)));
-	var newBlue = Math.floor((parseInt('0x' + blueHex) * (1 / factor)));
-	var newColor = '#'
-			+ newRed.toString(16).toUpperCase()
-			+ newGreen.toString(16).toUpperCase()
-			+ newBlue.toString(16).toUpperCase();
-	return newColor;
-}
-
-function centerBiasedRandom(range, bias) {
-	return biasedRandom(range / 2, bias) * (Math.random() >= 0.5 ? 1 : -1);
-}
-
-function biasedRandom(range, bias) {
-	return (range - Math.pow(Math.random() * Math.pow(range, bias), 1 / bias));
-}
-
-function selectiveToUpperCase(str) {
-	str = str.toUpperCase();
-	var i;
-	while ((i = str.indexOf('^')) !== -1) {
-		str = str.replace(str.substring(i, i + 2), str.substring(i + 1, i + 2).toLowerCase());
-	}
-	return str;
-}
-
-function getCookie(c_name){
-    var c_value = document.cookie;
-    var c_start = c_value.indexOf(" " + c_name + "=");
-    if (c_start == -1){
-        c_start = c_value.indexOf(c_name + "=");
-    }
-    if (c_start == -1){
-        c_value = null;
-    }
-    else {
-        c_start = c_value.indexOf("=", c_start)+ 1;
-        var c_end = c_value.indexOf(";", c_start);
-        if (c_end == -1){
-            c_end = c_value.length;
-        }
-        c_value = unescape(c_value.substring(c_start,c_end));
-    }
-    return c_value;
-}
-
-function setCookie(c_name, value) {
-    document.cookie = c_name + '=' + value + '; expires=' + new Date(2037, 0, 1, 0, 0, 0, 0).toGMTString() + '; path=/';
 }
