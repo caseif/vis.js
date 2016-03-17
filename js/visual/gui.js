@@ -117,3 +117,42 @@ function checkHideableText() {
         $('#volume-info').fadeOut(500);
     }
 }
+
+function initGui(song) {
+    document.getElementById('artist').innerHTML = '???';
+    document.getElementById('title').innerHTML = '???';
+    document.title = '[vis.js] ??? \u2014 ???';
+    if (song != undefined) {
+        var baseArtistHeight = $('#artist').height();
+        document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
+
+        while ($('#artist').height() >= baseArtistHeight) {
+            $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
+        }
+        $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 5) + 'px');
+        var baseTitleHeight = $('#title').height();
+        document.getElementById('title').innerHTML = selectiveToUpperCase(song.getTitle());
+        var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
+        while ($('#title').height() >= baseTitleHeight * newLines) {
+            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
+        }
+            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
+        document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
+        color = getColor(song.getGenre());
+    }
+    if (color == undefined) {
+        color = mainGenres.EDM;
+    }
+
+    if (!song || song.getGenre() != 'ayy lmao') {
+        drawBlock();
+    }
+
+    if (song.getGenre() == 'Karma Fields') {
+        $('html').css('backgroundColor', '#E8E8E8');
+        $('.content #artist').css('color', '#000');
+        $('.content #title').css('color', '#000');
+        $('.content #songinfo').css('text-shadow', '0 0 0 rgba(0, 0, 0, 0.4)');
+        ctx.shadowBlur = 0;
+    }
+}

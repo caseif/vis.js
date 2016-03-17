@@ -18,18 +18,18 @@ Song.prototype.getId = function() {
 	return this.id;
 }
 
-Song.prototype.getFileId = function() {
-	return this.file;
+Song.prototype.getArtist = function() {
+	return this.artist;
 }
 
 Song.prototype.getTitle = function() {
 	return this.title;
 }
 
-Song.prototype.getArtist = function() {
-	return this.artist;
-}
-
 Song.prototype.getGenre = function() {
 	return this.genre;
+}
+
+Song.prototype.getFileId = function() {
+	return this.file;
 }

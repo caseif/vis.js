@@ -89,3 +89,21 @@ function exponentialTransform(array) {
     }
     return newArr;
 }
+
+// top secret bleeding-edge shit in here
+function experimentalTransform(array) {
+    var newArr = [];
+    for (var i = 0; i < array.length; i++) {
+        var sum = 0;
+        var divisor = 0;
+        for (var j = 0; j < array.length; j++) {
+            var dist = Math.abs(i - j);
+            var weight = 1 / Math.pow(2, dist);
+            if (weight == 1) weight = 10;
+            sum += array[j] * weight;
+            divisor += weight;
+        }
+        newArr[i] = sum / divisor;
+    }
+    return newArr;
+}

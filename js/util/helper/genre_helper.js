@@ -16,8 +16,8 @@ var mainGenres = {
 	'Chillout': '#F4C2C2',
     'Rock': '#B4D7BF',
     'Pop': '#B3E234',
-    'pinkcloud': '#F6B4D9',
-	'BTC': '#000000', // this one is treated specially
+    'Pink Cloud': '#F6B4D9',
+	'Karma Fields': '#000000', // this one is treated specially
 	'Mirai Sekai': '#FFFFFF' // also treated specially
 };
 
