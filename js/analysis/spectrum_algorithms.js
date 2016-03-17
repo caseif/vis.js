@@ -46,38 +46,57 @@ function transformToVisualBins(array) {
 }
 
 function getTransformedSpectrum(array) {
-    var newArr = algorithmicTransform(array);
+    var newArr = normalizeAmplitude(array);
+    newArr = averageTransform(newArr);
+    newArr = tailTransform(newArr);
     newArr = smooth(newArr);
     newArr = exponentialTransform(newArr);
     return newArr;
 }
 
-function algorithmicTransform(array) {
+function normalizeAmplitude(array) {
     var values = [];
     for (var i = 0; i < spectrumSize; i++) {
         if (begun) {
-            if (i == 0) {
-                var value = array[i] / 255 * spectrumHeight;
-            }
-            else if (i == spectrumSize - 1) {
-                var value = (array[i - 1] + array[i]) / 2  / 255 * spectrumHeight;
-            }
-            else {
-                var value = (array[i - 1] + array[i] + array[i + 1]) / 3  / 255 * spectrumHeight;
-            }
-            value = Math.min(value + 1, spectrumHeight);
+            values[i] = array[i] / 255 * spectrumHeight;
         } else {
             value = 1;
         }
+    }
+    return values;
+}
+
+function averageTransform(array) {
+    var values = [];
+    for (var i = 0; i < spectrumSize; i++) {
+        if (i == 0) {
+            var value = array[i];
+        }
+        else if (i == spectrumSize - 1) {
+            var value = (array[i - 1] + array[i]) / 2;
+        }
+        else {
+            var value = (array[i - 1] + array[i] + array[i + 1]) / 3;
+        }
+        value = Math.min(value + 1, spectrumHeight);
+
+        values[i] = value;
+    }
+
+    return values;
+}
+
+function tailTransform(array) {
+    var values = [];
+    for (var i = 0; i < spectrumSize; i++) {
+        var value = array[i];
         if (i < headMargin) {
             value *= headMarginSlope * Math.pow(i + 1, marginDecay) + minMarginWeight;
         } else if (spectrumSize - i <= tailMargin) {
             value *= tailMarginSlope * Math.pow(spectrumSize - i, marginDecay) + minMarginWeight;
         }
-
         values[i] = value;
     }
-
     return values;
 }
 
@@ -92,6 +111,7 @@ function exponentialTransform(array) {
 
 // top secret bleeding-edge shit in here
 function experimentalTransform(array) {
+    var resistance = 3; // magic constant
     var newArr = [];
     for (var i = 0; i < array.length; i++) {
         var sum = 0;
@@ -99,7 +119,7 @@ function experimentalTransform(array) {
         for (var j = 0; j < array.length; j++) {
             var dist = Math.abs(i - j);
             var weight = 1 / Math.pow(2, dist);
-            if (weight == 1) weight = 10;
+            if (weight == 1) weight = resistance;
             sum += array[j] * weight;
             divisor += weight;
         }
