@@ -17,7 +17,7 @@ var spectrumSpacing = 7; // the separation of each spectrum bar in pixels at wid
 var maxFftSize = 16384; // the preferred fftSize to use for the audio node (actual fftSize may be lower)
 // BASIC TRANSFORMATION
 var spectrumStart = 4; // the first bin rendered in the spectrum
-var spectrumEnd = 400; // the last bin rendered in the spectrum
+var spectrumEnd = 1200; // the last bin rendered in the spectrum
 var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
 // EXPONENTIAL TRANSFORMATION
 var spectrumMaxExponent = 5; // the max exponent to raise spectrum values to

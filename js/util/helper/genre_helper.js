@@ -47,7 +47,6 @@ var subgenres = {
     'Electro Soul': 'Post Disco',
     'Indie Dance': 'Post Disco',
     'Nu Disco': 'Post Disco',
-    'Synthpop': 'Post Disco',
     'Synthwave': 'Post Disco',
 
     'Brostep': 'Dubstep',
