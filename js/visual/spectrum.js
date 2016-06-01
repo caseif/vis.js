@@ -45,6 +45,9 @@ function drawSpectrum(array) {
     // drawing pass
     for (var i = 0; i < spectrumSize; i++) {
         var value = array[i];
+
+        if(value < 2 * resRatio) value = 2 * resRatio
+
         ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
     }
     ctx.clearRect(0, spectrumHeight, spectrumWidth, blockTopPadding);
