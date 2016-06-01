@@ -173,6 +173,7 @@ video#bgvid {
 	visibility:hidden;
 	position:relative;
 	z-index:-1;
+	z-index:-2;
 }
 
 .playing .partsbg{
@@ -237,4 +238,51 @@ video#bgvid {
 @keyframes textIn{
 	from{max-width:0;}
 	to{max-width:100%;}
+}
+
+#cover{
+	width: 191px;
+    height: 191px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index:-1;
+    perspective: 1910px;
+    perspective-origin: center;
+}
+
+#cover div{
+	width: 100%;
+    height: 100%;
+    background: #C2C1C2;
+    visibility:hidden;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px 0;
+    position:relative;
+}
+
+#cover div img{
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#cover div img.mcat{
+	width: 75%;
+    height: 75%;
+    position: absolute;
+    top: 12.5%;
+    left: 12.5%;
+}
+
+.playing #cover div{
+	visibility:visible;
+    animation:coverIn .3s linear both .7s;
+}
+
+@keyframes coverIn{
+	from{transform: rotateY(90deg);}
+	to{transform: rotateY(0deg);}
+}
 }

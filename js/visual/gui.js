@@ -16,40 +16,6 @@ var blockSize = 193 * resRatio;
 var blockTopPadding = 50 * resRatio;
 var blockSidePadding = 30 * resRatio;
 
-function drawBlock() {
-    ctx.fillStyle = color;
-    ctx.fillRect(0, spectrumHeight + blockTopPadding, blockSize, blockSize);
-    var img = new Image();
-    img.onload = () => {
-        var origBlur = ctx.shadowBlur;
-		ctx.shadowBlur = 0;
-
-        // Edge renders the shadow in front of the image for some reason, so it has to be "disabled" or the cat will
-        // appear black instead of white. Shame, because it looks pretty cool.
-
-        // We don't need to worry about a check because other browsers don't render it if the blur is 0.
-        var origXOff = ctx.shadowOffsetX;
-        var origYOff = ctx.shadowOffsetY;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-
-        ctx.fillStyle = song.getGenre() === 'Mirai Sekai' ? 'black' : 'white';
-        ctx.drawImage(
-            img,
-            blockSize * (1 - blockWidthRatio) / 2,
-            spectrumHeight + blockTopPadding + (blockSize * (1 - blockHeightRatio) / 2),
-            blockSize * blockWidthRatio,
-            blockSize * blockHeightRatio
-        );
-		ctx.shadowBlur = origBlur;
-        ctx.shadowOffsetX = origXOff;
-        ctx.shadowOffsetY = origYOff;
-    };
-    prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
-            + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-    img.src = song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg';
-}
-
 // dudududududu
 var red = 255;
 var green = 0;
@@ -120,7 +86,7 @@ function checkHideableText() {
 
 function initGui(song) {
     document.getElementById('artist').innerHTML = '???';
-    document.getElementById('title').innerHTML = '???';
+    document.getElementById('title').innerHTML = '<span>???</span>';
     document.title = '[vis.js] ??? \u2014 ???';
     if (song != undefined) {
         var baseArtistHeight = $('#artist').height();
@@ -140,12 +106,29 @@ function initGui(song) {
         document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
         color = getColor(song.getGenre());
     }
+    else{
+        // Trigger animations even if there is no song
+        $("body").addClass("playing");
+    }
     if (color == undefined) {
         color = mainGenres.EDM;
     }
 
     if (!song || song.getGenre() != 'ayy lmao') {
-        drawBlock();
+        $("#cover").css({
+            left: 0,
+            top: spectrumHeight + blockTopPadding,
+            width: blockSize,
+            height: blockSize
+        })
+        $("#cover div").css("background-color", color);
+        $("#cover img").css({
+            left: blockSize * (1 - blockWidthRatio) / 2,
+            top: blockSize * (1 - blockHeightRatio) / 2,
+            width: blockSize * blockWidthRatio,
+            height: blockSize * blockHeightRatio
+        })
+        .attr("src", song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg')
     }
 
     if (song.getGenre() == 'Karma Fields') {
