@@ -131,7 +131,7 @@ function initGui(song) {
         }
         $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 5) + 'px');
         var baseTitleHeight = $('#title').height();
-        document.getElementById('title').innerHTML = selectiveToUpperCase(song.getTitle());
+        document.getElementById('title').innerHTML = selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>");
         var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
         while ($('#title').height() >= baseTitleHeight * newLines) {
             $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');

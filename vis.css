@@ -164,6 +164,11 @@ video#bgvid {
     z-index: -100;
 }
 
+
+/*
+ * ANIMATIONS
+ */
+
 .partsbg{
 	visibility:hidden;
 	position:relative;
@@ -178,4 +183,58 @@ video#bgvid {
 @keyframes partsbgIn{
 	from{opacity:0;}
 	to{opacity:1;}
+}
+
+/*.content{
+	visibility:hidden;
+}
+
+.playing .content{
+	visibility:visible;
+	animation:contentgIn 1s ease-out both;
+}
+
+@keyframes contentIn{
+	from{opacity:0;}
+	to{opacity:1;}
+}*/
+
+.content #artist{
+	overflow:hidden;
+	visibility:hidden;
+	white-space:nowrap;
+}
+
+.playing .content #artist{
+	visibility:visible;
+	animation:textIn .5s linear both 1s;
+}
+
+.content #title span{
+	overflow:hidden;
+	visibility:hidden;
+	white-space:nowrap;
+	display:inline-block;
+}
+
+.playing .content #title span{
+	visibility:visible;
+	animation:textIn .5s linear both 1.25s;
+}
+
+.playing .content #title span:nth-child(2){
+	animation-delay:1.35s;
+}
+
+.playing .content #title span:nth-child(3){
+	animation-delay:1.45s;
+}
+
+.playing .content #title span:nth-child(4){
+	animation-delay:1.55s;
+}
+
+@keyframes textIn{
+	from{max-width:0;}
+	to{max-width:1370px;}
 }
