@@ -122,7 +122,7 @@ function initGui(song) {
             height: blockSize
         })
         $("#cover div").css("background-color", color);
-        $("#cover img").css({
+        $("#cover img.mcat").css({
             left: blockSize * (1 - blockWidthRatio) / 2,
             top: blockSize * (1 - blockHeightRatio) / 2,
             width: blockSize * blockWidthRatio,
