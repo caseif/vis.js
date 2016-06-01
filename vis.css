@@ -236,5 +236,5 @@ video#bgvid {
 
 @keyframes textIn{
 	from{max-width:0;}
-	to{max-width:1370px;}
+	to{max-width:100%;}
 }
