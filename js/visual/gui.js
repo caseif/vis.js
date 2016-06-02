@@ -86,7 +86,7 @@ function checkHideableText() {
 
 function initGui(song) {
     centerContent();
-    
+
     document.getElementById('artist').innerHTML = '???';
     document.getElementById('title').innerHTML = '<span>???</span>';
     document.title = '[vis.js] ??? \u2014 ???';
@@ -116,7 +116,8 @@ function initGui(song) {
         color = mainGenres.EDM;
     }
 
-    if (!song || song.getGenre() != 'ayy lmao') {
+    var GUI_NoCover = false;
+    if (!GUI_NoCover) {
         $("#cover").css({
             left: 0,
             top: spectrumHeight + blockTopPadding,

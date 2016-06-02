@@ -54,9 +54,9 @@ centerContent();
 initSpectrumHandler();
 
 if (song.getGenre() == 'ayy lmao') {
-    $('.ayylmao').html('<img class="kitty" src="./img/cat.gif" alt="ayy lmao">');
-    $('.kitty').css('margin-top', -blockSize + blockTopPadding - 9);
-    $('.kitty').attr('height', blockSize);
+    $('#cover div').append('<img class="kitty" src="./img/cat.gif" alt="ayy lmao">');
+    //$('.kitty').css('margin-top', -blockSize + blockTopPadding - 9);
+    //$('.kitty').attr('height', blockSize);
 }
 
 if (song.getGenre() == 'Mirai Sekai') {
