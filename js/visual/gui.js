@@ -85,6 +85,8 @@ function checkHideableText() {
 }
 
 function initGui(song) {
+    centerContent();
+    
     document.getElementById('artist').innerHTML = '???';
     document.getElementById('title').innerHTML = '<span>???</span>';
     document.title = '[vis.js] ??? \u2014 ???';
