@@ -131,6 +131,12 @@ function initGui(song) {
         .attr("src", song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg')
     }
 
+    $("#spectrum_preloader").css({
+        height: 2 * resRatio,
+        top: spectrumHeight - 2 * resRatio
+    })
+    $("#spectrum_preloader div").css("background-color", color);
+
     if (song.getGenre() == 'Karma Fields') {
         $('html').css('backgroundColor', '#E8E8E8');
         $('.content #artist').css('color', '#000');
