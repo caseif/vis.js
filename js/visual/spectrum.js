@@ -75,13 +75,14 @@ function drawSpectrum(array) {
     }
 
     else if(spectrumAnimation == "phase_3"){
-        var ratio = (now - spectrumAnimationStart) / 500;
+        var ratio = (now - spectrumAnimationStart) / 1000;
 
         // drawing pass
         for (var i = 0; i < spectrumSize; i++) {
             var value = array[i];
 
-            if(ratio < 1) value -= spectrumHeight - spectrumHeight * ratio;
+            // Used to smooth transiton between bar & full Spectrum (lasts 1sec)
+            if(ratio < 1) value = value / (1 + 9 - 9 * ratio); 
 
             if(value < 2 * resRatio) value = 2 * resRatio
 
