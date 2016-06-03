@@ -30,6 +30,9 @@ function handleAudio() {
     drawSpectrum(array);
 }
 
+var spectrumAnimation = "phase_1",
+    spectrumAnimationStart = 0;
+
 function drawSpectrum(array) {
     if (isPlaying) {
         updateParticleAttributes(array);
@@ -42,14 +45,50 @@ function drawSpectrum(array) {
     var drawArray = isPlaying ? array : lastSpectrum;
     array = getTransformedSpectrum(array);
 
-    // drawing pass
-    for (var i = 0; i < spectrumSize; i++) {
-        var value = array[i];
+    var now = Date.now();
 
-        if(value < 2 * resRatio) value = 2 * resRatio
+    if(spectrumAnimation == "phase_1"){
+        var ratio = (now - started) / 500;
 
-        ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
+        ctx.fillRect(0, spectrumHeight - 2 * resRatio, (spectrumWidth/2) * ratio, 2 * resRatio);
+        ctx.fillRect(spectrumWidth - (spectrumWidth/2) * ratio, spectrumHeight - 2 * resRatio, (spectrumWidth/2) * ratio, 2 * resRatio);
+
+        if(ratio > 1){
+            spectrumAnimation = "phase_2";
+            spectrumAnimationStart = now;
+        }
     }
+
+    else if(spectrumAnimation == "phase_2"){
+        var ratio = (now - spectrumAnimationStart) / 500;
+
+        ctx.globalAlpha = Math.abs(Math.cos(ratio*10));
+
+        ctx.fillRect(0, spectrumHeight - 2 * resRatio, spectrumWidth, 2 * resRatio);
+
+        ctx.globalAlpha = 1;
+
+        if(ratio > 1){
+            spectrumAnimation = "phase_3";
+            spectrumAnimationStart = now;
+        }
+    }
+
+    else if(spectrumAnimation == "phase_3"){
+        var ratio = (now - spectrumAnimationStart) / 500;
+
+        // drawing pass
+        for (var i = 0; i < spectrumSize; i++) {
+            var value = array[i];
+
+            if(ratio < 1) value -= spectrumHeight - spectrumHeight * ratio;
+
+            if(value < 2 * resRatio) value = 2 * resRatio
+
+            ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
+        }
+    }
+
     ctx.clearRect(0, spectrumHeight, spectrumWidth, blockTopPadding);
 }
 
