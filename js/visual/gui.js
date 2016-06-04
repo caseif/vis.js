@@ -85,24 +85,30 @@ function checkHideableText() {
 }
 
 function initGui(song) {
+    var $artist = $('#artist'),
+        $title = $('#title');
 
-    document.getElementById('artist').innerHTML = '???';
-    document.getElementById('title').innerHTML = '<span>???</span>';
+    $artist.html('???');
+    $title.html('<span>???</span>');
     document.title = '[vis.js] ??? \u2014 ???';
     if (song != undefined) {
-        document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
+        $artist.html(selectiveToUpperCase(song.getArtist()));
 
-        var baseArtistWidth = $('#songinfo').width();
-        while ($('#artist')[0].scrollWidth > baseArtistWidth) {
-            $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
-            console.log($('#songinfo').width(), $('#artist')[0].scrollWidth)
+        var baseArtistWidth = $('#songinfo').width(),
+            baseArtistSize = $artist.css('font-size').replace('px', '');
+        while ($artist[0].scrollWidth > baseArtistWidth) {
+            baseArtistSize -= 1;
+            $artist.css('font-size', baseArtistSize + 'px');
         }
 
-        var baseTitleHeight = $('#title').height();
-        document.getElementById('title').innerHTML = selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>");
-        var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
-        while ($('#title').height() >= baseTitleHeight * newLines) {
-            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
+
+        $title.html(selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>"));
+
+        var maxTitleHeight = $('#cover').height() - ($artist.height() - 10) + 7,
+            baseTitleSize = $title.css('font-size').replace('px', '');
+        while ($title.height() > maxTitleHeight) {
+            baseTitleSize -= 1;
+            $title.css('font-size', baseTitleSize + 'px');
         }
 
         document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
