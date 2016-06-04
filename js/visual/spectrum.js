@@ -47,6 +47,11 @@ function drawSpectrum(array) {
 
     var now = Date.now();
 
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = spectrumShadowBlur;
+    ctx.shadowOffsetX = spectrumShadowOffsetX;
+    ctx.shadowOffsetY = spectrumShadowOffsetY;
+
     if(spectrumAnimation == "phase_1"){
         var ratio = (now - started) / 500;
 

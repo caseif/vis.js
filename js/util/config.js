@@ -25,8 +25,8 @@ var spectrumMinExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 2; // the scale for spectrum exponents
 // DROP SHADOW
 var spectrumShadowBlur = 6; // the blur radius of the spectrum's drop shadow
-var spectrumShadowOffsetX = -1; // the x-offset of the spectrum's drop shadow
-var spectrumShadowOffsetY = -1; // the y-offset of the spectrum's drop shadow
+var spectrumShadowOffsetX = 0; // the x-offset of the spectrum's drop shadow
+var spectrumShadowOffsetY = 0; // the y-offset of the spectrum's drop shadow
 
 /* ********************** */
 /* * Smoothing settings * */
