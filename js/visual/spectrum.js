@@ -84,12 +84,12 @@ function drawSpectrum(array) {
 
             // Used to smooth transiton between bar & full spectrum (lasts 1 sec)
             if (ratio < 1) {
-				value = value / (1 + 9 - 9 * ratio); 
-			}
+                value = value / (1 + 9 - 9 * ratio); 
+            }
 
             if (value < 2 * resRatio) {
-				value = 2 * resRatio;
-			}
+                value = 2 * resRatio;
+            }
 
             ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
         }

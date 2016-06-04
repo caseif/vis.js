@@ -14,17 +14,17 @@ var VIEW_ANGLE = 45,
 // and a scene
 var renderer = new THREE.WebGLRenderer({alpha: true});
 var params = {
-	minFilter: THREE.LinearFilter, 
-	magFilter: THREE.LinearFilter,
-	format: THREE.RGBAFormat,
-	stencilBuffer: false
+    minFilter: THREE.LinearFilter, 
+    magFilter: THREE.LinearFilter,
+    format: THREE.RGBAFormat,
+    stencilBuffer: false
 };
 
 var camera = new THREE.PerspectiveCamera(
-		VIEW_ANGLE,
-		ASPECT,
-		NEAR,
-		FAR);
+        VIEW_ANGLE,
+        ASPECT,
+        NEAR,
+        FAR);
 
 var scene = new THREE.Scene();
 

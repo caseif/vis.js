@@ -11,22 +11,22 @@
 }
 
 html {
-	height: 100%;
-	font-family: sans-serif;
-	background-color: #111;
+    height: 100%;
+    font-family: sans-serif;
+    background-color: #111;
 }
 
 body {
-	margin:0;
+    margin:0;
 }
 
 #loading {
-	color: #FFF;
-	position: absolute;
+    color: #FFF;
+    position: absolute;
 }
 
 #canvas {
-	z-index: 996;
+    z-index: 996;
 }
 
 #volume-info {
@@ -38,26 +38,26 @@ body {
 }
 
 #pause-info {
-	position: absolute;
-	bottom: 8px;
-	left: 8px;
-	color: #FFF;
-	display: none;
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    color: #FFF;
+    display: none;
 }
 
 #github {
-	position: absolute;
-	bottom: 8px;
-	right: 12px;
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
 }
 
 #github a {
-	color: #FFF;
-	text-decoration: none;
+    color: #FFF;
+    text-decoration: none;
 }
 
 .content {
-	margin: 196px auto 0 auto;
+    margin: 196px auto 0 auto;
     position: relative;
     width: 1568px;
 }
@@ -67,86 +67,86 @@ body {
 }
 
 .content #artist {
-	color: #FFF;
-	display: block;
-	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
-	font-weight: 700;
+    color: #FFF;
+    display: block;
+    font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
+    font-weight: 700;
     font-size: 102px;
     line-height: 112%;
     letter-spacing: -5.3px;
 }
 
 .content #title {
-	color: #FFF;
-	display: block;
-	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
-	font-weight: 400;
-	margin-top: -7px;
-	font-size: 56px;
+    color: #FFF;
+    display: block;
+    font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
+    font-weight: 400;
+    margin-top: -7px;
+    font-size: 56px;
     line-height: 87%;
     letter-spacing: -4px;
 }
 
 .content #title a {
-	color: white;
-	text-decoration: none;
+    color: white;
+    text-decoration: none;
 }
 
 .content #title a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 #particles {
-	position: fixed;
-	left: 0;
-	top: 0;
-	z-index: -99;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -99;
 }
 
 .kitty {
-	position: absolute;
+    position: absolute;
 }
 
 #vig {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     box-shadow: inset 0 0 20em 7em rgba(0,0,0,0.5);
-	z-index: 997;
+    z-index: 997;
 }
 
 .front {
-	z-index: 9999;
+    z-index: 9999;
 }
 
 #preloader {
-	position: fixed;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	background-color: rgba(18,18,17,0.95);
-	z-index:998;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(18,18,17,0.95);
+    z-index:998;
 }
 
 #status {
-	width:200px;
-	height:150px;
-	position:absolute;
-	left:50%;
-	top:50%;
-	background-image:url(./img/status.gif);
-	background-repeat:no-repeat;
-	background-position:center;
-	margin:-100px 0 0 -100px;
+    width:200px;
+    height:150px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    background-image:url(./img/status.gif);
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px;
 }
 
 .cattext{
-	color: #FFF; 
-	text-align: center; 
-	padding-bottom: 75px;
+    color: #FFF; 
+    text-align: center; 
+    padding-bottom: 75px;
 }
 
 video#bgvid {
@@ -177,77 +177,77 @@ video#bgvid {
  */
 
 .partsbg{
-	visibility:hidden;
-	position:relative;
-	z-index:-2;
+    visibility:hidden;
+    position:relative;
+    z-index:-2;
 }
 
 .playing .partsbg{
-	visibility:visible;
-	animation:partsbgIn 10s ease-out both;
+    visibility:visible;
+    animation:partsbgIn 10s ease-out both;
 }
 
 @keyframes partsbgIn{
-	from{opacity:0;}
-	to{opacity:1;}
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
 /*.content{
-	visibility:hidden;
+    visibility:hidden;
 }
 
 .playing .content{
-	visibility:visible;
-	animation:contentgIn 1s ease-out both;
+    visibility:visible;
+    animation:contentgIn 1s ease-out both;
 }
 
 @keyframes contentIn{
-	from{opacity:0;}
-	to{opacity:1;}
+    from{opacity:0;}
+    to{opacity:1;}
 }*/
 
 .content #artist{
-	overflow:hidden;
-	visibility:hidden;
-	white-space:nowrap;
+    overflow:hidden;
+    visibility:hidden;
+    white-space:nowrap;
 }
 
 .playing .content #artist{
-	visibility:visible;
-	animation:textIn .35s linear both 0.7s;
+    visibility:visible;
+    animation:textIn .35s linear both 0.7s;
 }
 
 .content #title span{
-	overflow:hidden;
-	visibility:hidden;
-	white-space:nowrap;
-	display:inline-block;
+    overflow:hidden;
+    visibility:hidden;
+    white-space:nowrap;
+    display:inline-block;
 }
 
 .playing .content #title span{
-	visibility:visible;
-	animation:textIn .35s linear both 0.8s;
+    visibility:visible;
+    animation:textIn .35s linear both 0.8s;
 }
 
 .playing .content #title span:nth-child(2){
-	animation-delay:0.9s;
+    animation-delay:0.9s;
 }
 
 .playing .content #title span:nth-child(3){
-	animation-delay:1.0s;
+    animation-delay:1.0s;
 }
 
 .playing .content #title span:nth-child(4){
-	animation-delay:1.1s;
+    animation-delay:1.1s;
 }
 
 @keyframes textIn{
-	from{max-width:0;}
-	to{max-width:100%;}
+    from{max-width:0;}
+    to{max-width:100%;}
 }
 
 #cover{
-	width: 191px;
+    width: 191px;
     height: 191px;
     position: absolute;
     top: 0;
@@ -258,7 +258,7 @@ video#bgvid {
 }
 
 #cover div{
-	width: 100%;
+    width: 100%;
     height: 100%;
     background: #C2C1C2;
     visibility:hidden;
@@ -267,7 +267,7 @@ video#bgvid {
 }
 
 #cover div img{
-	width: 100%;
+    width: 100%;
     height: 100%;
     position: absolute;
     top: 0;
@@ -275,7 +275,7 @@ video#bgvid {
 }
 
 #cover div img.mcat{
-	width: 75%;
+    width: 75%;
     height: 75%;
     position: absolute;
     top: 12.5%;
@@ -283,21 +283,21 @@ video#bgvid {
 }
 
 .playing #cover div{
-	visibility:visible;
+    visibility:visible;
     animation:coverIn .250s linear both .350s;
 }
 
 @keyframes coverIn{
-	from{transform: rotateY(90deg);}
-	to{transform: rotateY(0deg);}
+    from{transform: rotateY(90deg);}
+    to{transform: rotateY(0deg);}
 }
 
 #preloader{ /* Only to show spectrum_preloader */
-	display:none !important;
+    display:none !important;
 }
 
 #spectrum_preloader{
-	position: absolute;
+    position: absolute;
     top: 352px;
     left: 0;
     width: 100%;
@@ -306,8 +306,8 @@ video#bgvid {
 }
 
 #spectrum_preloader div{
-	position: absolute;
-	background: #C2C1C2;
+    position: absolute;
+    background: #C2C1C2;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px 0;
     width: 100%;
     height: 100%;

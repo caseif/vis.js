@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
-		<link rel="icon" type="image/x-icon" href="./favicon.ico">
-		<link rel="stylesheet" href="./vis.css">
-		<link href='https://fonts.googleapis.com/css?family=Raleway:300,700' rel='stylesheet' type='text/css'>
-	</head>
-	<body>
-		<div id="vig"></div>
-		<!-- Preloader -->
-		<div id="preloader">
-			<div class="cattext" id="status">Fetching Audio...<br> (Funny, cus it's a cat.)</div>
-		</div>
-		<div class="content">
-			<canvas id="canvas" style="display: block;"></canvas>
-			<div id="songinfo" class="front">
-				<div id="artist" class="front"></div>
-				<div id="title" class="front"></div>
-			</div>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r75/three.min.js"></script>
+        <link rel="icon" type="image/x-icon" href="./favicon.ico">
+        <link rel="stylesheet" href="./vis.css">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:300,700' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div id="vig"></div>
+        <!-- Preloader -->
+        <div id="preloader">
+            <div class="cattext" id="status">Fetching Audio...<br> (Funny, cus it's a cat.)</div>
+        </div>
+        <div class="content">
+            <canvas id="canvas" style="display: block;"></canvas>
+            <div id="songinfo" class="front">
+                <div id="artist" class="front"></div>
+                <div id="title" class="front"></div>
+            </div>
             <div class="ayylmao"></div>
             <div id="cover">
-            	<div><img src="/img/mcat.svg" class="mcat"></div>
+                <div><img src="/img/mcat.svg" class="mcat"></div>
             </div>
             <div id="spectrum_preloader"><div></div></div>
-		</div>
+        </div>
 
-		<div class="partsbg"></div>
-		<div style="" class="mvbg"></div>
+        <div class="partsbg"></div>
+        <div style="" class="mvbg"></div>
 
         <div id="volume-info" class="front">Volume: <span id="volume-value"></span></div>
-		<div id="pause-info" class="hide front">Press P to Pause</div>
-		<div id="github" class="hide front"><a href="https://github.com/caseif/vis.js" target="_blank">Github</a></div>
+        <div id="pause-info" class="hide front">Press P to Pause</div>
+        <div id="github" class="hide front"><a href="https://github.com/caseif/vis.js" target="_blank">Github</a></div>
 
         <!-- Config script -->
-		<script type="text/javascript" src="./js/util/config.js"></script>
+        <script type="text/javascript" src="./js/util/config.js"></script>
 
         <!-- Utility scripts -->
-		<script type="text/javascript" src="./js/util/helper/net/async_helper.js"></script>
+        <script type="text/javascript" src="./js/util/helper/net/async_helper.js"></script>
         <script type="text/javascript" src="./js/util/helper/net/cookie_helper.js"></script>
         <script type="text/javascript" src="./js/util/helper/net/url_helper.js"></script>
         <script type="text/javascript" src="./js/util/helper/color_helper.js"></script>
@@ -65,13 +65,13 @@
         <script type="text/javascript" src="./js/audio/loader.js"></script>
 
         <!-- Main script -->
-		<script type="text/javascript" src="./js/vis.js"></script>
+        <script type="text/javascript" src="./js/vis.js"></script>
 
         <!-- WebGL scripts -->
-		<script type="text/javascript" src="./js/visual/gl/geom_util.js"></script>
-		<script type="text/javascript" src="./js/visual/gl/scene.js"></script>
-		<script type="text/javascript" src="./js/visual/gl/geometry.js"></script>
-		<script type="text/javascript" src="./js/visual/gl/light.js"></script>
-		<script type="text/javascript" src="./js/visual/gl/render.js"></script>
-	</body>
+        <script type="text/javascript" src="./js/visual/gl/geom_util.js"></script>
+        <script type="text/javascript" src="./js/visual/gl/scene.js"></script>
+        <script type="text/javascript" src="./js/visual/gl/geometry.js"></script>
+        <script type="text/javascript" src="./js/visual/gl/light.js"></script>
+        <script type="text/javascript" src="./js/visual/gl/render.js"></script>
+    </body>
 </html>

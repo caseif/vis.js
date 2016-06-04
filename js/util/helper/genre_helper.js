@@ -1,24 +1,24 @@
 var mainGenres = {
-	'Trap': '#820028',
-	'Drumstep': '#E20386',
-	'Drum & Bass': '#E10304',
-	'Trance': '#0584E3', // must come before electro
-	'Breaks': '#E06D61', // technically custom but must come before electro
-	'Electro House': '#E2D904', // must come before house
-	'House': '#E28C06',
-	'Hardcore': '#0DB104',
-	'Glitch Hop': '#19925B',
-	'Post Disco': '#29B8B2',
-	'Dubstep': '#8D03E2',
-	'Future Bass': '#9999FB',
-	'EDM': '#C2C1C2',
-	// begin custom colors
-	'Chillout': '#F4C2C2',
+    'Trap': '#820028',
+    'Drumstep': '#E20386',
+    'Drum & Bass': '#E10304',
+    'Trance': '#0584E3', // must come before electro
+    'Breaks': '#E06D61', // technically custom but must come before electro
+    'Electro House': '#E2D904', // must come before house
+    'House': '#E28C06',
+    'Hardcore': '#0DB104',
+    'Glitch Hop': '#19925B',
+    'Post Disco': '#29B8B2',
+    'Dubstep': '#8D03E2',
+    'Future Bass': '#9999FB',
+    'EDM': '#C2C1C2',
+    // begin custom colors
+    'Chillout': '#F4C2C2',
     'Rock': '#B4D7BF',
     'Pop': '#B3E234',
     'Pink Cloud': '#F6B4D9',
-	'Karma Fields': '#000000', // this one is treated specially
-	'Mirai Sekai': '#FFFFFF' // also treated specially
+    'Karma Fields': '#000000', // this one is treated specially
+    'Mirai Sekai': '#FFFFFF' // also treated specially
 };
 
 var subgenres = {

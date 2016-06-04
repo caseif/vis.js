@@ -24,11 +24,11 @@ var QueryString = function () {
 
 var songName = QueryString.song;
 if (songName !== undefined) {
-	songName = decodeURIComponent(songName);
+    songName = decodeURIComponent(songName);
 }
 var subgenreName = QueryString.subgenre;
 if (subgenreName !== undefined) {
-	subgenreName = decodeURIComponent(subgenreName);
+    subgenreName = decodeURIComponent(subgenreName);
 } else {
     var genreName = QueryString.genre;
     if (genreName !== undefined) {
@@ -40,5 +40,5 @@ if (subgenreName !== undefined) {
 }
 var artistName = QueryString.artist;
 if (artistName !== undefined) {
-	artistName = decodeURIComponent(artistName);
+    artistName = decodeURIComponent(artistName);
 }

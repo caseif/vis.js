@@ -65,9 +65,9 @@ if (song.getGenre() == 'ayy lmao') {
 
 if (song.getGenre() == 'Mirai Sekai') {
     $('.partsbg').hide();
-	$('#vig').hide();
-	$('.content').css('textShadow','0px 0px 20px rgba(0, 0, 0, 0.9)');
-	$('.mvbg').html('<video autoplay loop id="bgvid"><source src="'
+    $('#vig').hide();
+    $('.content').css('textShadow','0px 0px 20px rgba(0, 0, 0, 0.9)');
+    $('.mvbg').html('<video autoplay loop id="bgvid"><source src="'
             + prefix + '/content/uc?export=download&id=0B8_nDMQp-qqCU0ZmcHNfR1pwZ0E" type="video/webm"></video>');
 } else if (song.getGenre() == 'Pink Cloud') {
     var arr = ['7YBEo6D', 'Bbpq19Q', '6MPcxXC'];

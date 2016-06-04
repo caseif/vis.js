@@ -39,15 +39,15 @@ function setupAudioNodes() {
 }
 
 function playSound(buffer) {
-	bufferSource.buffer = buffer;
-	bufferSource.start(0);
-	$('#status').fadeOut(); // will first fade out the loading animation
-	$('#preloader').fadeOut('slow'); // will fade out the grey DIV that covers the website.
+    bufferSource.buffer = buffer;
+    bufferSource.start(0);
+    $('#status').fadeOut(); // will first fade out the loading animation
+    $('#preloader').fadeOut('slow'); // will fade out the grey DIV that covers the website.
     $("body").addClass("playing");
     $('#spectrum_preloader').hide();
-	isPlaying = true;
-	begun = true;
-	started = Date.now();
+    isPlaying = true;
+    begun = true;
+    started = Date.now();
 }
 
 function setOnEnded() {
