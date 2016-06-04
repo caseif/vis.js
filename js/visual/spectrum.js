@@ -30,8 +30,8 @@ function handleAudio() {
     drawSpectrum(array);
 }
 
-var spectrumAnimation = "phase_1",
-    spectrumAnimationStart = 0;
+var spectrumAnimation = "phase_1";
+var spectrumAnimationStart = 0;
 
 function drawSpectrum(array) {
     if (isPlaying) {
@@ -52,19 +52,17 @@ function drawSpectrum(array) {
     ctx.shadowOffsetX = spectrumShadowOffsetX;
     ctx.shadowOffsetY = spectrumShadowOffsetY;
 
-    if(spectrumAnimation == "phase_1"){
+    if (spectrumAnimation == "phase_1") {
         var ratio = (now - started) / 500;
 
         ctx.fillRect(0, spectrumHeight - 2 * resRatio, (spectrumWidth/2) * ratio, 2 * resRatio);
         ctx.fillRect(spectrumWidth - (spectrumWidth/2) * ratio, spectrumHeight - 2 * resRatio, (spectrumWidth/2) * ratio, 2 * resRatio);
 
-        if(ratio > 1){
+        if (ratio > 1) {
             spectrumAnimation = "phase_2";
             spectrumAnimationStart = now;
         }
-    }
-
-    else if(spectrumAnimation == "phase_2"){
+    } else if (spectrumAnimation == "phase_2") {
         var ratio = (now - spectrumAnimationStart) / 500;
 
         ctx.globalAlpha = Math.abs(Math.cos(ratio*10));
@@ -73,23 +71,25 @@ function drawSpectrum(array) {
 
         ctx.globalAlpha = 1;
 
-        if(ratio > 1){
+        if (ratio > 1) {
             spectrumAnimation = "phase_3";
             spectrumAnimationStart = now;
         }
-    }
-
-    else if(spectrumAnimation == "phase_3"){
+    } else if (spectrumAnimation == "phase_3") {
         var ratio = (now - spectrumAnimationStart) / 1000;
 
         // drawing pass
         for (var i = 0; i < spectrumSize; i++) {
             var value = array[i];
 
-            // Used to smooth transiton between bar & full Spectrum (lasts 1sec)
-            if(ratio < 1) value = value / (1 + 9 - 9 * ratio); 
+            // Used to smooth transiton between bar & full spectrum (lasts 1 sec)
+            if (ratio < 1) {
+				value = value / (1 + 9 - 9 * ratio); 
+			}
 
-            if(value < 2 * resRatio) value = 2 * resRatio
+            if (value < 2 * resRatio) {
+				value = 2 * resRatio;
+			}
 
             ctx.fillRect(i * (barWidth + spectrumSpacing), spectrumHeight - value, barWidth, value, value);
         }

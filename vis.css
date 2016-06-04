@@ -16,7 +16,7 @@ html {
 	background-color: #111;
 }
 
-body{
+body {
 	margin:0;
 }
 
@@ -71,7 +71,7 @@ body{
 	display: block;
 	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
 	font-weight: 700;
-	font-size: 102px;
+    font-size: 102px;
     line-height: 112%;
     letter-spacing: -5.3px;
 }

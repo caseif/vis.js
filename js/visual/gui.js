@@ -85,8 +85,8 @@ function checkHideableText() {
 }
 
 function initGui(song) {
-    var $artist = $('#artist'),
-        $title = $('#title');
+    var $artist = $('#artist');
+    var $title = $('#title');
 
     $artist.html('???');
     $title.html('<span>???</span>');
@@ -94,8 +94,8 @@ function initGui(song) {
     if (song != undefined) {
         $artist.html(selectiveToUpperCase(song.getArtist()));
 
-        var baseArtistWidth = $('#songinfo').width(),
-            baseArtistSize = $artist.css('font-size').replace('px', '');
+        var baseArtistWidth = $('#songinfo').width();
+        var baseArtistSize = $artist.css('font-size').replace('px', '');
         while ($artist[0].scrollWidth > baseArtistWidth) {
             baseArtistSize -= 1;
             $artist.css('font-size', baseArtistSize + 'px');
@@ -104,8 +104,8 @@ function initGui(song) {
 
         $title.html(selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>"));
 
-        var maxTitleHeight = $('#cover').height() - ($artist.height() - 10) + 7,
-            baseTitleSize = $title.css('font-size').replace('px', '');
+        var maxTitleHeight = $('#cover').height() - ($artist.height() - 10) + 7;
+        var baseTitleSize = $title.css('font-size').replace('px', '');
         while ($title.height() > maxTitleHeight) {
             baseTitleSize -= 1;
             $title.css('font-size', baseTitleSize + 'px');
@@ -114,7 +114,7 @@ function initGui(song) {
         document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
         color = getColor(song.getGenre());
     }
-    else{
+    else {
         // Trigger animations even if there is no song
         $("body").addClass("playing");
     }
