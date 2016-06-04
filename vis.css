@@ -16,6 +16,10 @@ html {
 	background-color: #111;
 }
 
+body{
+	margin:0;
+}
+
 #loading {
 	color: #FFF;
 	position: absolute;
@@ -53,7 +57,9 @@ html {
 }
 
 .content {
-	position: absolute;
+	margin: 196px auto 0 auto;
+    position: relative;
+    width: 1568px;
 }
 
 .content #songinfo {
@@ -63,21 +69,22 @@ html {
 .content #artist {
 	color: #FFF;
 	display: block;
-	font-size: 6em;
 	font-family: 'Gotham-Medium', 'Raleway', Lato, sans-serif;
 	font-weight: 700;
-	letter-spacing: -5px;
+	font-size: 102px;
+    line-height: 112%;
+    letter-spacing: -5.3px;
 }
 
 .content #title {
 	color: #FFF;
 	display: block;
-	font-size: 3.4em;
 	font-family: 'Gotham-Book', 'Raleway', Lato, sans-serif;
 	font-weight: 400;
 	margin-top: -7px;
-	line-height: 98%;
-	margin-left: 5px;
+	font-size: 54px;
+    line-height: 88%;
+    letter-spacing: -4px;
 }
 
 .content #title a {

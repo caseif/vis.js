@@ -1,4 +1,4 @@
-var resRatio = $(document).width() / 1920;
+var resRatio = $(window).width() / 1920;
 
 function selectiveToUpperCase(str) {
 	str = str.toUpperCase();

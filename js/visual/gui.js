@@ -12,7 +12,7 @@ function updateCanvas() {
     ctx.shadowOffsetY = spectrumShadowOffsetY;
 }
 
-var blockSize = 193 * resRatio;
+var blockSize = 192 * resRatio;
 var blockTopPadding = 50 * resRatio;
 var blockSidePadding = 30 * resRatio;
 
@@ -85,26 +85,26 @@ function checkHideableText() {
 }
 
 function initGui(song) {
-    centerContent();
 
     document.getElementById('artist').innerHTML = '???';
     document.getElementById('title').innerHTML = '<span>???</span>';
     document.title = '[vis.js] ??? \u2014 ???';
     if (song != undefined) {
-        var baseArtistHeight = $('#artist').height();
         document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
 
-        while ($('#artist').height() >= baseArtistHeight) {
+        var baseArtistWidth = $('#songinfo').width();
+        while ($('#artist')[0].scrollWidth > baseArtistWidth) {
             $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
+            console.log($('#songinfo').width(), $('#artist')[0].scrollWidth)
         }
-        $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 5) + 'px');
+
         var baseTitleHeight = $('#title').height();
         document.getElementById('title').innerHTML = selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>");
         var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
         while ($('#title').height() >= baseTitleHeight * newLines) {
             $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
         }
-            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
+
         document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
         color = getColor(song.getGenre());
     }
