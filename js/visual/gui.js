@@ -12,43 +12,9 @@ function updateCanvas() {
     ctx.shadowOffsetY = spectrumShadowOffsetY;
 }
 
-var blockSize = 193 * resRatio;
+var blockSize = 192 * resRatio;
 var blockTopPadding = 50 * resRatio;
 var blockSidePadding = 30 * resRatio;
-
-function drawBlock() {
-    ctx.fillStyle = color;
-    ctx.fillRect(0, spectrumHeight + blockTopPadding, blockSize, blockSize);
-    var img = new Image();
-    img.onload = () => {
-        var origBlur = ctx.shadowBlur;
-		ctx.shadowBlur = 0;
-
-        // Edge renders the shadow in front of the image for some reason, so it has to be "disabled" or the cat will
-        // appear black instead of white. Shame, because it looks pretty cool.
-
-        // We don't need to worry about a check because other browsers don't render it if the blur is 0.
-        var origXOff = ctx.shadowOffsetX;
-        var origYOff = ctx.shadowOffsetY;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
-
-        ctx.fillStyle = song.getGenre() === 'Mirai Sekai' ? 'black' : 'white';
-        ctx.drawImage(
-            img,
-            blockSize * (1 - blockWidthRatio) / 2,
-            spectrumHeight + blockTopPadding + (blockSize * (1 - blockHeightRatio) / 2),
-            blockSize * blockWidthRatio,
-            blockSize * blockHeightRatio
-        );
-		ctx.shadowBlur = origBlur;
-        ctx.shadowOffsetX = origXOff;
-        ctx.shadowOffsetY = origYOff;
-    };
-    prefix = window.location.href.split('/')[0] + '//' + window.location.hostname
-            + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-    img.src = song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg';
-}
 
 // dudududududu
 var red = 255;
@@ -119,34 +85,66 @@ function checkHideableText() {
 }
 
 function initGui(song) {
-    document.getElementById('artist').innerHTML = '???';
-    document.getElementById('title').innerHTML = '???';
+    var $artist = $('#artist'),
+        $title = $('#title');
+
+    $artist.html('???');
+    $title.html('<span>???</span>');
     document.title = '[vis.js] ??? \u2014 ???';
     if (song != undefined) {
-        var baseArtistHeight = $('#artist').height();
-        document.getElementById('artist').innerHTML = selectiveToUpperCase(song.getArtist());
+        $artist.html(selectiveToUpperCase(song.getArtist()));
 
-        while ($('#artist').height() >= baseArtistHeight) {
-            $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 1) + 'px');
+        var baseArtistWidth = $('#songinfo').width(),
+            baseArtistSize = $artist.css('font-size').replace('px', '');
+        while ($artist[0].scrollWidth > baseArtistWidth) {
+            baseArtistSize -= 1;
+            $artist.css('font-size', baseArtistSize + 'px');
         }
-        $('#artist').css('font-size', ($('#artist').css('font-size').replace('px', '') - 5) + 'px');
-        var baseTitleHeight = $('#title').height();
-        document.getElementById('title').innerHTML = selectiveToUpperCase(song.getTitle());
-        var newLines = (song.getTitle().length - song.getTitle().replace('<br>', '').replace(/\^/g, '').length) / 4 + 1;
-        while ($('#title').height() >= baseTitleHeight * newLines) {
-            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 1) + 'px');
+
+
+        $title.html(selectiveToUpperCase("<span>"+song.getTitle().replace('<br>', "</span><br><span>")+"</span>"));
+
+        var maxTitleHeight = $('#cover').height() - ($artist.height() - 10) + 7,
+            baseTitleSize = $title.css('font-size').replace('px', '');
+        while ($title.height() > maxTitleHeight) {
+            baseTitleSize -= 1;
+            $title.css('font-size', baseTitleSize + 'px');
         }
-            $('#title').css('font-size', ($('#title').css('font-size').replace('px', '') - 5) + 'px');
+
         document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
         color = getColor(song.getGenre());
+    }
+    else{
+        // Trigger animations even if there is no song
+        $("body").addClass("playing");
     }
     if (color == undefined) {
         color = mainGenres.EDM;
     }
 
-    if (!song || song.getGenre() != 'ayy lmao') {
-        drawBlock();
+    var GUI_NoCover = false;
+    if (!GUI_NoCover) {
+        $("#cover").css({
+            left: 0,
+            top: spectrumHeight + blockTopPadding,
+            width: blockSize,
+            height: blockSize
+        })
+        $("#cover div").css("background-color", color);
+        $("#cover img.mcat").css({
+            left: blockSize * (1 - blockWidthRatio) / 2,
+            top: blockSize * (1 - blockHeightRatio) / 2,
+            width: blockSize * blockWidthRatio,
+            height: blockSize * blockHeightRatio
+        })
+        .attr("src", song.getGenre() == 'Mirai Sekai' ? 'img/mcatblack.svg' : 'img/mcat.svg')
     }
+
+    $("#spectrum_preloader").css({
+        height: 2 * resRatio,
+        top: spectrumHeight - 2 * resRatio
+    })
+    $("#spectrum_preloader div").css("background-color", color);
 
     if (song.getGenre() == 'Karma Fields') {
         $('html').css('backgroundColor', '#E8E8E8');

@@ -7,8 +7,8 @@ if (!window.AudioContext) {
 
 var color;
 
-var spectrumWidth = $(document).width() * 0.83;
-spectrumSpacing *= resRatio;
+var spectrumWidth = 1568 * resRatio;
+spectrumSpacing = 7 * resRatio;
 var barWidth = (spectrumWidth + spectrumSpacing) / spectrumSize - spectrumSpacing;
 spectrumWidth = (barWidth + spectrumSpacing) * spectrumSize - spectrumSpacing;
 
@@ -37,11 +37,17 @@ var volumeHidden = false;
 updateCanvas();
 
 function centerContent() {
-    $('.content').css('margin-top', ($(document).height() - $('.content').height()) * 0.38);
-    $('.content').css('margin-left', ($(document).width() - $('.content').width()) / 2);
+    resRatio = $(window).width() / 1920;
+
+    $('.content').css({
+        width: (1568 * resRatio) + "px",
+        marginTop: (196 * resRatio) + "px"
+    });
+    $('#canvas').attr("width", 1568 * resRatio);
 }
 
 $(window).resize(() => { centerContent() });
+centerContent();
 
 $('#artist').css('font-size', $('#artist').css('font-size').replace('px', '') * resRatio + 'px');
 $('#title').css('font-size', $('#title').css('font-size').replace('px', '') * resRatio + 'px');
@@ -54,9 +60,9 @@ centerContent();
 initSpectrumHandler();
 
 if (song.getGenre() == 'ayy lmao') {
-    $('.ayylmao').html('<img class="kitty" src="./img/cat.gif" alt="ayy lmao">');
-    $('.kitty').css('margin-top', -blockSize + blockTopPadding - 9);
-    $('.kitty').attr('height', blockSize);
+    $('#cover div').append('<img class="kitty" src="./img/cat.gif" alt="ayy lmao">');
+    //$('.kitty').css('margin-top', -blockSize + blockTopPadding - 9);
+    //$('.kitty').attr('height', blockSize);
 }
 
 if (song.getGenre() == 'Mirai Sekai') {

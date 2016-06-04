@@ -41,7 +41,7 @@ var fleckMaterial = new THREE.PointsMaterial({
 });
 
 var bokehMaterial = new THREE.PointsMaterial({
-	color: 0xFFFFFF,
+	color: brighten(color, 2.1),
 	opacity: bokehOpacity,
 	size: 100,
 	map: bokehTexture,
