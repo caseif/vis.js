@@ -111,8 +111,12 @@ function initGui(song) {
             $title.css('font-size', baseTitleSize + 'px');
         }
 
-        document.title = '[vis.js] ' + song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
+		var fullTitle = song.getArtist().replace(/\^/g, '') + ' \u2014 ' + song.getTitle().replace('<br>', ' ').replace(/\^/g, '');
+        document.title = '[vis.js] ' + fullTitle;
         color = getColor(song.getGenre());
+		
+		$('#loading-value').html(fullTitle);
+		$('#loading-value').fadeIn();
     }
     else {
         // Trigger animations even if there is no song

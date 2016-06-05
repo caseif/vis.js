@@ -37,6 +37,34 @@ body {
     display: none;
 }
 
+#loading-info {
+	top: 12px;
+	color: white;
+	position: absolute;
+	width: 600px;
+	left: 50%;
+	margin-left: -300px;
+	text-align: center;
+	animation: pulse-fade 2s linear infinite;
+	-webkit-animation: pulse-fade 2s linear infinite;
+}
+
+#loading-value {
+	display: none;
+}
+
+@keyframes pulse-fade {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 #pause-info {
     position: absolute;
     bottom: 8px;
