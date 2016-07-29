@@ -66,7 +66,7 @@ function normalizeAmplitude(array) {
     return values;
 }
 
-function averageTransform(array) {
+/*function averageTransform(array) {
     var values = [];
     for (var i = 0; i < spectrumSize; i++) {
         if (i == 0) {
@@ -84,6 +84,57 @@ function averageTransform(array) {
     }
 
     return values;
+}*/
+
+function averageTransform(array) {
+    var values = [];
+    var length = array.length;
+
+    for (var i = 0; i < length; i++) {
+        var value = 0;
+        if (i == 0) {
+            value = array[i];
+        } else if (i == length - 1) {
+            value = (array[i - 1] + array[i]) / 2;
+        } else {
+            var prevValue = array[i - 1];
+            var curValue = array[i];
+            var nextValue = array[i + 1];
+
+            if (curValue >= prevValue && curValue >= nextValue) {
+              value = curValue;
+            } else {
+              value = (curValue + Math.max(nextValue, prevValue)) / 2;
+            }
+        }
+        value = Math.min(value + 1, spectrumHeight);
+
+        values[i] = value;
+    }
+
+    var newValues = [];
+    for (var i = 0; i < length; i++) {
+        var value = 0;
+        if (i == 0) {
+            value = values[i];
+        } else if (i == length - 1) {
+            value = (values[i - 1] + values[i]) / 2;
+        } else {
+            var prevValue = values[i - 1];
+            var curValue = values[i];
+            var nextValue = values[i + 1];
+
+            if (curValue >= prevValue && curValue >= nextValue) {
+              value = curValue;
+            } else {
+              value = ((curValue / 2) + (Math.max(nextValue, prevValue) / 3) + (Math.min(nextValue, prevValue) / 6));
+            }
+        }
+        value = Math.min(value + 1, spectrumHeight);
+
+        newValues[i] = value;
+    }
+    return newValues;
 }
 
 function tailTransform(array) {

@@ -18,9 +18,9 @@ var maxFftSize = 16384; // the preferred fftSize to use for the audio node (actu
 // BASIC TRANSFORMATION
 var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 1200; // the last bin rendered in the spectrum
-var spectrumScale = 1.8; // the logarithmic scale to adjust spectrum values to
+var spectrumScale = 2.5; // the logarithmic scale to adjust spectrum values to
 // EXPONENTIAL TRANSFORMATION
-var spectrumMaxExponent = 5; // the max exponent to raise spectrum values to
+var spectrumMaxExponent = 6; // the max exponent to raise spectrum values to
 var spectrumMinExponent = 3; // the min exponent to raise spectrum values to
 var spectrumExponentScale = 2; // the scale for spectrum exponents
 // DROP SHADOW
@@ -33,14 +33,14 @@ var spectrumShadowOffsetY = 0; // the y-offset of the spectrum's drop shadow
 /* ********************** */
 var smoothingPoints = 3; // points to use for algorithmic smoothing. Must be an odd number.
 var smoothingPasses = 1; // number of smoothing passes to execute
-var temporalSmoothing = 0.25; // passed directly to the JS analyzer node
+var temporalSmoothing = 0.2; // passed directly to the JS analyzer node
 
 /* ************************************ */
 /* * Spectrum margin dropoff settings * */
 /* ************************************ */
 var headMargin = 7; // the size of the head margin dropoff zone
 var tailMargin = 0; // the size of the tail margin dropoff zone
-var minMarginWeight = 0.6; // the minimum weight applied to bars in the dropoff zone
+var minMarginWeight = 0.7; // the minimum weight applied to bars in the dropoff zone
 
 /* *************************** */
 /* * Basic particle settings * */
