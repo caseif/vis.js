@@ -1,5 +1,5 @@
 # key|artist|title|genreColor|googleDriveId
-# The last parameter should be the song's URL. If it does not start with "http", it will be parsed as a YouTube ID.
+# The last parameter should be the song's URL. If it does not start with 'http', it will be parsed as a YouTube ID.
 # Newlines are denoted with <br>
 # Prefixing a character with ^ will force it to be lowercase
 gramophone|Faux|Gramophone|Indie Dance|0B8_nDMQp-qqCRy1odzBBVC0yM3c
@@ -303,7 +303,7 @@ werise|San Holo|We Rise|Future Bass|0B8_nDMQp-qqCUEJNSUd5dkpaMms
 katie|Von Grey|Katie<br>(LYNOS Remix)|Future Bass|0B8_nDMQp-qqCd0xERzB5VFZja1U
 iwalkalone|Penguin Soup|I Walk Alone<br>(feat. Iris Eye)|Synthpop|0B8_nDMQp-qqCLXF5ZzRmbk8yaDA
 ancientionika|Dvinity|Ancient<br>(Ionika Remix)|Dubstep|0B8_nDMQp-qqCeDlvSWZkRzF3WUE
-pyramids|DVBBS & Dropgun|Pyramids (feat. Sanjin)<br>(More Kords' "This Is What's Wrong With EDM" Mix)|Festival Trap|0B8_nDMQp-qqCR0NXYVhobjYyT0k
+pyramids|DVBBS & Dropgun|Pyramids (feat. Sanjin)<br>(More Kords' &quot;This Is What's Wrong With EDM&quot; Mix)|Festival Trap|0B8_nDMQp-qqCR0NXYVhobjYyT0k
 aletheiaslullaby|Elpis|Aletheia's Lullaby|Liquid Dubstep|0B8_nDMQp-qqCdmNWdnhtUC1ZUWM
 emera|Elpis|Emera (Future)|Liquid Dubstep|0B8_nDMQp-qqCWkR4U2M2OVJId3M
 kairos|Elpis|Kairos|Liquid Dubstep|0B8_nDMQp-qqCUmhDT09BTHdBNWs
