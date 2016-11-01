@@ -67,8 +67,8 @@ var rightChance = 0.03; // the chance for a particle to spawn along the right ed
 var topBottomChance = 0.09; // the chance for a particle to spawn along the top/bottom edges of the screen
 // VELOCITY
 var velBias = 1.8; // bias for particle velocities (higher values = more center-biased)
-var minParticleVelocity = 2.5; // the minimum scalar for particle velocity
-var maxParticleVelocity = 3.5; // the maximum scalar for particle velocity
+var minParticleVelocity = 2; // the minimum scalar for particle velocity
+var maxParticleVelocity = 5; // the maximum scalar for particle velocity
 var absMinParticleVelocity = 0.001; // the absolute lowest speed for particles
 var fleckVelocityScalar = 1.75; // velocity of flecks relative to normal particles
 var fleckYVelScalar = 0.75; // y-velocity range of flecks relative to x-velocity
