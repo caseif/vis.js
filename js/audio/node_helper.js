@@ -1,8 +1,11 @@
 var context = new AudioContext();
+var dispContext = new AudioContext();
 var gainNode;
 var audioBuffer;
 var bufferSource;
+var dispBufferSource;
 var analyzer;
+var dispScriptProcessor;
 var scriptProcessor;
 
 function setupAudioNodes() {
@@ -10,14 +13,24 @@ function setupAudioNodes() {
     setOnEnded();
     bufferSource.connect(context.destination);
 
+    muteGainNode = context.createGain();
+    muteGainNode.gain.value = -1;
+    bufferSource.connect(muteGainNode);
+    muteGainNode.connect(context.destination);
+
     gainNode = context.createGain();
     gainNode.gain.value = 0;
-    bufferSource.connect(gainNode);
-    gainNode.connect(context.destination);
     var vol = getCookie('volume');
     if (vol != null) {
         gainNode.gain.value = vol;
     }
+
+    delayNode = context.createDelay(1);
+    delayNode.delayTime.value = audioDelay;
+    bufferSource.connect(gainNode);
+    gainNode.connect(delayNode);
+    bufferSource.connect(delayNode);
+    delayNode.connect(context.destination);
 
     scriptProcessor = context.createScriptProcessor(bufferInterval, 1, 1);
     scriptProcessor.connect(context.destination);

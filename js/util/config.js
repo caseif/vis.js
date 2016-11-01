@@ -15,6 +15,7 @@ var spectrumSize = 63; // number of bars in the spectrum
 var spectrumDimensionScalar = 4.5; // the ratio of the spectrum width to its height
 var spectrumSpacing = 7; // the separation of each spectrum bar in pixels at width=1920
 var maxFftSize = 16384; // the preferred fftSize to use for the audio node (actual fftSize may be lower)
+var audioDelay = 0.4; // audio will lag behind the rendered spectrum by this amount of time (in seconds)
 // BASIC TRANSFORMATION
 var spectrumStart = 4; // the first bin rendered in the spectrum
 var spectrumEnd = 1200; // the last bin rendered in the spectrum
